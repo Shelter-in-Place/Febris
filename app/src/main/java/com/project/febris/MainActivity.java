@@ -107,5 +107,5 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(MainActivity.this, GraphScreen.class);
         MainActivity.this.startActivity(i);
     }
-//test change 1
+//test Shelter in Place
 }
