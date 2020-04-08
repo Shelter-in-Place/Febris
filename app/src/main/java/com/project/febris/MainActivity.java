@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-// daniel does 
+// daniel does
 public class MainActivity extends AppCompatActivity {
 
     private CardView card_1;
