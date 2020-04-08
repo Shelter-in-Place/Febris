@@ -1,3 +1,4 @@
+//this is a sample note
 package com.project.febris;
 
 import androidx.appcompat.app.AppCompatActivity;
