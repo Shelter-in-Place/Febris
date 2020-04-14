@@ -23,6 +23,9 @@ public interface Dao {
     @Delete
     int delete(Place... places);
 
+    @Query("DELETE FROM places")
+    void deleteAll();
+
     @Update
     int update(Place... places);
 }

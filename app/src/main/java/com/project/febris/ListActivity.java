@@ -13,10 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 // Febris package imports
 import com.project.febris.adapters.PlacesRecyclerAdapter;
 import com.project.febris.models.Place;
-import com.project.febris.persistence.Repository;
 import com.project.febris.util.VerticalSpacingItemDecorator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListActivity extends AppCompatActivity {

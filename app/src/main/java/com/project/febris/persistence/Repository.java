@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
+import com.project.febris.async.DeleteAsyncTask;
 import com.project.febris.async.InsertAsyncTask;
 import com.project.febris.models.Place;
 
@@ -31,6 +32,10 @@ public class Repository {
 
     public void deletePlace(Place place){
 
+    }
+
+    public void deleteAll() {
+        new DeleteAsyncTask(mDatabase.getNoteDao()).execute();
     }
 
 }
