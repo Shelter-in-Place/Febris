@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class GraphScreen extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class GraphScreen extends AppCompatActivity {
 
     public void buttonClick(View view){
         Button b = (Button) view;
-        Intent i = new Intent(GraphScreen.this, MainActivity.class);
-        GraphScreen.this.startActivity(i);
+        Intent i = new Intent(SecondActivity.this, ListActivity.class);
+        SecondActivity.this.startActivity(i);
     }
 }

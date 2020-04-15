@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="100"
+    android:background="#ffffff"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="30"
+        android:src="@drawable/ic_europe"
+        />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="70"
+        android:orientation="vertical"
+        android:weightSum="100"
+        android:background="#ffffff"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/item_place_name"
+            android:textSize="23sp"
+            android:layout_weight="40"
+            android:text="New York"
+            android:textColor="#000"
+            android:lines="1"
+            android:paddingLeft ="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/item_infections"
+            android:textSize="17sp"
+            android:layout_weight="30"
+            android:paddingLeft="10dp"
+            android:text="Infections: 1000"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/item_deaths"
+            android:textSize="17sp"
+            android:paddingLeft="10dp"
+            android:layout_weight="30"
+            android:text="Deaths: 50"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+<!--<LinearLayout-->
+<!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--android:layout_width="0dp"-->
+<!--android:layout_height="match_parent"-->
+<!--android:layout_weight="60"-->
+<!--android:orientation="vertical"-->
+<!--android:weightSum="100"-->
+<!--android:background="@color/lightYellow"-->
+<!--android:gravity="center_vertical">-->
+
