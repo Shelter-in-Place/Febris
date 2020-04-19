@@ -18,17 +18,25 @@ public class Place{
     private String image_address;
 
     @ColumnInfo(name = "infections")
-    private String infections ;
+    private int infections;
 
     @ColumnInfo(name = "deaths")
-    private String deaths;
+    private int deaths;
 
-    public Place(int ID, String place, String image_address, String infections, String deaths){
+    @ColumnInfo(name = "recovered")
+    private int recovered;
+
+    @ColumnInfo(name = "date")
+    private String date;
+
+
+    public Place(int ID, String place, String image_address, int infections, int deaths, int recovered){
         this.ID = ID;
         this.place = place;
         this.image_address = image_address;
         this.infections = infections;
         this.deaths = deaths;
+        this.recovered = recovered;
     }
 
     @Ignore
@@ -56,18 +64,28 @@ public class Place{
         this.image_address = image_address;
     }
 
-    public String getInfections() { return infections;}
+    public int getInfections() { return infections;}
 
-    public void setInfections(String region) {
-        this.infections = region;
+    public void setInfections(int infections) {
+        this.infections = infections;
     }
 
-    public String getDeaths() {
+    public int getDeaths() {
         return deaths;
     }
 
-    public void setDeaths(String image_address) {
-        this.deaths = image_address;
+    public void setDeaths(int deaths) { this.deaths = deaths; }
+
+    public int getRecovered() {
+        return deaths;
     }
+
+    public void setRecovered(int recovered) { this.recovered = recovered; }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) { this.date = date; }
 }
 
