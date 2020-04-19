@@ -32,7 +32,7 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.place_title.setText(mPlaces.get(position).getPlace());
-        holder.place_infections.setText(                         "Confirmed cases: " + mPlaces.get(position).getInfections());
+        holder.place_infections.setText("Confirmed cases: " + String.valueOf(mPlaces.get(position).getInfections()));
         holder.place_deaths.setText("Deaths: " + mPlaces.get(position).getDeaths());
     }
 

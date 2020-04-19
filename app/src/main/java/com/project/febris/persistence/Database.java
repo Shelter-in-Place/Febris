@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import com.project.febris.models.Place;
 
-@androidx.room.Database(entities = {Place.class}, version = 1)
+@androidx.room.Database(entities = {Place.class}, version = 2)
 public abstract class Database extends RoomDatabase {
 
     public static final String DATABASE_NAME = "db";
@@ -21,7 +21,8 @@ public abstract class Database extends RoomDatabase {
                     context.getApplicationContext(),
                     Database.class,
                     DATABASE_NAME
-            ).build();
+            ).fallbackToDestructiveMigration().
+                    build();
         }
         return instance;
     }
