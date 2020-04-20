@@ -62,16 +62,6 @@ public class Repository {
                     Place place = new Place(i+1, currentCountryName, "", currentCountry.getConfirmed(), currentCountry.getDeaths(), currentCountry.getRecovered());
                     insertPlaceTask(place);
                 }
-//                Details details = response.body().getNew_Zealand().get(response.body().getNew_Zealand().size() - 1);
-//                Log.d(TAG, "Repository: Success -->" + "DATE: " + details.getDate() + "; INFECTIONS: " + details.getConfirmed());
-//                deleteAll();
-
-//                response.body().getNew_Zealand().get(response.body().getNew_Zealand().size() - 1).getConfirmed()
-//
-//
-//                Place place = new Place(1, "Afghanistan", "address", details.getConfirmed(), details.getDeaths(), 1);
-//                insertPlaceTask(place);
-
             }
 
             @Override

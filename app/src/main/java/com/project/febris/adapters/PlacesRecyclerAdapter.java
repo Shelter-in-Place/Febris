@@ -32,8 +32,9 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.place_title.setText(mPlaces.get(position).getPlace());
-        holder.place_infections.setText("Confirmed cases: " + String.valueOf(mPlaces.get(position).getInfections()));
-        holder.place_deaths.setText("Deaths: " + mPlaces.get(position).getDeaths());
+        holder.place_infections.setText("Confirmed cases: \n" + String.valueOf(mPlaces.get(position).getInfections()));
+        holder.place_deaths.setText("Deaths: \n" + mPlaces.get(position).getDeaths());
+        holder.place_recovered.setText("Recovered: \n" + mPlaces.get(position).getDeaths());
     }
 
     @Override
@@ -51,12 +52,14 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         TextView place_title;
         TextView place_infections;
         TextView place_deaths;
+        TextView place_recovered;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             place_title = itemView.findViewById(R.id.item_place_name);
-            place_infections = itemView.findViewById(R.id.item_infections);
+            place_infections = itemView.findViewById(R.id.item_confirmed);
             place_deaths = itemView.findViewById(R.id.item_deaths);
+            place_recovered = itemView.findViewById(R.id.item_recovered);
         }
     }
 }
