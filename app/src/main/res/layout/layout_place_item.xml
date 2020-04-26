@@ -5,7 +5,10 @@
     android:layout_gravity="center"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
+    android:elevation="1dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="6dp"
+    android:layout_marginRight="6dp"
     card_view:cardCornerRadius="5dp">
 
     <LinearLayout
@@ -13,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/primaryLightColor"
+        android:background="#ffffff"
         android:gravity="center_horizontal">
 
         <TextView
