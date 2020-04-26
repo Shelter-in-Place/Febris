@@ -755,37 +755,37 @@ public class ResultModel {
 
     public List<String> getCountriesList(){
         countriesList = new ArrayList<>();
-        countriesList.add("Afghanistan"); countriesList.add("Albania"); countriesList.add("Algeria"); countriesList.add("Andorra"); countriesList.add("Angola"); countriesList.add("Antigua_and_Barbuda");
+        countriesList.add("Afghanistan"); countriesList.add("Albania"); countriesList.add("Algeria"); countriesList.add("Andorra"); countriesList.add("Angola"); countriesList.add("Antigua and Barbuda");
         countriesList.add("Argentina"); countriesList.add("Armenia"); countriesList.add("Australia"); countriesList.add("Austria"); countriesList.add("Azerbaijan"); countriesList.add("Bahamas");
         countriesList.add("Bahrain"); countriesList.add("Bangladesh"); countriesList.add("Barbados"); countriesList.add("Belarus"); countriesList.add("Belgium"); countriesList.add("Belize");
-        countriesList.add("Benin"); countriesList.add("Bhutan"); countriesList.add("Bolivia"); countriesList.add("Bosnia_and_Herzegovina"); countriesList.add("Botswana"); countriesList.add("Brazil");
-        countriesList.add("Brunei"); countriesList.add("Bulgaria"); countriesList.add("Burkina_Faso"); countriesList.add("Burma"); countriesList.add("Burundi"); countriesList.add("Cabo_Verde");
-        countriesList.add("Cambodia"); countriesList.add("Cameroon"); countriesList.add("Canada"); countriesList.add("Central_African_Republic"); countriesList.add("Chad"); countriesList.add("Chile");
-        countriesList.add("China"); countriesList.add("Colombia"); countriesList.add("Congo_Brazzaville"); countriesList.add("Congo_Kinshasa"); countriesList.add("Costa_Rica"); countriesList.add("Cote_d_Ivoire");
+        countriesList.add("Benin"); countriesList.add("Bhutan"); countriesList.add("Bolivia"); countriesList.add("Bosnia and Herzegovina"); countriesList.add("Botswana"); countriesList.add("Brazil");
+        countriesList.add("Brunei"); countriesList.add("Bulgaria"); countriesList.add("Burkina Faso"); countriesList.add("Burma"); countriesList.add("Burundi"); countriesList.add("Cabo Verde");
+        countriesList.add("Cambodia"); countriesList.add("Cameroon"); countriesList.add("Canada"); countriesList.add("Central African Republic"); countriesList.add("Chad"); countriesList.add("Chile");
+        countriesList.add("China"); countriesList.add("Colombia"); countriesList.add("Congo (Brazzaville)"); countriesList.add("Congo (Kinshasa)"); countriesList.add("Costa Rica"); countriesList.add("Cote d'Ivoire");
         countriesList.add("Croatia"); countriesList.add("Cuba"); countriesList.add("Cyprus"); countriesList.add("Czechia"); countriesList.add("Denmark"); countriesList.add("Diamond_Princess");
-        countriesList.add("Djibouti"); countriesList.add("Dominica"); countriesList.add("Dominican_Republic"); countriesList.add("Ecuador"); countriesList.add("Egypt"); countriesList.add("El_Salvador");
-        countriesList.add("Equatorial_Guinea"); countriesList.add("Eritrea"); countriesList.add("Estonia"); countriesList.add("Eswatini"); countriesList.add("Ethiopia"); countriesList.add("Fiji");
+        countriesList.add("Djibouti"); countriesList.add("Dominica"); countriesList.add("Dominican Republic"); countriesList.add("Ecuador"); countriesList.add("Egypt"); countriesList.add("El Salvador");
+        countriesList.add("Equatorial Guinea"); countriesList.add("Eritrea"); countriesList.add("Estonia"); countriesList.add("Eswatini"); countriesList.add("Ethiopia"); countriesList.add("Fiji");
         countriesList.add("Finland"); countriesList.add("France"); countriesList.add("Gabon"); countriesList.add("Gambia"); countriesList.add("Georgia"); countriesList.add("Germany");
         countriesList.add("Ghana"); countriesList.add("Greece"); countriesList.add("Grenada"); countriesList.add("Guatemala"); countriesList.add("Guinea"); countriesList.add("Guinea_Bissau");
-        countriesList.add("Guyana"); countriesList.add("Haiti"); countriesList.add("Holy_See"); countriesList.add("Honduras"); countriesList.add("Hungary"); countriesList.add("Iceland");
+        countriesList.add("Guyana"); countriesList.add("Haiti"); countriesList.add("Holy See"); countriesList.add("Honduras"); countriesList.add("Hungary"); countriesList.add("Iceland");
         countriesList.add("India"); countriesList.add("Indonesia"); countriesList.add("Iran"); countriesList.add("Iraq"); countriesList.add("Ireland"); countriesList.add("Israel");
         countriesList.add("Italy"); countriesList.add("Jamaica"); countriesList.add("Japan"); countriesList.add("Jordan"); countriesList.add("Kazakhstan"); countriesList.add("Kenya");
         countriesList.add("Kosovo"); countriesList.add("Kuwait"); countriesList.add("Kyrgyzstan"); countriesList.add("Laos"); countriesList.add("Latvia"); countriesList.add("Lebanon");
-        countriesList.add("Liberia"); countriesList.add("Libya"); countriesList.add("Liechtenstein"); countriesList.add("Lithuania"); countriesList.add("Luxembourg"); countriesList.add("MS_Zaandam");
+        countriesList.add("Liberia"); countriesList.add("Libya"); countriesList.add("Liechtenstein"); countriesList.add("Lithuania"); countriesList.add("Luxembourg"); countriesList.add("MS Zaandam");
         countriesList.add("Madagascar"); countriesList.add("Malawi"); countriesList.add("Malaysia"); countriesList.add("Maldives"); countriesList.add("Mali"); countriesList.add("Malta");
         countriesList.add("Mauritania"); countriesList.add("Mauritius"); countriesList.add("Mexico"); countriesList.add("Moldova"); countriesList.add("Monaco"); countriesList.add("Mongolia");
         countriesList.add("Montenegro"); countriesList.add("Morocco"); countriesList.add("Mozambique"); countriesList.add("Namibia"); countriesList.add("Nepal"); countriesList.add("Netherlands");
-        countriesList.add("New_Zealand"); countriesList.add("Nicaragua"); countriesList.add("Niger"); countriesList.add("Nigeria"); countriesList.add("North_Macedonia"); countriesList.add("Norway");
-        countriesList.add("Oman"); countriesList.add("Pakistan"); countriesList.add("Panama"); countriesList.add("Papua_New_Guinea"); countriesList.add("Paraguay"); countriesList.add("Peru");
+        countriesList.add("New Zealand"); countriesList.add("Nicaragua"); countriesList.add("Niger"); countriesList.add("Nigeria"); countriesList.add("North Macedonia"); countriesList.add("Norway");
+        countriesList.add("Oman"); countriesList.add("Pakistan"); countriesList.add("Panama"); countriesList.add("Papua New Guinea"); countriesList.add("Paraguay"); countriesList.add("Peru");
         countriesList.add("Philippines"); countriesList.add("Poland"); countriesList.add("Portugal"); countriesList.add("Qatar"); countriesList.add("Romania"); countriesList.add("Russia");
-        countriesList.add("Rwanda"); countriesList.add("Saint_Kitts_and_Nevis"); countriesList.add("Saint_Lucia"); countriesList.add("Saint_Vincent_and_the_Grenadines"); countriesList.add("San_Marino"); countriesList.add("Sao_Tome_and_Principe");
-        countriesList.add("Saudi_Arabia"); countriesList.add("Senegal"); countriesList.add("Serbia"); countriesList.add("Seychelles"); countriesList.add("Sierra_Leone"); countriesList.add("Singapore");
-        countriesList.add("Slovakia"); countriesList.add("Slovenia"); countriesList.add("Somalia"); countriesList.add("South_Africa"); countriesList.add("South_Korea"); countriesList.add("South_Sudan");
-        countriesList.add("Spain"); countriesList.add("Sri_Lanka"); countriesList.add("Sudan"); countriesList.add("Suriname"); countriesList.add("Sweden"); countriesList.add("Switzerland");
-        countriesList.add("Syria"); countriesList.add("Taiwan"); countriesList.add("Tanzania"); countriesList.add("Thailand"); countriesList.add("Timor_Leste"); countriesList.add("Togo");
-        countriesList.add("Trinidad_and_Tobago"); countriesList.add("Tunisia"); countriesList.add("Turkey"); countriesList.add("US"); countriesList.add("Uganda"); countriesList.add("Ukraine");
-        countriesList.add("United_Arab_Emirates"); countriesList.add("United_Kingdom"); countriesList.add("Uruguay"); countriesList.add("Uzbekistan"); countriesList.add("Venezuela"); countriesList.add("Vietnam");
-        countriesList.add("West_Bank_and_Gaza"); countriesList.add("Western_Sahara"); countriesList.add("Yemen"); countriesList.add("Zambia"); countriesList.add("Zimbabwe");
+        countriesList.add("Rwanda"); countriesList.add("Saint Kitts and Nevis"); countriesList.add("Saint Lucia"); countriesList.add("Saint Vincent and the Grenadines"); countriesList.add("San Marino"); countriesList.add("Sao_Tome_and_Principe");
+        countriesList.add("Saudi Arabia"); countriesList.add("Senegal"); countriesList.add("Serbia"); countriesList.add("Seychelles"); countriesList.add("Sierra Leone"); countriesList.add("Singapore");
+        countriesList.add("Slovakia"); countriesList.add("Slovenia"); countriesList.add("Somalia"); countriesList.add("South Africa"); countriesList.add("South Korea"); countriesList.add("South Sudan");
+        countriesList.add("Spain"); countriesList.add("Sri Lanka"); countriesList.add("Sudan"); countriesList.add("Suriname"); countriesList.add("Sweden"); countriesList.add("Switzerland");
+        countriesList.add("Syria"); countriesList.add("Taiwan"); countriesList.add("Tanzania"); countriesList.add("Thailand"); countriesList.add("Timor Leste"); countriesList.add("Togo");
+        countriesList.add("Trinidad and Tobago"); countriesList.add("Tunisia"); countriesList.add("Turkey"); countriesList.add("United States"); countriesList.add("Uganda"); countriesList.add("Ukraine");
+        countriesList.add("United Arab Emirates"); countriesList.add("United Kingdom"); countriesList.add("Uruguay"); countriesList.add("Uzbekistan"); countriesList.add("Venezuela"); countriesList.add("Vietnam");
+        countriesList.add("West Bank and Gaza"); countriesList.add("Western Sahara"); countriesList.add("Yemen"); countriesList.add("Zambia"); countriesList.add("Zimbabwe");
 
         return countriesList;
     }
