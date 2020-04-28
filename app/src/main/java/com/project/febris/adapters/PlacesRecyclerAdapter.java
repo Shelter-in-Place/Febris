@@ -39,7 +39,7 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         holder.place_title.setText(mPlaces.get(position).getPlace());
         holder.place_infections.setText("Cases: \n" + String.valueOf(mPlaces.get(position).getInfections()));
         holder.place_deaths.setText("Deaths: \n" + mPlaces.get(position).getDeaths());
-        holder.place_recovered.setText("Recovered: \n" + mPlaces.get(position).getDeaths());
+        holder.place_recovered.setText("Recovered: \n" + mPlaces.get(position).getRecovered());
     }
 
     @Override
