@@ -50,6 +50,7 @@ public class ListActivity extends AppCompatActivity {
 //        initToolBar();
 
         initViewModel();
+
         initSearchView();
     }
 
@@ -68,6 +69,7 @@ public class ListActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 // Keith your search methods go here ya ya ya!
                 Log.d(TAG, "Search Text Typed");
+                adapter.getFilter().filter(newText);
                 return false;
             }
         });
