@@ -3,6 +3,8 @@ package com.project.febris.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,9 +16,11 @@ import com.project.febris.models.Place;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAdapter.ViewHolder> {
+public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAdapter.ViewHolder> implements
+        Filterable {
 
-    private List<Place> mPlaces = new ArrayList<>();
+    private List<Place> mPlaces;
+    private List<Place> mPlacesFull;
 
     public PlacesRecyclerAdapter() {
 
@@ -44,8 +48,44 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
     public void setPlaces(List<Place> places){
         this.mPlaces = places;
+        mPlacesFull = new ArrayList<>(places);
         notifyDataSetChanged();
     }
+
+    @Override
+    public Filter getFilter() {
+        return resultsFilter;
+    }
+
+    private Filter resultsFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Place> filteredList = new ArrayList<>();
+            if(constraint==null||constraint.length()== 0){
+                filteredList.addAll(mPlacesFull);
+            }
+            else{
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for(Place place : mPlacesFull){
+                    if(place.getPlace().toLowerCase().contains(filterPattern)){
+                        filteredList.add(place);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mPlaces.clear();
+            mPlaces.addAll((List)results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
