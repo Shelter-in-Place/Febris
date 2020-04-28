@@ -32,7 +32,7 @@ public class Fragment2 extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_screen_1, container, false);
+        View root = inflater.inflate(R.layout.fragment_screen_2, container, false);
         initRecyclerView(root);
         initViewModel();
 
