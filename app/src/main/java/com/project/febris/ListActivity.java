@@ -17,7 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 
 
 // Febris package imports
-    
+
 import com.google.android.material.tabs.TabLayout;
 import com.project.febris.adapters.PlacesRecyclerAdapter;
 import com.project.febris.models.Place;
