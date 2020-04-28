@@ -1,5 +1,6 @@
 package com.project.febris.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,12 @@ import java.util.List;
 
 public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAdapter.ViewHolder> implements
         Filterable {
+    private static final String TAG = "PlacesRecyclerAdapter";
 
     private List<Place> mPlaces;
     private List<Place> mPlacesFull;
 
     public PlacesRecyclerAdapter() {
-
     }
 
     @NonNull
@@ -43,7 +44,13 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
     @Override
     public int getItemCount() {
-        return mPlaces.size();
+        try{
+            return mPlaces.size();
+        }
+        catch(NullPointerException e){
+            Log.d(TAG, "getItemCount: nullpointer error " + e.getMessage());
+            return 0;
+        }
     }
 
     public void setPlaces(List<Place> places){
