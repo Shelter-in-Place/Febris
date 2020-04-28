@@ -1,6 +1,7 @@
 package com.project.febris.ui.main;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ import com.project.febris.util.VerticalSpacingItemDecorator;
 import java.util.List;
 
 public class Fragment2 extends Fragment {
-
+    private static final String TAG = "FRAGMENT 2";
     private PlacesRecyclerAdapter adapter;
 
     @Nullable
@@ -56,5 +57,10 @@ public class Fragment2 extends Fragment {
                 adapter.setPlaces(places);
             }
         });
+    }
+
+    public void search(String newText){
+        Log.d(TAG, "TEST METHOD TRIGGERED");
+        adapter.getFilter().filter(newText);
     }
 }
