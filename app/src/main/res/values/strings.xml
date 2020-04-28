@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Febris</string>
+
+    <string name="tab_text_1">Favorites</string>
+    <string name="tab_text_2">World List</string>
+    <string name="tab_text_3">Charts</string>
 </resources>

@@ -75,7 +75,7 @@ public class Place{
     public void setDeaths(int deaths) { this.deaths = deaths; }
 
     public int getRecovered() {
-        return deaths;
+        return recovered;
     }
 
     public void setRecovered(int recovered) { this.recovered = recovered; }
