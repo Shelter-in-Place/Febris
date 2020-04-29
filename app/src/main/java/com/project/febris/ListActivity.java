@@ -28,6 +28,8 @@ import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
+    //Testing commit
+
     private static final String TAG = "List Activity";
 
     //UI components
