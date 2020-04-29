@@ -38,6 +38,7 @@ public class Repository {
         mDatabase = Database.getInstance(context);
         initRetrofit();
         callRetrofit();
+        testDataFList();
     }
 
     // RETROFIT
@@ -76,15 +77,13 @@ public class Repository {
 
     }
 
-    public void cacheData(ResultModel resultModel){
-//        deleteAll();
-//        Details det = resultModel.getAfghanistan().get(2);
-//        int confirmed = det.getConfirmed();
-//        Log.d(TAG, "THIS" + confirmed);
-//        Place place = new Place(1, "Afghanistan", "address", confirmed, 1, 1);
-//        insertPlaceTask(place);
-
+    private void testDataFList(){
+        deleteAllFavourites();
+        FavouritesPlace fPlace = new FavouritesPlace(1, "test country name", "", 100, 200, 300,false);
+        insertFavouriteTask(fPlace);
     }
+
+
 
     // DATABASE METHODS
 

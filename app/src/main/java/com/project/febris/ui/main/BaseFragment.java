@@ -20,31 +20,5 @@ import java.util.List;
 public abstract class BaseFragment extends Fragment {
     private static final String TAG = "BaseFragment";
 
-    private PlacesRecyclerAdapter adapter;
-
-
-    public void initRecyclerView(View root){
-        RecyclerView mRecyclerView = root.findViewById(R.id.recyclerView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(0);
-        mRecyclerView.addItemDecoration(itemDecorator);
-//        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
-        adapter = new PlacesRecyclerAdapter();
-        mRecyclerView.setAdapter(adapter);
-    }
-
-    public void initViewModel(){
-        ListViewModel mListViewModel = new ViewModelProvider(this).get(ListViewModel.class);
-        mListViewModel.getAllPlaces().observe(this, new Observer<List<Place>>() {
-            @Override
-            public void onChanged(List<Place> places) {
-                adapter.setPlaces(places);
-            }
-        });
-    }
-
-    public void search(String newText){
-        Log.d(TAG, "TEST METHOD TRIGGERED");
-        adapter.getFilter().filter(newText);
-    }
+    //TO BE USED AS BASE FRAGMENT CLASS - BUT NOT SURE RECYCLER VIEW CAN BE IN HERE INSTEAD OF IN THE FRAGMENTS THEMSELVES.  WILL HAVE A PLAY AROUND TO SEE HOW THIS WOULD WORK
 }
