@@ -79,11 +79,14 @@ public class Repository {
 
     private void testDataFList(){
         deleteAllFavourites();
-        FavouritesPlace fPlace = new FavouritesPlace(1, "test country name", "", 100, 200, 300,false);
+        FavouritesPlace fPlace = new FavouritesPlace("test country name", "", 100, 200, 300,false);
         insertFavouriteTask(fPlace);
     }
 
-
+    public void addFav(String countryName){
+        FavouritesPlace fPlace = new FavouritesPlace(countryName, "", 100, 200, 300,false);
+        insertFavouriteTask(fPlace);
+    }
 
     // DATABASE METHODS
 

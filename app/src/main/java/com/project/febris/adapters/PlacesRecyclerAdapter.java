@@ -11,6 +11,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.febris.ListViewModel;
@@ -28,8 +29,9 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
     private List<Place> mPlaces;
     private List<Place> mPlacesFull;
-    ListViewModel mViewModel;
-    private FavouritesPlace favourite = new FavouritesPlace();
+    private ListViewModel mViewModel;
+    private Place favourite = new Place();
+    private Place testPlace;
 
 
     public PlacesRecyclerAdapter() {
@@ -82,7 +84,8 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
                         Log.d(TAG, "onCheckedChanged: favourite = \n"+
                                 "place: "+ favourite.getPlace()+"\n"+
                                 "favourited: "+favourite.is_favourite());
-                        mViewModel.insertFavourite(favourite);
+                        mViewModel.insertFavourite("tester");
+
                     }
                     catch(NullPointerException e){
                         Log.d(TAG, "onCheckedChanged: "+e.getMessage());

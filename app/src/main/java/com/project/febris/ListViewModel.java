@@ -51,7 +51,9 @@ public class ListViewModel extends AndroidViewModel {
         return allFavourites;
     }
 
-    public void insertFavourite(FavouritesPlace favourite){mRepository.insertFavouriteTask(favourite);}
+    public void insertFavourite(String countryName){
+        mRepository.addFav(countryName);
+    }
 
     public void deleteFavourite(FavouritesPlace favourite){mRepository.deleteFavourite(favourite);}
 }

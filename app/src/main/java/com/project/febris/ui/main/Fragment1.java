@@ -66,4 +66,10 @@ public class Fragment1 extends Fragment {
         adapter.getFilter().filter(newText);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+        Log.d(TAG, "onresume");
+    }
 }
