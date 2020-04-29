@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.project.febris.R;
 
-public class Fragment3 extends Fragment {
+public class Fragment3 extends BaseFragment {
 
     @Nullable
     @Override

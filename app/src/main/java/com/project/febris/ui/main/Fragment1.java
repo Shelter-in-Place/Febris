@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.febris.ListViewModel;
 import com.project.febris.R;
-import com.project.febris.adapters.PlacesRecyclerAdapter;
+import com.project.febris.adapters.FavouritesRecyclerAdapter;
+import com.project.febris.models.FavouritesPlace;
 import com.project.febris.models.Place;
 import com.project.febris.util.VerticalSpacingItemDecorator;
 
@@ -27,7 +27,7 @@ public class Fragment1 extends Fragment {
 
     private static final String TAG = "FRAGMENT 1";
 
-    private PlacesRecyclerAdapter adapter;
+    private FavouritesRecyclerAdapter adapter;
 
     @Nullable
     @Override
@@ -41,22 +41,22 @@ public class Fragment1 extends Fragment {
         return root;
     }
 
-    private void initRecyclerView(View root){
+    public void initRecyclerView(View root){
         RecyclerView mRecyclerView = root.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(0);
         mRecyclerView.addItemDecoration(itemDecorator);
 //        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
-        adapter = new PlacesRecyclerAdapter();
+        adapter = new FavouritesRecyclerAdapter();
         mRecyclerView.setAdapter(adapter);
     }
 
     public void initViewModel(){
         ListViewModel mListViewModel = new ViewModelProvider(this).get(ListViewModel.class);
-        mListViewModel.getAllPlaces().observe(this, new Observer<List<Place>>() {
+        mListViewModel.getAllFavourites().observe(this, new Observer<List<FavouritesPlace>>() {
             @Override
-            public void onChanged(List<Place> places) {
-                adapter.setPlaces(places);
+            public void onChanged(List<FavouritesPlace> favourites) {
+                adapter.setFavourites(favourites);
             }
         });
     }
@@ -65,4 +65,5 @@ public class Fragment1 extends Fragment {
         Log.d(TAG, "TEST METHOD TRIGGERED");
         adapter.getFilter().filter(newText);
     }
+
 }
