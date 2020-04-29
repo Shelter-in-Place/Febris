@@ -5,8 +5,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "places")
-public class Place {
+@Entity(tableName = "favourites")
+public class FavouritesPlace {
 
     @PrimaryKey(autoGenerate = true)
     private int ID;
@@ -35,7 +35,7 @@ public class Place {
 
 
 
-    public Place(int ID, String place, String image_address, int infections, int deaths, int recovered, boolean is_favourite){
+    public FavouritesPlace(int ID, String place, String image_address, int infections, int deaths, int recovered, boolean is_favourite){
         this.ID = ID;
         this.place = place;
         this.image_address = image_address;
@@ -46,7 +46,7 @@ public class Place {
     }
 
     @Ignore
-    public Place() {
+    public FavouritesPlace() {
     }
 
     // Get / Set Methods:

@@ -11,7 +11,6 @@ import androidx.appcompat.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import androidx.viewpager.widget.ViewPager;
@@ -27,8 +26,6 @@ import com.project.febris.ui.main.*;
 import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
-
-    //Testing commit
 
     private static final String TAG = "List Activity";
 
@@ -55,12 +52,12 @@ public class ListActivity extends AppCompatActivity {
 
     public void initViewModel(){
         mListViewModel = new ViewModelProvider(this).get(ListViewModel.class);
-        mListViewModel.getAllPlaces().observe(this, new Observer<List<Place>>() {
-            @Override
-            public void onChanged(List<Place> places) {
+//        mListViewModel.getAllPlaces().observe(this, new Observer<List<Place>>() {
+//            @Override
+//            public void onChanged(List<Place> places) {
 //                adapter.setPlaces(places);
-            }
-        });
+//            }
+//        });
     }
 
     private void initSearchView(){

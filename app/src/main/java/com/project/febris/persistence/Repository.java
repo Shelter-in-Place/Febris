@@ -8,8 +8,12 @@ import androidx.lifecycle.LiveData;
 import com.project.febris.API.Details;
 import com.project.febris.API.ResultModel;
 import com.project.febris.API.ResultsAPI;
+import com.project.febris.async.DeleteAllFavouritesAsyncTask;
 import com.project.febris.async.DeleteAsyncTask;
+import com.project.febris.async.DeleteFavouriteAsyncTask;
 import com.project.febris.async.InsertAsyncTask;
+import com.project.febris.async.InsertFavouriteAsyncTask;
+import com.project.febris.models.FavouritesPlace;
 import com.project.febris.models.Place;
 
 import java.util.List;
@@ -59,7 +63,7 @@ public class Repository {
                 for(int i=0; i < countries.size() - 1; i++){
                     String currentCountryName = countryNames.get(i);
                     Details currentCountry = countries.get(i).get(countries.get(i).size()-1);
-                    Place place = new Place(i+1, currentCountryName, "", currentCountry.getConfirmed(), currentCountry.getDeaths(), currentCountry.getRecovered());
+                    Place place = new Place(i+1, currentCountryName, "", currentCountry.getConfirmed(), currentCountry.getDeaths(), currentCountry.getRecovered(),false);
                     insertPlaceTask(place);
                 }
             }
@@ -83,6 +87,8 @@ public class Repository {
     }
 
     // DATABASE METHODS
+
+    //Places
     public void insertPlaceTask(Place place){
         new InsertAsyncTask(mDatabase.getNoteDao()).execute(place);
     }
@@ -102,5 +108,30 @@ public class Repository {
     public void deleteAll() {
         new DeleteAsyncTask(mDatabase.getNoteDao()).execute();
     }
+
+
+
+    //Favourites
+    public void insertFavouriteTask(FavouritesPlace favourite){
+        new InsertFavouriteAsyncTask(mDatabase.getFavouritesDao()).execute(favourite);
+    }
+
+    public void updateFavourites(FavouritesPlace favourite){
+
+    }
+
+    public LiveData<List<FavouritesPlace>> retrieveFavouritesTask(){
+        return mDatabase.getFavouritesDao().getFavourites();
+    }
+
+    public void deleteFavourite(FavouritesPlace favourite){
+        new DeleteFavouriteAsyncTask(mDatabase.getFavouritesDao()).execute();
+    }
+
+    public void deleteAllFavourites() {
+        new DeleteAllFavouritesAsyncTask(mDatabase.getFavouritesDao()).execute();
+    }
+
+
 
 }
