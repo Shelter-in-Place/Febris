@@ -40,7 +40,6 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final FavouritesPlace favourite = mFavourites.get(position);
 
         holder.place_title.setText(mFavourites.get(position).getPlace());
         holder.place_infections.setText("Cases: \n" + String.valueOf(mFavourites.get(position).getInfections()));
@@ -110,7 +109,7 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
         CheckBox favourites_checkbox;
         FavOnClickboxListener favOnClickboxListener;
 
-        public ViewHolder(@NonNull View itemView,FavOnClickboxListener favOnClickboxListener) {
+        public ViewHolder(@NonNull View itemView, FavOnClickboxListener favOnClickboxListener) {
             super(itemView);
             place_title = itemView.findViewById(R.id.item_place_name);
             place_infections = itemView.findViewById(R.id.item_confirmed);

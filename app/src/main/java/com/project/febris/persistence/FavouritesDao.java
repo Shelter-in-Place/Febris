@@ -28,4 +28,7 @@ public interface FavouritesDao {
 
     @Update
     int updateFavourites(FavouritesPlace... favourites);
+
+    @Query("SELECT * FROM favourites Where place = :place")
+    FavouritesPlace findFavorite(String place);
 }

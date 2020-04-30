@@ -17,9 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.project.febris.ListViewModel;
 import com.project.febris.R;
 import com.project.febris.adapters.FavouritesRecyclerAdapter;
-import com.project.febris.adapters.PlacesRecyclerAdapter;
 import com.project.febris.models.FavouritesPlace;
-import com.project.febris.models.Place;
 import com.project.febris.util.VerticalSpacingItemDecorator;
 
 import java.util.ArrayList;
@@ -29,20 +27,15 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
 
     private static final String TAG = "FRAGMENT 1";
 
-    private FavouritesRecyclerAdapter adapter;
-    private List<FavouritesPlace> mFavourites = new ArrayList<>();
+    private FavouritesRecyclerAdapter favouritesRecyclerAdapter;
+    private List<FavouritesPlace> mFavouritesList = new ArrayList<>();
     private ListViewModel mListViewModel;
 
 
     @Nullable
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_screen_1, container, false);
-        mListViewModel = new ViewModelProvider(this).get(ListViewModel.class);
-
         initRecyclerView(root);
         initViewModel();
         return root;
@@ -54,34 +47,35 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
         VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(0);
         mRecyclerView.addItemDecoration(itemDecorator);
 //        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
-        adapter = new FavouritesRecyclerAdapter(this);
-        mRecyclerView.setAdapter(adapter);
+        favouritesRecyclerAdapter = new FavouritesRecyclerAdapter(this);
+        mRecyclerView.setAdapter(favouritesRecyclerAdapter);
     }
 
     public void initViewModel(){
+        mListViewModel = new ViewModelProvider(this).get(ListViewModel.class);
         mListViewModel.getAllFavourites().observe(this, new Observer<List<FavouritesPlace>>() {
             @Override
             public void onChanged(List<FavouritesPlace> favourites) {
-                adapter.setFavourites(favourites);
-                mFavourites.addAll(favourites);
+                favouritesRecyclerAdapter.setFavourites(favourites);
+                mFavouritesList.addAll(favourites);
             }
         });
     }
 
-    public void search(String newText){
+    public void search(String searchText){
         Log.d(TAG, "TEST METHOD TRIGGERED");
-        adapter.getFilter().filter(newText);
+        favouritesRecyclerAdapter.getFilter().filter(searchText);
     }
 
     private void deleteFavourite (FavouritesPlace favouritesPlace){
-        mFavourites.remove(favouritesPlace);
-        adapter.notifyDataSetChanged();
+        mFavouritesList.remove(favouritesPlace);
+        favouritesRecyclerAdapter.notifyDataSetChanged();
 //        mListViewModel.deleteFavourite(favouritesPlace);
     }
+
     @Override
     public void favOnClickboxclick(int position) {
-        deleteFavourite(mFavourites.get(position));
-
-
+        deleteFavourite(mFavouritesList.get(position));
+        Log.d(TAG, "favOnClickboxclick");
     }
 }

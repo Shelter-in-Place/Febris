@@ -105,11 +105,11 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") was favourited");
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+
                     place.is_favourite());
-//
-//            mListViewModel.deleteFavourite(favourite);
-//            place.set_favourite(false);
-//            mListViewModel.update(place);
-//            adapter.notifyDataSetChanged();
+
+            //Keith this is the method I put in for the delete - it plumbs down into the repository
+            //where a new thread is created to find the favorite via a name search and then delete
+            //that favorite from the fav database
+            mListViewModel.delFavourite(place.getPlace());
 
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is no longer favourited");
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+
@@ -118,11 +118,11 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
         }
         else{
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") was not favourited");
-//            place.set_favourite(true);
-//            mListViewModel.update(place);
-//            adapter.notifyDataSetChanged();
-//            favourite.set_favourite(true);
-//            mListViewModel.insertFavourite(favourite);
+            place.set_favourite(true);
+            mListViewModel.update(place);
+            adapter.notifyDataSetChanged();
+            favourite.set_favourite(true);
+            mListViewModel.insertFavourite(favourite);
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is now favourited");
         }
     }

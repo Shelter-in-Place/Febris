@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "favourites")
 public class FavouritesPlace {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int ID;
 
     @ColumnInfo(name = "place")
@@ -36,14 +36,14 @@ public class FavouritesPlace {
 
 
     public FavouritesPlace(String place, String image_address, int infections, int deaths, int recovered, boolean is_favourite){
-          this.place = place;
+        this.ID = 0;
+        this.place = place;
         this.image_address = image_address;
         this.infections = infections;
         this.deaths = deaths;
         this.recovered = recovered;
         this.is_favourite = is_favourite;
     }
-
 
 
     @Ignore

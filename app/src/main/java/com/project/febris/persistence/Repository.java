@@ -59,6 +59,7 @@ public class Repository {
             public void onResponse(Call<ResultModel> call, Response<ResultModel> response) {
                 Log.d(TAG, "Repository: Success -->" + response.code());
                 deleteAll();
+                deleteAllFavourites();
                 List<List<Details>> countries = response.body().getCountries();
                 List<String> countryNames = response.body().getCountriesList();
                 for(int i=0; i < countries.size() - 1; i++){
@@ -134,6 +135,17 @@ public class Repository {
 
     public void deleteAllFavourites() {
         new DeleteAllFavouritesAsyncTask(mDatabase.getFavouritesDao()).execute();
+    }
+
+    public void delFavourite(String place){
+        final String placeName = place;
+        new Thread(new Runnable(){
+            public void run(){
+                final FavouritesPlace favouritesPlace = mDatabase.getFavouritesDao().findFavorite(placeName);
+                mDatabase.getFavouritesDao().deleteFavourite(favouritesPlace);
+            }
+        }).start();
+
     }
 
 

@@ -63,44 +63,6 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         holder.place_deaths.setText("Deaths: \n" + mPlaces.get(position).getDeaths());
         holder.place_recovered.setText("Recovered: \n" + mPlaces.get(position).getRecovered());
         holder.favourites_checkbox.setChecked(place.is_favourite());
-
-//        holder.favourites_checkbox.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FavouritesPlace favourite = new FavouritesPlace();
-//                int id = place.getID();
-//                String name = place.getPlace();
-//                String image_address = place.getImage_address();
-//                int infections = place.getInfections();
-//                int deaths = place.getDeaths();
-//                int recovered = place.getRecovered();
-//                String date = place.getDate();
-//                boolean is_favourite = place.is_favourite();
-//
-//                favourite.setID(id);
-//                favourite.setRegion(name);
-//                favourite.setImage_address(image_address);
-//                favourite.setInfections(infections);
-//                favourite.setDeaths(deaths);
-//                favourite.setRecovered(recovered);
-//                favourite.setDate(date);
-//                favourite.set_favourite(is_favourite);
-//
-//                if(!place.is_favourite()){
-//                    holder.favourites_checkbox.setChecked(true);
-//                    place.set_favourite(true);
-//                    mRepository.updatePlaces(place);
-//                    favourite.set_favourite(true);
-//                    mRepository.insertFavouriteTask(favourite);
-//                }
-//                else{
-//                    holder.favourites_checkbox.setChecked(false);
-//                    place.set_favourite(false);
-//                    mRepository.updatePlaces(place);
-//                    mRepository.deleteFavourite(favourite);
-//                }
-//            }
-//        });
     }
 
 
@@ -173,13 +135,12 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
             this.onClickboxListener = onClickboxListener;
             favourites_checkbox.setOnClickListener(this);
-
-
         }
-
 
         @Override
         public void onClick(View v) {
+            Log.d(TAG, "onClick triggered");
+
             onClickboxListener.onClickboxclick(getAdapterPosition());
         }
 
