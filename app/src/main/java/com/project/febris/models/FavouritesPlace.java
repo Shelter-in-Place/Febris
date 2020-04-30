@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "favourites")
 public class FavouritesPlace {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private int ID;
 
     @ColumnInfo(name = "place")

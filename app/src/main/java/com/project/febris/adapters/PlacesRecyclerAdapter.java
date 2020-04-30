@@ -11,10 +11,8 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.project.febris.ListViewModel;
 import com.project.febris.R;
 import com.project.febris.models.FavouritesPlace;
 import com.project.febris.models.Place;
@@ -29,25 +27,23 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
     private List<Place> mPlaces;
     private List<Place> mPlacesFull;
-    private ListViewModel mViewModel;
-    private Place favourite = new Place();
-    private Place testPlace;
+    private FavouritesPlace favourite = new FavouritesPlace();
+    private OnClickboxListener mOnClickBoxListener;
+    Repository mRepository;
 
 
-    public PlacesRecyclerAdapter() {
+    public PlacesRecyclerAdapter(OnClickboxListener onClickboxListener) {
+        this.mOnClickBoxListener=onClickboxListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_place_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view,mOnClickBoxListener);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //ATTEMPT TO CREATE
-        final Place place = mPlaces.get(position);
+    private void setFavourite(Place place) {
         favourite.setDate(place.getDate());
         favourite.setDeaths(place.getDeaths());
         favourite.setID(place.getID());
@@ -55,61 +51,70 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         favourite.setInfections(place.getInfections());
         favourite.setRecovered(place.getRecovered());
         favourite.setRegion(place.getPlace());
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        //ATTEMPT TO CREATE
+        final Place place = mPlaces.get(position);
 
         holder.place_title.setText(mPlaces.get(position).getPlace());
         holder.place_infections.setText("Cases: \n" + String.valueOf(mPlaces.get(position).getInfections()));
         holder.place_deaths.setText("Deaths: \n" + mPlaces.get(position).getDeaths());
         holder.place_recovered.setText("Recovered: \n" + mPlaces.get(position).getRecovered());
+        holder.favourites_checkbox.setChecked(place.is_favourite());
 
-        holder.favourites_checkbox.setOnCheckedChangeListener(null);
-
-        holder.favourites_checkbox.setChecked(mPlaces.get(position).is_favourite());
-
-        holder.favourites_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.d(TAG, "onCheckedChanged: \nfavourite = \n"+
-                        "place: "+ favourite.getPlace()+"\n"+
-                        "favourited: "+favourite.is_favourite());
-
-                place.set_favourite(isChecked);
-                Log.d(TAG, "onCheckedChanged: "+place.getPlace() + "\n"+
-                        place.getID()+"\n"+place.is_favourite());
-
-                    favourite.set_favourite(isChecked);
-
-
-                if(place.is_favourite()){
-                    try{
-                        Log.d(TAG, "onCheckedChanged: favourite = \n"+
-                                "place: "+ favourite.getPlace()+"\n"+
-                                "favourited: "+favourite.is_favourite());
-                        mViewModel.insertFavourite("tester");
-
-                    }
-                    catch(NullPointerException e){
-                        Log.d(TAG, "onCheckedChanged: "+e.getMessage());
-                    }
-
-                }
-
-            }
-        });
-
+//        holder.favourites_checkbox.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                FavouritesPlace favourite = new FavouritesPlace();
+//                int id = place.getID();
+//                String name = place.getPlace();
+//                String image_address = place.getImage_address();
+//                int infections = place.getInfections();
+//                int deaths = place.getDeaths();
+//                int recovered = place.getRecovered();
+//                String date = place.getDate();
+//                boolean is_favourite = place.is_favourite();
+//
+//                favourite.setID(id);
+//                favourite.setRegion(name);
+//                favourite.setImage_address(image_address);
+//                favourite.setInfections(infections);
+//                favourite.setDeaths(deaths);
+//                favourite.setRecovered(recovered);
+//                favourite.setDate(date);
+//                favourite.set_favourite(is_favourite);
+//
+//                if(!place.is_favourite()){
+//                    holder.favourites_checkbox.setChecked(true);
+//                    place.set_favourite(true);
+//                    mRepository.updatePlaces(place);
+//                    favourite.set_favourite(true);
+//                    mRepository.insertFavouriteTask(favourite);
+//                }
+//                else{
+//                    holder.favourites_checkbox.setChecked(false);
+//                    place.set_favourite(false);
+//                    mRepository.updatePlaces(place);
+//                    mRepository.deleteFavourite(favourite);
+//                }
+//            }
+//        });
     }
+
 
     @Override
     public int getItemCount() {
-        try{
+        try {
             return mPlaces.size();
-        }
-        catch(NullPointerException e){
+        } catch (NullPointerException e) {
             Log.d(TAG, "getItemCount: nullpointer error " + e.getMessage());
             return 0;
         }
     }
 
-    public void setPlaces(List<Place> places){
+    public void setPlaces(List<Place> places) {
         this.mPlaces = places;
         mPlacesFull = new ArrayList<>(places);
         notifyDataSetChanged();
@@ -124,14 +129,13 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Place> filteredList = new ArrayList<>();
-            if(constraint==null||constraint.length()== 0){
+            if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(mPlacesFull);
-            }
-            else{
+            } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for(Place place : mPlacesFull){
-                    if(place.getPlace().toLowerCase().contains(filterPattern)){
+                for (Place place : mPlacesFull) {
+                    if (place.getPlace().toLowerCase().contains(filterPattern)) {
                         filteredList.add(place);
                     }
                 }
@@ -145,26 +149,49 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mPlaces.clear();
-            mPlaces.addAll((List)results.values);
+            mPlaces.addAll((List) results.values);
             notifyDataSetChanged();
         }
     };
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
         TextView place_title;
         TextView place_infections;
         TextView place_deaths;
         TextView place_recovered;
         CheckBox favourites_checkbox;
+        OnClickboxListener onClickboxListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnClickboxListener onClickboxListener) {
             super(itemView);
             place_title = itemView.findViewById(R.id.item_place_name);
             place_infections = itemView.findViewById(R.id.item_confirmed);
             place_deaths = itemView.findViewById(R.id.item_deaths);
             place_recovered = itemView.findViewById(R.id.item_recovered);
             favourites_checkbox = itemView.findViewById(R.id.favourite_checkbox);
+
+            this.onClickboxListener = onClickboxListener;
+            favourites_checkbox.setOnClickListener(this);
+
+
+        }
+
+
+        @Override
+        public void onClick(View v) {
+            onClickboxListener.onClickboxclick(getAdapterPosition());
+        }
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
         }
     }
+
+    public interface OnClickboxListener{
+        void onClickboxclick(int position);
+    }
+
+
 }

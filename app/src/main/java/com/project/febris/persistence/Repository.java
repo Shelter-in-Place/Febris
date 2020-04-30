@@ -111,6 +111,8 @@ public class Repository {
         new DeleteAsyncTask(mDatabase.getNoteDao()).execute();
     }
 
+    public int isFavourite(int id){return mDatabase.getNoteDao().isFavorite(id);}
+
 
 
     //Favourites

@@ -28,4 +28,7 @@ public interface Dao {
 
     @Update
     int update(Place... places);
+
+    @Query("SELECT EXISTS (SELECT 1 FROM places WHERE ID == :id AND deaths >= 2000)")
+    public int isFavorite(int id);
 }
