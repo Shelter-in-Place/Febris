@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "eb2cae7677a15137eb975f888ab40a04",
+    "identityHash": "e0684aee800bcad309853b7bf02fb6ed",
     "entities": [
       {
         "tableName": "places",
@@ -68,7 +68,7 @@
       },
       {
         "tableName": "favourites",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `place` TEXT, `image_address` TEXT, `infections` INTEGER NOT NULL, `deaths` INTEGER NOT NULL, `recovered` INTEGER NOT NULL, `date` TEXT, `isFav` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER NOT NULL, `place` TEXT, `image_address` TEXT, `infections` INTEGER NOT NULL, `deaths` INTEGER NOT NULL, `recovered` INTEGER NOT NULL, `date` TEXT, `isFav` INTEGER NOT NULL, PRIMARY KEY(`ID`))",
         "fields": [
           {
             "fieldPath": "ID",
@@ -123,7 +123,7 @@
           "columnNames": [
             "ID"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -132,7 +132,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'eb2cae7677a15137eb975f888ab40a04')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e0684aee800bcad309853b7bf02fb6ed')"
     ]
   }
 }

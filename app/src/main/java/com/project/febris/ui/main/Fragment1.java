@@ -17,17 +17,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.project.febris.ListViewModel;
 import com.project.febris.R;
 import com.project.febris.adapters.FavouritesRecyclerAdapter;
+import com.project.febris.adapters.PlacesRecyclerAdapter;
 import com.project.febris.models.FavouritesPlace;
 import com.project.febris.models.Place;
 import com.project.febris.util.VerticalSpacingItemDecorator;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Fragment1 extends Fragment {
+public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.FavOnClickboxListener {
 
     private static final String TAG = "FRAGMENT 1";
 
     private FavouritesRecyclerAdapter adapter;
+    private List<FavouritesPlace> mFavourites = new ArrayList<>();
+    private ListViewModel mListViewModel;
+
 
     @Nullable
     @Override
@@ -36,6 +41,8 @@ public class Fragment1 extends Fragment {
             Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_screen_1, container, false);
+        mListViewModel = new ViewModelProvider(this).get(ListViewModel.class);
+
         initRecyclerView(root);
         initViewModel();
         return root;
@@ -47,16 +54,16 @@ public class Fragment1 extends Fragment {
         VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(0);
         mRecyclerView.addItemDecoration(itemDecorator);
 //        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
-        adapter = new FavouritesRecyclerAdapter();
+        adapter = new FavouritesRecyclerAdapter(this);
         mRecyclerView.setAdapter(adapter);
     }
 
     public void initViewModel(){
-        ListViewModel mListViewModel = new ViewModelProvider(this).get(ListViewModel.class);
         mListViewModel.getAllFavourites().observe(this, new Observer<List<FavouritesPlace>>() {
             @Override
             public void onChanged(List<FavouritesPlace> favourites) {
                 adapter.setFavourites(favourites);
+                mFavourites.addAll(favourites);
             }
         });
     }
@@ -66,4 +73,15 @@ public class Fragment1 extends Fragment {
         adapter.getFilter().filter(newText);
     }
 
+    private void deleteFavourite (FavouritesPlace favouritesPlace){
+        mFavourites.remove(favouritesPlace);
+        adapter.notifyDataSetChanged();
+//        mListViewModel.deleteFavourite(favouritesPlace);
+    }
+    @Override
+    public void favOnClickboxclick(int position) {
+        deleteFavourite(mFavourites.get(position));
+
+
+    }
 }
