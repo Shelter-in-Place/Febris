@@ -65,8 +65,10 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
         mListViewModel.getAllPlaces().observe(this, new Observer<List<Place>>() {
             @Override
             public void onChanged(List<Place> places) {
+                Log.d(TAG, "onChanged: ");
+                mPlaces = places;
                 adapter.setPlaces(places);
-                mPlaces.addAll(places);
+                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -79,51 +81,29 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
 
     @Override
     public void onClickboxclick(int position) {
-
         Place place = mPlaces.get(position);
-
-        FavouritesPlace favourite = new FavouritesPlace();
-        int id = place.getID();
-        String name = place.getPlace();
-        String image_address = place.getImage_address();
-        int infections = place.getInfections();
-        int deaths = place.getDeaths();
-        int recovered = place.getRecovered();
-        String date = place.getDate();
-        boolean is_favourite = place.is_favourite();
-
-        favourite.setID(id);
-        favourite.setRegion(name);
-        favourite.setImage_address(image_address);
-        favourite.setInfections(infections);
-        favourite.setDeaths(deaths);
-        favourite.setRecovered(recovered);
-        favourite.setDate(date);
-        favourite.set_favourite(is_favourite);
-
         if(place.is_favourite()){
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") was favourited");
-            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+
-                    place.is_favourite());
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+ place.is_favourite());
 
-            //Keith this is the method I put in for the delete - it plumbs down into the repository
-            //where a new thread is created to find the favorite via a name search and then delete
-            //that favorite from the fav database
-            mListViewModel.delFavourite(place.getPlace());
+            place.set_favourite(false);
+            mListViewModel.update(place);
+            adapter.notifyDataSetChanged();
 
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is no longer favourited");
-            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+
-                    place.is_favourite());
-
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+ place.is_favourite());
         }
         else{
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") was not favourited");
             place.set_favourite(true);
             mListViewModel.update(place);
             adapter.notifyDataSetChanged();
-            favourite.set_favourite(true);
-            mListViewModel.insertFavourite(favourite);
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is now favourited");
         }
+    }
+
+    @Override
+    public void onChecked(boolean checked){
+        Log.d(TAG, "onChecked: ");
     }
 }

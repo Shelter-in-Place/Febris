@@ -36,7 +36,7 @@ public class FavouritesPlace {
 
 
     public FavouritesPlace(String place, String image_address, int infections, int deaths, int recovered, boolean is_favourite){
-        this.ID = 0;
+
         this.place = place;
         this.image_address = image_address;
         this.infections = infections;

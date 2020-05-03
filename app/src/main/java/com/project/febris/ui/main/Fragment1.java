@@ -17,7 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.project.febris.ListViewModel;
 import com.project.febris.R;
 import com.project.febris.adapters.FavouritesRecyclerAdapter;
-import com.project.febris.models.FavouritesPlace;
+import com.project.febris.models.Place;
+
 import com.project.febris.util.VerticalSpacingItemDecorator;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
     private static final String TAG = "FRAGMENT 1";
 
     private FavouritesRecyclerAdapter favouritesRecyclerAdapter;
-    private List<FavouritesPlace> mFavouritesList = new ArrayList<>();
+    private List<Place> mPlaces = new ArrayList<>();
     private ListViewModel mListViewModel;
 
 
@@ -46,18 +47,20 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(0);
         mRecyclerView.addItemDecoration(itemDecorator);
-//        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
         favouritesRecyclerAdapter = new FavouritesRecyclerAdapter(this);
         mRecyclerView.setAdapter(favouritesRecyclerAdapter);
     }
 
     public void initViewModel(){
         mListViewModel = new ViewModelProvider(this).get(ListViewModel.class);
-        mListViewModel.getAllFavourites().observe(this, new Observer<List<FavouritesPlace>>() {
+        mListViewModel.getFavPlaces().observe(this, new Observer<List<Place>>() {
             @Override
-            public void onChanged(List<FavouritesPlace> favourites) {
-                favouritesRecyclerAdapter.setFavourites(favourites);
-                mFavouritesList.addAll(favourites);
+            public void onChanged(List<Place> places) {
+                Log.d(TAG, "onChanged: ");
+                mPlaces = places;
+                favouritesRecyclerAdapter.setFavourites(places);
+                favouritesRecyclerAdapter.notifyDataSetChanged();
+
             }
         });
     }
@@ -67,15 +70,33 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
         favouritesRecyclerAdapter.getFilter().filter(searchText);
     }
 
-    private void deleteFavourite (FavouritesPlace favouritesPlace){
-        mFavouritesList.remove(favouritesPlace);
-        favouritesRecyclerAdapter.notifyDataSetChanged();
-//        mListViewModel.deleteFavourite(favouritesPlace);
-    }
-
     @Override
     public void favOnClickboxclick(int position) {
-        deleteFavourite(mFavouritesList.get(position));
-        Log.d(TAG, "favOnClickboxclick");
+        Place place = mPlaces.get(position);
+        if(place.is_favourite()){
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") was favourited");
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+ place.is_favourite());
+
+            place.set_favourite(false);
+            mListViewModel.update(place);
+            favouritesRecyclerAdapter.notifyDataSetChanged();
+
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is no longer favourited");
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+ place.is_favourite());
+        }
+        else{
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") was not favourited");
+            place.set_favourite(true);
+            mListViewModel.update(place);
+            favouritesRecyclerAdapter.notifyDataSetChanged();
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is now favourited");
+        }
     }
+    
+    @Override
+    public void onChecked(boolean checked){
+        Log.d(TAG, "onChecked: ");
+    }
+    
+    
 }

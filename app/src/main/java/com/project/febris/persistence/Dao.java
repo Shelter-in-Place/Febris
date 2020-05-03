@@ -20,6 +20,9 @@ public interface Dao {
     @Query("SELECT * FROM places")
     LiveData<List<Place>> getPlaces();
 
+    @Query("SELECT * FROM places WHERE isFav = 1")
+    LiveData<List<Place>> getFavPlaces();
+
     @Delete
     int delete(Place... places);
 
@@ -27,7 +30,7 @@ public interface Dao {
     void deleteAll();
 
     @Update
-    int update(Place... places);
+    void updatePlaces(Place... places);
 
     @Query("SELECT EXISTS (SELECT 1 FROM places WHERE ID == :id AND deaths >= 2000)")
     public int isFavorite(int id);

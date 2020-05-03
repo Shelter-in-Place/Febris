@@ -1,6 +1,7 @@
 package com.project.febris;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -13,16 +14,16 @@ import com.project.febris.persistence.Repository;
 import java.util.List;
 
 public class ListViewModel extends AndroidViewModel {
-
+    private static final String TAG = "ListViewModel";
     private Repository mRepository;
     private LiveData<List<Place>> allPlaces;
-    private LiveData<List<FavouritesPlace>> allFavourites;
+    private LiveData<List<Place>> allFavourites;
 
     public ListViewModel(@NonNull Application application) {
         super(application);
         mRepository = new Repository(application);
         allPlaces = mRepository.retrievePlacesTask();
-        allFavourites = mRepository.retrieveFavouritesTask();
+        allFavourites = mRepository.getFavPlaces();
 
     }
 
@@ -32,33 +33,21 @@ public class ListViewModel extends AndroidViewModel {
     }
 
     public void update(Place place){
+        Log.d(TAG, "update: ");
         mRepository.updatePlaces(place);
-    }
-
-    public void delete(Place place){
-        mRepository.deletePlace(place);
-    }
-
-    public void deleteAll(){
-        mRepository.deleteAll();
     }
 
     public LiveData<List<Place>> getAllPlaces() {
         return allPlaces;
     }
 
-    public LiveData<List<FavouritesPlace>> getAllFavourites(){
+    public LiveData<List<Place>> getFavPlaces(){
         return allFavourites;
     }
 
-    public void insertFavourite(FavouritesPlace favouritesPlace){
-        mRepository.insertFavouriteTask(favouritesPlace);
-    }
-
-    public void deleteFavourite(FavouritesPlace favourite){mRepository.deleteFavourite(favourite);}
-
-    public void delFavourite(String place){
-        mRepository.delFavourite(place);
-    }
+//    public void delFavourite(String place){
+//        mRepository.delFavourite(place);
+//        Log.d(TAG, "delFavourite: ");
+//    }
 
 }
