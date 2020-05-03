@@ -1,6 +1,7 @@
 package com.project.febris.ui.main;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -16,7 +17,7 @@ import com.project.febris.R;
  * one of the sections/tabs/pages.
  */
 public class FragmentAdapter extends FragmentPagerAdapter {
-
+    private static final String TAG = "FragmentAdapter";
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
     private final Context mContext;
@@ -29,15 +30,19 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = null;
+        Log.d(TAG, "position: " + position);
         switch (position){
             case 0:
                 fragment = new Fragment1();
+                Log.d(TAG, "Frag 1 built");
                 break;
             case 1:
                 fragment = new Fragment2();
+                Log.d(TAG, "Frag 2 built");
                 break;
             case 2:
                 fragment = new Fragment3();
+                Log.d(TAG, "Frag 3 built");
 
         }
         return fragment;
@@ -51,7 +56,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        // Show 2 total pages.
         return 3;
     }
 }

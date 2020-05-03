@@ -59,7 +59,7 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
                 Log.d(TAG, "onChanged: ");
                 mPlaces = places;
                 favouritesRecyclerAdapter.setFavourites(places);
-                favouritesRecyclerAdapter.notifyDataSetChanged();
+                favouritesRecyclerAdapter.notifyItemRangeChanged(0, places.size());
 
             }
         });
@@ -79,7 +79,7 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
 
             place.set_favourite(false);
             mListViewModel.update(place);
-            favouritesRecyclerAdapter.notifyDataSetChanged();
+
 
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is no longer favourited");
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+ place.is_favourite());
@@ -88,7 +88,7 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") was not favourited");
             place.set_favourite(true);
             mListViewModel.update(place);
-            favouritesRecyclerAdapter.notifyDataSetChanged();
+
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is now favourited");
         }
     }

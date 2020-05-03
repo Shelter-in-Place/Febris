@@ -64,6 +64,7 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
     public void setPlaces(List<Place> places) {
         this.mPlaces = places;
         mPlacesFull = new ArrayList<>(places);
+
         notifyDataSetChanged();
     }
 

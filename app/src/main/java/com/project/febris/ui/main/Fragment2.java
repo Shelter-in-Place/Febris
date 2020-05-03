@@ -5,23 +5,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.febris.ListViewModel;
 import com.project.febris.R;
-import com.project.febris.adapters.FavouritesRecyclerAdapter;
 import com.project.febris.adapters.PlacesRecyclerAdapter;
-import com.project.febris.models.FavouritesPlace;
 import com.project.febris.models.Place;
+import com.project.febris.util.SwipeControllerFrag2;
 import com.project.febris.util.VerticalSpacingItemDecorator;
 
 import java.util.ArrayList;
@@ -29,8 +27,11 @@ import java.util.List;
 
 public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClickboxListener {
     private static final String TAG = "FRAGMENT 2";
+    private RecyclerView mRecyclerView;
     private PlacesRecyclerAdapter adapter;
-    private FavouritesRecyclerAdapter mFavAdapter;
+    private ItemTouchHelper itemTouchHelper;
+    private SwipeControllerFrag2 swipeControllerFrag2;
+
     private List<Place> mPlaces = new ArrayList<>();
     private ListViewModel mListViewModel;
 
@@ -45,14 +46,14 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
 
         initRecyclerView(root);
         initViewModel();
-
+        initSwipeController();
         return root;
     }
 
 
 
     public void initRecyclerView(View root){
-        RecyclerView mRecyclerView = root.findViewById(R.id.recyclerView);
+        mRecyclerView = root.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(0);
         mRecyclerView.addItemDecoration(itemDecorator);
@@ -68,9 +69,16 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
                 Log.d(TAG, "onChanged: ");
                 mPlaces = places;
                 adapter.setPlaces(places);
-                adapter.notifyDataSetChanged();
+
+                adapter.notifyItemRangeChanged(0, places.size());
             }
         });
+    }
+
+    private void initSwipeController(){
+        swipeControllerFrag2 = new SwipeControllerFrag2();
+        itemTouchHelper = new ItemTouchHelper(swipeControllerFrag2);
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
     public void search(String newText){
@@ -88,7 +96,7 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
 
             place.set_favourite(false);
             mListViewModel.update(place);
-            adapter.notifyDataSetChanged();
+
 
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is no longer favourited");
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+ place.is_favourite());
@@ -97,7 +105,7 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") was not favourited");
             place.set_favourite(true);
             mListViewModel.update(place);
-            adapter.notifyDataSetChanged();
+
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is now favourited");
         }
     }
