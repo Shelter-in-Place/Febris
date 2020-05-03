@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -13,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.febris.R;
-import com.project.febris.models.FavouritesPlace;
 import com.project.febris.models.Place;
 
 import java.util.ArrayList;
@@ -23,8 +23,8 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
         Filterable {
     private static final String TAG = "PlacesRecyclerAdapter";
 
-    private List<FavouritesPlace> mFavourites;
-    private List<FavouritesPlace> mFavouritesFull;
+    private List<Place> mPlaces;
+    private List<Place> mPlacesFull;
     private FavOnClickboxListener mFavOnClickListener;
 
     public FavouritesRecyclerAdapter(FavOnClickboxListener favOnClick) {
@@ -35,23 +35,23 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_place_item, parent, false);
-        return new ViewHolder(view,mFavOnClickListener);
+        return new ViewHolder(view, mFavOnClickListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.place_title.setText(mFavourites.get(position).getPlace());
-        holder.place_infections.setText("Cases: \n" + String.valueOf(mFavourites.get(position).getInfections()));
-        holder.place_deaths.setText("Deaths: \n" + mFavourites.get(position).getDeaths());
-        holder.place_recovered.setText("Recovered: \n" + mFavourites.get(position).getRecovered());
-//        holder.favourites_checkbox.setChecked(favourite.is_favourite());
+        holder.place_title.setText(mPlaces.get(position).getPlace());
+        holder.place_infections.setText("Cases: \n" + String.valueOf(mPlaces.get(position).getInfections()));
+        holder.place_deaths.setText("Deaths: \n" + mPlaces.get(position).getDeaths());
+        holder.place_recovered.setText("Recovered: \n" + mPlaces.get(position).getRecovered());
+        holder.favourites_checkbox.setChecked(mPlaces.get(position).is_favourite());
     }
 
     @Override
     public int getItemCount() {
         try{
-            return mFavourites.size();
+            return mPlaces.size();
         }
         catch(NullPointerException e){
             Log.d(TAG, "getItemCount: nullpointer error " + e.getMessage());
@@ -59,9 +59,9 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
         }
     }
 
-    public void setFavourites(List<FavouritesPlace> favourites){
-        this.mFavourites = favourites;
-        mFavouritesFull = new ArrayList<>(favourites);
+    public void setFavourites(List<Place> places){
+        this.mPlaces = places;
+        mPlacesFull = new ArrayList<>(places);
         notifyDataSetChanged();
     }
 
@@ -73,16 +73,16 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
     private Filter resultsFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<FavouritesPlace> filteredList = new ArrayList<>();
+            List<Place> filteredList = new ArrayList<>();
             if(constraint==null||constraint.length()== 0){
-                filteredList.addAll(mFavouritesFull);
+                filteredList.addAll(mPlacesFull);
             }
             else{
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for(FavouritesPlace favourites : mFavouritesFull){
-                    if(favourites.getPlace().toLowerCase().contains(filterPattern)){
-                        filteredList.add(favourites);
+                for(Place place : mPlacesFull){
+                    if(place.getPlace().toLowerCase().contains(filterPattern)){
+                        filteredList.add(place);
                     }
                 }
             }
@@ -94,13 +94,13 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mFavourites.clear();
-            mFavourites.addAll((List)results.values);
+            mPlaces.clear();
+            mPlaces.addAll((List)results.values);
             notifyDataSetChanged();
         }
     };
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener{
 
         TextView place_title;
         TextView place_infections;
@@ -125,11 +125,18 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
 
         @Override
         public void onClick(View v) {
-            favOnClickboxListener.favOnClickboxclick(getAdapterPosition());
+            Log.d(TAG, "onClick: triggered");
+            favOnClickboxListener.favOnClickboxclick(getLayoutPosition());
+        }
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            Log.d(TAG, "onCheckedChanged: ");
         }
     }
 
     public interface FavOnClickboxListener{
         void favOnClickboxclick(int position);
+        void onChecked(boolean checked);
     }
 }

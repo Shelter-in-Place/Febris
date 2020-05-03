@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.febris.R;
-import com.project.febris.models.FavouritesPlace;
 import com.project.febris.models.Place;
 import com.project.febris.persistence.Repository;
 
@@ -27,9 +26,7 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
     private List<Place> mPlaces;
     private List<Place> mPlacesFull;
-    private FavouritesPlace favourite = new FavouritesPlace();
     private OnClickboxListener mOnClickBoxListener;
-    Repository mRepository;
 
 
     public PlacesRecyclerAdapter(OnClickboxListener onClickboxListener) {
@@ -40,29 +37,17 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_place_item, parent, false);
-        return new ViewHolder(view,mOnClickBoxListener);
-    }
-
-    private void setFavourite(Place place) {
-        favourite.setDate(place.getDate());
-        favourite.setDeaths(place.getDeaths());
-        favourite.setID(place.getID());
-        favourite.setImage_address(place.getImage_address());
-        favourite.setInfections(place.getInfections());
-        favourite.setRecovered(place.getRecovered());
-        favourite.setRegion(place.getPlace());
+        return new ViewHolder(view, mOnClickBoxListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        //ATTEMPT TO CREATE
-        final Place place = mPlaces.get(position);
 
         holder.place_title.setText(mPlaces.get(position).getPlace());
         holder.place_infections.setText("Cases: \n" + String.valueOf(mPlaces.get(position).getInfections()));
         holder.place_deaths.setText("Deaths: \n" + mPlaces.get(position).getDeaths());
         holder.place_recovered.setText("Recovered: \n" + mPlaces.get(position).getRecovered());
-        holder.favourites_checkbox.setChecked(place.is_favourite());
+        holder.favourites_checkbox.setChecked( mPlaces.get(position).is_favourite());
     }
 
 
@@ -140,18 +125,18 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick triggered");
-
             onClickboxListener.onClickboxclick(getAdapterPosition());
         }
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+            Log.d(TAG, "onCheckedChanged: ");
         }
     }
 
     public interface OnClickboxListener{
         void onClickboxclick(int position);
+        void onChecked(boolean checked);
     }
 
 

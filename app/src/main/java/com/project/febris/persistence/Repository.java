@@ -13,6 +13,7 @@ import com.project.febris.async.DeleteAsyncTask;
 import com.project.febris.async.DeleteFavouriteAsyncTask;
 import com.project.febris.async.InsertAsyncTask;
 import com.project.febris.async.InsertFavouriteAsyncTask;
+import com.project.febris.async.UpdateAsyncTask;
 import com.project.febris.models.FavouritesPlace;
 import com.project.febris.models.Place;
 
@@ -38,7 +39,7 @@ public class Repository {
         mDatabase = Database.getInstance(context);
         initRetrofit();
         callRetrofit();
-        testDataFList();
+//        testDataFList();
     }
 
     // RETROFIT
@@ -97,7 +98,7 @@ public class Repository {
     }
 
     public void updatePlaces(Place place){
-
+        new UpdateAsyncTask(mDatabase.getNoteDao()).execute(place);
     }
 
     public LiveData<List<Place>> retrievePlacesTask(){
@@ -125,8 +126,8 @@ public class Repository {
 
     }
 
-    public LiveData<List<FavouritesPlace>> retrieveFavouritesTask(){
-        return mDatabase.getFavouritesDao().getFavourites();
+    public LiveData<List<Place>> getFavPlaces(){
+        return mDatabase.getNoteDao().getFavPlaces();
     }
 
     public void deleteFavourite(FavouritesPlace favourite){
@@ -137,16 +138,17 @@ public class Repository {
         new DeleteAllFavouritesAsyncTask(mDatabase.getFavouritesDao()).execute();
     }
 
-    public void delFavourite(String place){
-        final String placeName = place;
-        new Thread(new Runnable(){
-            public void run(){
-                final FavouritesPlace favouritesPlace = mDatabase.getFavouritesDao().findFavorite(placeName);
-                mDatabase.getFavouritesDao().deleteFavourite(favouritesPlace);
-            }
-        }).start();
-
-    }
+//    public void delFavourite(String place){
+//        final String placeName = place;
+//        new Thread(new Runnable(){
+//            public void run(){
+//                final FavouritesPlace favouritesPlace = mDatabase.getFavouritesDao().findFavorite(placeName);
+//                mDatabase.getFavouritesDao().deleteFavourite(favouritesPlace);
+//            }
+//        }).start();
+//        Log.d(TAG, "delFavourite: ");
+//
+//    }
 
 
 
