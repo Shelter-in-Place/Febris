@@ -120,13 +120,21 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
             favourites_checkbox = itemView.findViewById(R.id.myList_checkbox);
 
             this.onClickboxListener = onClickboxListener;
+            favourites_checkbox.setOnClickListener(this);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick triggered");
-            onClickboxListener.dataScreen(getAdapterPosition());
+            if (v == favourites_checkbox){
+                Log.d(TAG, "onClick: ");
+                mOnClickBoxListener.onClickboxclick(getAdapterPosition());
+            }
+            else{
+                onClickboxListener.dataScreen(getAdapterPosition());
+            }
+
         }
 
         @Override

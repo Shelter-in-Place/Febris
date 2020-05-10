@@ -77,12 +77,27 @@ public class Fragment3 extends Fragment {
             public void onChanged(List<Place> places) {
                 setPlaces(places);
                 try {
-                    countryHeader.setText(mPlaces.getValue().get(32).getPlace());
-                    totalInfections.setText("" + mPlaces.getValue().get(35).getInfections());
-                    currentInfections.setText("" + mPlaces.getValue().get(35).getCurrentInfections());
-                    deaths.setText("" + mPlaces.getValue().get(35).getDeaths());
-                    recovered.setText("" + mPlaces.getValue().get(35).getRecovered());
+//                    countryHeader.setText(mPlaces.getValue().get(32).getPlace());
+//                    totalInfections.setText("" + mPlaces.getValue().get(35).getInfections());
+//                    currentInfections.setText("" + mPlaces.getValue().get(35).getCurrentInfections());
+//                    deaths.setText("" + mPlaces.getValue().get(35).getDeaths());
+//                    recovered.setText("" + mPlaces.getValue().get(35).getRecovered());
 
+                }
+                catch (Exception err){
+                    Log.d(TAG, "onChanged: " + err);
+                }
+            }
+        });
+        mListViewModel.getSelectedCountry().observe(this, new Observer<List<Place>>() {
+            @Override
+            public void onChanged(List<Place> places) {
+                try {
+                    countryHeader.setText(places.get(0).getPlace());
+                    totalInfections.setText("" + places.get(0).getInfections());
+                    currentInfections.setText("" + places.get(0).getCurrentInfections());
+                    deaths.setText("" + places.get(0).getDeaths());
+                    recovered.setText("" + places.get(0).getRecovered());
                 }
                 catch (Exception err){
                     Log.d(TAG, "onChanged: " + err);

@@ -19,7 +19,7 @@ public class ListViewModel extends AndroidViewModel {
     private Repository mRepository;
     private LiveData<List<Place>> allPlaces;
     private LiveData<List<Place>> allFavourites;
-    public Place selectedCountry;
+    private LiveData<List<Place>>  selectedCountry;
     public List<Place> placesLocal = new ArrayList<>();
 
     public ListViewModel(@NonNull Application application) {
@@ -27,6 +27,7 @@ public class ListViewModel extends AndroidViewModel {
         mRepository = new Repository(application);
         allPlaces = mRepository.retrievePlacesTask();
         allFavourites = mRepository.getFavPlaces();
+        selectedCountry = mRepository.getSelectedCountry();
     }
 
     //DB METHODS:
@@ -47,13 +48,17 @@ public class ListViewModel extends AndroidViewModel {
         return allFavourites;
     }
 
-    public Place getSelectedCountry() {
-        return this.selectedCountry;
+    public LiveData<List<Place>> getSelectedCountry(){
+        return selectedCountry;
     }
 
-    public void setSelectedCountry(Place country) {
-        this.selectedCountry = country;
-        Log.d(TAG, "setSelectedCountry: " + selectedCountry.getPlace());
+    public void clearSelected() {
+        for(int i = 0; i < selectedCountry.getValue().size(); i++){
+            Place place = selectedCountry.getValue().get(i);
+            place.setSelected(false);
+            update(place);
+        }
+        Log.d(TAG, "ClearSelected: ");
     }
 
     public List<Place> getPlacesLocal() {

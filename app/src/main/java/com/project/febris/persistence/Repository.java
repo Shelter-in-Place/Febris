@@ -109,7 +109,9 @@ public class Repository {
         return mDatabase.getNoteDao().getFavPlaces();
     }
 
-
+    public LiveData<List<Place>> getSelectedCountry(){
+        return mDatabase.getNoteDao().getSelectedCountry();
+    }
 
 
 }

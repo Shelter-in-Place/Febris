@@ -29,6 +29,9 @@ public interface Dao {
     @Query("SELECT * FROM places WHERE isFav = 1")
     LiveData<List<Place>> getFavPlaces();
 
+    @Query("SELECT * FROM places WHERE selected = 1")
+    LiveData<List<Place>> getSelectedCountry();
+
     @Delete
     int delete(Place... places);
 

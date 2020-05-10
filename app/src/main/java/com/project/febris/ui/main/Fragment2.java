@@ -121,7 +121,11 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
     @Override
     public void dataScreen(int position) {
         Log.d(TAG, "dataScreen: clicked " + mPlaces.get(position).getPlace());
-        mListViewModel.setSelectedCountry(mPlaces.get(position));
+        mListViewModel.clearSelected();
+        Place place = mPlaces.get(position);
+        place.setSelected(true);
+        mListViewModel.update(place);
+
         dataTransfertoActivity.sendInfo(position);
         viewPager.setCurrentItem(3);
     }

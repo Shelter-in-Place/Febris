@@ -112,8 +112,6 @@ public class ListActivity extends AppCompatActivity implements Fragment2.DataTra
 
         try{
             Log.d(TAG, "sendInfo: try");
-            Fragment3 frag3 = (Fragment3) fragmentAdapter.getItem(2);
-            frag3.setSelectedCountry(position);
         }
         catch(Exception err){
             Log.d(TAG, "sendInfo: catch " + err);

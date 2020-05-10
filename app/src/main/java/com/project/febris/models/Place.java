@@ -38,6 +38,9 @@ public class Place {
     @ColumnInfo(name = "present")
     private boolean isPresent;
 
+    @ColumnInfo(name = "selected")
+    private boolean isSelected;
+
 
     public Place(int ID, String place, String image_address, int infections, int deaths, int recovered, boolean isFavourite){
         this.ID = ID;
@@ -120,6 +123,14 @@ public class Place {
 
     public void setPresent(boolean present) {
         isPresent = present;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }
 
