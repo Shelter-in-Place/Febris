@@ -51,8 +51,8 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
         mRecyclerView.setAdapter(favouritesRecyclerAdapter);
     }
 
-    public void initViewModel(){
-        mListViewModel = new ViewModelProvider(this).get(ListViewModel.class);
+    private void initViewModel(){
+        mListViewModel = new ViewModelProvider(getActivity()).get(ListViewModel.class);
         mListViewModel.getFavPlaces().observe(this, new Observer<List<Place>>() {
             @Override
             public void onChanged(List<Place> places) {

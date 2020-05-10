@@ -29,11 +29,13 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
     private static final String TAG = "FRAGMENT 2";
     private RecyclerView mRecyclerView;
     private PlacesRecyclerAdapter adapter;
-    private ItemTouchHelper itemTouchHelper;
     private SwipeControllerFrag2 swipeControllerFrag2;
+    private CustomViewPager viewPager;
 
     private List<Place> mPlaces = new ArrayList<>();
     private ListViewModel mListViewModel;
+
+    DataTransfertoActivity dataTransfertoActivity;
 
     @Nullable
     @Override
@@ -42,11 +44,13 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
             Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_screen_2, container, false);
-        mListViewModel = new ViewModelProvider(this).get(ListViewModel.class);
+        mListViewModel = new ViewModelProvider(getActivity()).get(ListViewModel.class);
 
         initRecyclerView(root);
         initViewModel();
         initSwipeController();
+
+        viewPager = getActivity().findViewById(R.id.view_pager);
         return root;
     }
 
@@ -62,14 +66,13 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
         mRecyclerView.setAdapter(adapter);
     }
 
-    public void initViewModel(){
+    private void initViewModel(){
         mListViewModel.getAllPlaces().observe(this, new Observer<List<Place>>() {
             @Override
             public void onChanged(List<Place> places) {
                 Log.d(TAG, "onChanged: ");
                 mPlaces = places;
                 adapter.setPlaces(places);
-
                 adapter.notifyItemRangeChanged(0, places.size());
             }
         });
@@ -77,7 +80,7 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
 
     private void initSwipeController(){
         swipeControllerFrag2 = new SwipeControllerFrag2();
-        itemTouchHelper = new ItemTouchHelper(swipeControllerFrag2);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeControllerFrag2);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
     }
 
@@ -113,5 +116,21 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
     @Override
     public void onChecked(boolean checked){
         Log.d(TAG, "onChecked: ");
+    }
+
+    @Override
+    public void dataScreen(int position) {
+        Log.d(TAG, "dataScreen: clicked " + mPlaces.get(position).getPlace());
+        mListViewModel.setSelectedCountry(mPlaces.get(position));
+        dataTransfertoActivity.sendInfo(position);
+        viewPager.setCurrentItem(3);
+    }
+
+    public void setDataTransfertoActivity(DataTransfertoActivity callback){
+        dataTransfertoActivity = callback;
+    }
+
+    public interface DataTransfertoActivity{
+        void sendInfo(int position);
     }
 }

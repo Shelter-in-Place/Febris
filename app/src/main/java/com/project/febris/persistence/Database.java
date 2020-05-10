@@ -5,10 +5,10 @@ import android.content.Context;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.project.febris.models.FavouritesPlace;
+
 import com.project.febris.models.Place;
 
-@androidx.room.Database(entities = {Place.class, FavouritesPlace.class}, version = 6)
+@androidx.room.Database(entities = {Place.class}, version = 8)
 public abstract class Database extends RoomDatabase {
 
     public static final String DATABASE_NAME = "db";
@@ -28,6 +28,5 @@ public abstract class Database extends RoomDatabase {
     }
 
     public abstract Dao getNoteDao();
-    public abstract FavouritesDao getFavouritesDao();
 
 }

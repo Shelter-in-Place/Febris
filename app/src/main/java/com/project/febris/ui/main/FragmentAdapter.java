@@ -34,15 +34,16 @@ public class FragmentAdapter extends FragmentPagerAdapter {
         switch (position){
             case 0:
                 fragment = new Fragment1();
-                Log.d(TAG, "Frag 1 built");
+                Log.d(TAG, "Frag 1 built " + fragment.getId());
                 break;
             case 1:
                 fragment = new Fragment2();
-                Log.d(TAG, "Frag 2 built");
+                Log.d(TAG, "Frag 2 built " + fragment.getId());
                 break;
             case 2:
                 fragment = new Fragment3();
-                Log.d(TAG, "Frag 3 built");
+
+                Log.d(TAG, "Frag 3 built " + fragment.getId());
 
         }
         return fragment;

@@ -1,6 +1,7 @@
 
 package com.project.febris.ui.main;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -8,27 +9,35 @@ import android.util.Log;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 // Febris package imports
 import com.google.android.material.tabs.TabLayout;
+import com.project.febris.ListViewModel;
 import com.project.febris.R;
 import com.project.febris.adapters.PlacesRecyclerAdapter;
+import com.project.febris.models.Place;
 
 import java.util.List;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity implements Fragment2.DataTransfertoActivity{
 
     private static final String TAG = "List Activity";
 
     //UI components
     List<Fragment> allFragments;
+    private CustomViewPager viewPager;
 
     //variables
     private PlacesRecyclerAdapter adapter;
 
     private Fragment1 fragment1;
     private Fragment2 fragment2;
-    private Fragment3 fragment3;
+    public Fragment3 fragment3;
+    public Place selectedPlace;
+    public FragmentAdapter fragmentAdapter;
+
+    public ListViewModel mListViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +45,7 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initSearchView();
         initFragmentAdapter();
+        mListViewModel = new ViewModelProvider(this).get(ListViewModel.class);
     }
 
     private void initSearchView(){
@@ -60,8 +70,8 @@ public class ListActivity extends AppCompatActivity {
     }
 
     public void initFragmentAdapter(){
-        FragmentAdapter fragmentAdapter = new FragmentAdapter(this, getSupportFragmentManager());
-        CustomViewPager viewPager = (CustomViewPager) findViewById(R.id.view_pager);
+        fragmentAdapter = new FragmentAdapter(this, getSupportFragmentManager());
+        viewPager = (CustomViewPager) findViewById(R.id.view_pager);
         viewPager.setAdapter(fragmentAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
@@ -81,6 +91,33 @@ public class ListActivity extends AppCompatActivity {
         fragment3.search(searchText);
 
         Log.d(TAG, "TEST METHOD TRIGGERED");
+    }
+
+    public CustomViewPager getViewPager() {
+        return viewPager;
+    }
+
+    @Override
+    public void onAttachFragment(@NonNull Fragment fragment) {
+        if (fragment instanceof Fragment2){
+            Fragment2 fragment2 = (Fragment2) fragment;
+            fragment2.setDataTransfertoActivity(this);
+        }
+
+    }
+
+    @Override
+    public void sendInfo(int position) {
+        Log.d(TAG, "sendInfo: Initiated");
+
+        try{
+            Log.d(TAG, "sendInfo: try");
+            Fragment3 frag3 = (Fragment3) fragmentAdapter.getItem(2);
+            frag3.setSelectedCountry(position);
+        }
+        catch(Exception err){
+            Log.d(TAG, "sendInfo: catch " + err);
+        }
     }
 
 }

@@ -10,4 +10,8 @@
     <color name="secondaryTextColor">#000000</color>
     <color name="white">#ffffff</color>
     <color name="black">#121212</color>
+
+    <color name="cardHeadingColor">#757575</color>
+    <color name="cardNumbersColor">#000000</color>
+
 </resources>

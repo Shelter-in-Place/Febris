@@ -26,9 +26,4 @@ public interface FavouritesDao {
     @Query("DELETE FROM favourites")
     void deleteAllFavourites();
 
-    @Update
-    int updateFavourites(FavouritesPlace... favourites);
-
-    @Query("SELECT * FROM favourites Where place = :place")
-    FavouritesPlace findFavorite(String place);
 }

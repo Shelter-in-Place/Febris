@@ -20,6 +20,12 @@ public interface Dao {
     @Query("SELECT * FROM places")
     LiveData<List<Place>> getPlaces();
 
+    @Query("SELECT * FROM places")
+    List<Place> getPlacesNonLiveData();
+
+    @Query("SELECT * FROM places WHERE place = :place")
+    LiveData<Place> getSpecificPlace(String place);
+
     @Query("SELECT * FROM places WHERE isFav = 1")
     LiveData<List<Place>> getFavPlaces();
 

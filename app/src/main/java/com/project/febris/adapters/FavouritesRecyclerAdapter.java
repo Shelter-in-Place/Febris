@@ -34,7 +34,7 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_place_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_card, parent, false);
         return new ViewHolder(view, mFavOnClickListener);
     }
 
@@ -42,9 +42,9 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.place_title.setText(mPlaces.get(position).getPlace());
-        holder.place_infections.setText("Cases: \n" + String.valueOf(mPlaces.get(position).getInfections()));
-        holder.place_deaths.setText("Deaths: \n" + mPlaces.get(position).getDeaths());
-        holder.place_recovered.setText("Recovered: \n" + mPlaces.get(position).getRecovered());
+        holder.place_infections.setText(String.valueOf("" + mPlaces.get(position).getInfections()));
+        holder.place_deaths.setText("" + mPlaces.get(position).getDeaths());
+        holder.place_recovered.setText("" + mPlaces.get(position).getRecovered());
         holder.favourites_checkbox.setChecked(mPlaces.get(position).is_favourite());
     }
 
@@ -111,11 +111,11 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
 
         public ViewHolder(@NonNull View itemView, FavOnClickboxListener favOnClickboxListener) {
             super(itemView);
-            place_title = itemView.findViewById(R.id.item_place_name);
-            place_infections = itemView.findViewById(R.id.item_confirmed);
-            place_deaths = itemView.findViewById(R.id.item_deaths);
-            place_recovered = itemView.findViewById(R.id.item_recovered);
-            favourites_checkbox = itemView.findViewById(R.id.favourite_checkbox);
+            place_title = itemView.findViewById(R.id.country_name);
+            place_infections = itemView.findViewById(R.id.infectionsNumber);
+            place_deaths = itemView.findViewById(R.id.deathsNumber);
+            place_recovered = itemView.findViewById(R.id.recoveredNumber);
+            favourites_checkbox = itemView.findViewById(R.id.myList_checkbox);
 
             this.favOnClickboxListener = favOnClickboxListener;
             favourites_checkbox.setOnClickListener(this);
