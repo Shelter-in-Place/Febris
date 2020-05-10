@@ -64,7 +64,8 @@ public class Repository {
                 for(int i=0; i < countries.size() - 1; i++){
                     String currentCountryName = countryNames.get(i);
                     Details currentCountry = countries.get(i).get(countries.get(i).size()-1);
-                    Place place = new Place(i+1, currentCountryName, "", currentCountry.getConfirmed(), currentCountry.getDeaths(), currentCountry.getRecovered(),false);
+                    Place place = new Place(i+1, currentCountryName, "", currentCountry.getConfirmed(), currentCountry.getDeaths(), currentCountry.getRecovered(),false, currentCountry.getDate());
+                    place.setPresent(true);
                     insertPlaceTask(place);
                 }
             }
