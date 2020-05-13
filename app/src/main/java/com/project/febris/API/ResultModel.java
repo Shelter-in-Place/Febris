@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class ResultModel {
 
     private List<List<Details>> countries;
@@ -827,739 +828,739 @@ public class ResultModel {
         return allCountries;
     }
 
-    public List<Details> getAfghanistan() {
-        return Afghanistan;
-    }
-
-    public List<Details> getAlbania() {
-        return Albania;
-    }
-
-    public List<Details> getAlgeria() {
-        return Algeria;
-    }
-
-    public List<Details> getAndorra() {
-        return Andorra;
-    }
-
-    public List<Details> getAngola() {
-        return Angola;
-    }
-
-    public List<Details> getAntigua_and_Barbuda() {
-        return Antigua_and_Barbuda;
-    }
-
-    public List<Details> getArgentina() {
-        return Argentina;
-    }
-
-    public List<Details> getArmenia() {
-        return Armenia;
-    }
-
-    public List<Details> getAustralia() {
-        return Australia;
-    }
-
-    public List<Details> getAustria() {
-        return Austria;
-    }
-
-    public List<Details> getAzerbaijan() {
-        return Azerbaijan;
-    }
-
-    public List<Details> getBahamas() {
-        return Bahamas;
-    }
-
-    public List<Details> getBahrain() {
-        return Bahrain;
-    }
-
-    public List<Details> getBangladesh() {
-        return Bangladesh;
-    }
-
-    public List<Details> getBarbados() {
-        return Barbados;
-    }
-
-    public List<Details> getBelarus() {
-        return Belarus;
-    }
-
-    public List<Details> getBelgium() {
-        return Belgium;
-    }
-
-    public List<Details> getBenin() {
-        return Benin;
-    }
-
-    public List<Details> getBhutan() {
-        return Bhutan;
-    }
-
-    public List<Details> getBolivia() {
-        return Bolivia;
-    }
-
-    public List<Details> getBosnia_and_Herzegovina() {
-        return Bosnia_and_Herzegovina;
-    }
-
-    public List<Details> getBrazil() {
-        return Brazil;
-    }
-
-    public List<Details> getBrunei() {
-        return Brunei;
-    }
-
-    public List<Details> getBulgaria() {
-        return Bulgaria;
-    }
-
-    public List<Details> getBurkina_Faso() {
-        return Burkina_Faso;
-    }
-
-    public List<Details> getCabo_Verde() {
-        return Cabo_Verde;
-    }
-
-    public List<Details> getCambodia() {
-        return Cambodia;
-    }
-
-    public List<Details> getCameroon() {
-        return Cameroon;
-    }
-
-    public List<Details> getCanada() {
-        return Canada;
-    }
-
-    public List<Details> getCentral_African_Republic() {
-        return Central_African_Republic;
-    }
-
-    public List<Details> getChad() {
-        return Chad;
-    }
-
-    public List<Details> getChile() {
-        return Chile;
-    }
-
-    public List<Details> getChina() {
-        return China;
-    }
-
-    public List<Details> getColombia() {
-        return Colombia;
-    }
-
-    public List<Details> getCongo_Brazzaville() {
-        return Congo_Brazzaville;
-    }
-
-    public List<Details> getCongo_Kinshasa() {
-        return Congo_Kinshasa;
-    }
-
-    public List<Details> getCosta_Rica() {
-        return Costa_Rica;
-    }
-
-    public List<Details> getCote_d_Ivoire() {
-        return Cote_d_Ivoire;
-    }
-
-    public List<Details> getCroatia() {
-        return Croatia;
-    }
-
-    public List<Details> getDiamond_Princess() {
-        return Diamond_Princess;
-    }
-
-    public List<Details> getCuba() {
-        return Cuba;
-    }
-
-    public List<Details> getCyprus() {
-        return Cyprus;
-    }
-
-    public List<Details> getCzechia() {
-        return Czechia;
-    }
-
-    public List<Details> getDenmark() {
-        return Denmark;
-    }
-
-    public List<Details> getDjibouti() {
-        return Djibouti;
-    }
-
-    public List<Details> getDominican_Republic() {
-        return Dominican_Republic;
-    }
-
-    public List<Details> getEcuador() { return Ecuador; }
-
-    public List<Details> getEgypt() { return Egypt; }
-
-    public List<Details> getEl_Salvador() {
-        return El_Salvador;
-    }
-
-    public List<Details> getEquatorial_Guinea() {
-        return Equatorial_Guinea;
-    }
-
-    public List<Details> getEritrea() {
-        return Eritrea;
-    }
-
-    public List<Details> getEstonia() {
-        return Estonia;
-    }
-
-    public List<Details> getEswatini() {
-        return Eswatini;
-    }
-
-    public List<Details> getEthiopia() {
-        return Ethiopia;
-    }
-
-    public List<Details> getFiji() {
-        return Fiji;
-    }
-
-    public List<Details> getFinland() {
-        return Finland;
-    }
-
-    public List<Details> getFrance() {
-        return France;
-    }
-
-    public List<Details> getGabon() {
-        return Gabon;
-    }
-
-    public List<Details> getGambia() {
-        return Gambia;
-    }
-
-    public List<Details> getGeorgia() {
-        return Georgia;
-    }
-
-    public List<Details> getGermany() {
-        return Germany;
-    }
-
-    public List<Details> getGhana() {
-        return Ghana;
-    }
-
-    public List<Details> getGreece() {
-        return Greece;
-    }
-
-    public List<Details> getGuatemala() {
-        return Guatemala;
-    }
-
-    public List<Details> getGuinea() {
-        return Guinea;
-    }
-
-    public List<Details> getGuyana() {
-        return Guyana;
-    }
-
-    public List<Details> getHaiti() {
-        return Haiti;
-    }
-
-    public List<Details> getHoly_See() {
-        return Holy_See;
-    }
-
-    public List<Details> getHonduras() {
-        return Honduras;
-    }
-
-    public List<Details> getHungary() {
-        return Hungary;
-    }
-
-    public List<Details> getIceland() {
-        return Iceland;
-    }
-
-    public List<Details> getIndia() {
-        return India;
-    }
-
-    public List<Details> getIndonesia() {
-        return Indonesia;
-    }
-
-    public List<Details> getIran() {
-        return Iran;
-    }
-
-    public List<Details> getIraq() {
-        return Iraq;
-    }
-
-    public List<Details> getIreland() {
-        return Ireland;
-    }
-
-    public List<Details> getIsrael() {
-        return Israel;
-    }
-
-    public List<Details> getItaly() {
-        return Italy;
-    }
-
-    public List<Details> getJamaica() {
-        return Jamaica;
-    }
-
-    public List<Details> getJapan() {
-        return Japan;
-    }
-
-    public List<Details> getJordan() {
-        return Jordan;
-    }
-
-    public List<Details> getKazakhstan() {
-        return Kazakhstan;
-    }
-
-    public List<Details> getKenya() {
-        return Kenya;
-    }
-
-    public List<Details> getKuwait() {
-        return Kuwait;
-    }
-
-    public List<Details> getKyrgyzstan() {
-        return Kyrgyzstan;
-    }
-
-    public List<Details> getLatvia() {
-        return Latvia;
-    }
-
-    public List<Details> getLebanon() {
-        return Lebanon;
-    }
-
-    public List<Details> getLiberia() {
-        return Liberia;
-    }
-
-    public List<Details> getLiechtenstein() {
-        return Liechtenstein;
-    }
-
-    public List<Details> getLithuania() {
-        return Lithuania;
-    }
-
-    public List<Details> getLuxembourg() {
-        return Luxembourg;
-    }
-
-    public List<Details> getMadagascar() {
-        return Madagascar;
-    }
-
-    public List<Details> getMalaysia() {
-        return Malaysia;
-    }
-
-    public List<Details> getMaldives() {
-        return Maldives;
-    }
-
-    public List<Details> getMalta() {
-        return Malta;
-    }
-
-    public List<Details> getMauritania() {
-        return Mauritania;
-    }
-
-    public List<Details> getMauritius() {
-        return Mauritius;
-    }
-
-    public List<Details> getMexico() {
-        return Mexico;
-    }
-
-    public List<Details> getMoldova() {
-        return Moldova;
-    }
-
-    public List<Details> getMonaco() {
-        return Monaco;
-    }
-
-    public List<Details> getMongolia() {
-        return Mongolia;
-    }
-
-    public List<Details> getMontenegro() {
-        return Montenegro;
-    }
-
-    public List<Details> getMorocco() {
-        return Morocco;
-    }
-
-    public List<Details> getNamibia() {
-        return Namibia;
-    }
-
-    public List<Details> getNepal() {
-        return Nepal;
-    }
-
-    public List<Details> getNetherlands() {
-        return Netherlands;
-    }
-
-    public List<Details> getNew_Zealand() {
-        return New_Zealand;
-    }
-
-    public List<Details> getNicaragua() {
-        return Nicaragua;
-    }
-
-    public List<Details> getNiger() {
-        return Niger;
-    }
-
-    public List<Details> getNigeria() {
-        return Nigeria;
-    }
-
-    public List<Details> getNorth_Macedonia() {
-        return North_Macedonia;
-    }
-
-    public List<Details> getNorway() {
-        return Norway;
-    }
-
-    public List<Details> getOman() {
-        return Oman;
-    }
-
-    public List<Details> getPakistan() {
-        return Pakistan;
-    }
-
-    public List<Details> getPanama() {
-        return Panama;
-    }
-
-    public List<Details> getPapua_New_Guinea() {
-        return Papua_New_Guinea;
-    }
-
-    public List<Details> getParaguay() {
-        return Paraguay;
-    }
-
-    public List<Details> getPeru() {
-        return Peru;
-    }
-
-    public List<Details> getPhilippines() {
-        return Philippines;
-    }
-
-    public List<Details> getPoland() {
-        return Poland;
-    }
-
-    public List<Details> getPortugal() {
-        return Portugal;
-    }
-
-    public List<Details> getQatar() {
-        return Qatar;
-    }
-
-    public List<Details> getRomania() {
-        return Romania;
-    }
-
-    public List<Details> getRussia() {
-        return Russia;
-    }
-
-    public List<Details> getRwanda() {
-        return Rwanda;
-    }
-
-    public List<Details> getSaint_Lucia() {
-        return Saint_Lucia;
-    }
-
-    public List<Details> getSaint_Vincent_and_the_Grenadines() {
-        return Saint_Vincent_and_the_Grenadines;
-    }
-
-    public List<Details> getSan_Marino() {
-        return San_Marino;
-    }
-
-    public List<Details> getSaudi_Arabia() {
-        return Saudi_Arabia;
-    }
-
-    public List<Details> getSenegal() {
-        return Senegal;
-    }
-
-    public List<Details> getSerbia() {
-        return Serbia;
-    }
-
-    public List<Details> getSeychelles() {
-        return Seychelles;
-    }
-
-    public List<Details> getSingapore() {
-        return Singapore;
-    }
-
-    public List<Details> getSlovakia() {
-        return Slovakia;
-    }
-
-    public List<Details> getSlovenia() {
-        return Slovenia;
-    }
-
-    public List<Details> getSomalia() {
-        return Somalia;
-    }
-
-    public List<Details> getSouth_Africa() {
-        return South_Africa;
-    }
-
-    public List<Details> getSouth_Korea() {
-        return South_Korea;
-    }
-
-    public List<Details> getSpain() {
-        return Spain;
-    }
-
-    public List<Details> getSri_Lanka() {
-        return Sri_Lanka;
-    }
-
-    public List<Details> getSudan() {
-        return Sudan;
-    }
-
-    public List<Details> getSuriname() {
-        return Suriname;
-    }
-
-    public List<Details> getSweden() {
-        return Sweden;
-    }
-
-    public List<Details> getSwitzerland() {
-        return Switzerland;
-    }
-
-    public List<Details> getTaiwan() {
-        return Taiwan;
-    }
-
-    public List<Details> getTanzania() {
-        return Tanzania;
-    }
-
-    public List<Details> getThailand() {
-        return Thailand;
-    }
-
-    public List<Details> getTogo() {
-        return Togo;
-    }
-
-    public List<Details> getTrinidad_and_Tobago() {
-        return Trinidad_and_Tobago;
-    }
-
-    public List<Details> getTunisia() {
-        return Tunisia;
-    }
-
-    public List<Details> getTurkey() {
-        return Turkey;
-    }
-
-    public List<Details> getUganda() {
-        return Uganda;
-    }
-
-    public List<Details> getUkraine() {
-        return Ukraine;
-    }
-
-    public List<Details> getUnited_Arab_Emirates() {
-        return United_Arab_Emirates;
-    }
-
-    public List<Details> getUnited_Kingdom() {
-        return United_Kingdom;
-    }
-
-    public List<Details> getUruguay() {
-        return Uruguay;
-    }
-
-    public List<Details> getUS() {
-        return US;
-    }
-
-    public List<Details> getUzbekistan() {
-        return Uzbekistan;
-    }
-
-    public List<Details> getVenezuela() {
-        return Venezuela;
-    }
-
-    public List<Details> getVietnam() {
-        return Vietnam;
-    }
-
-    public List<Details> getZambia() {
-        return Zambia;
-    }
-
-    public List<Details> getZimbabwe() {
-        return Zimbabwe;
-    }
-
-    public List<Details> getDominica() {
-        return Dominica;
-    }
-
-    public List<Details> getGrenada() {
-        return Grenada;
-    }
-
-    public List<Details> getMozambique() {
-        return Mozambique;
-    }
-
-    public List<Details> getSyria() {
-        return Syria;
-    }
-
-    public List<Details> getTimor_Leste() {
-        return Timor_Leste;
-    }
-
-    public List<Details> getBelize() {
-        return Belize;
-    }
-
-    public List<Details> getLaos() {
-        return Laos;
-    }
-
-    public List<Details> getLibya() {
-        return Libya;
-    }
-
-    public List<Details> getWest_Bank_and_Gaza() {
-        return West_Bank_and_Gaza;
-    }
-
-    public List<Details> getGuinea_Bissau() {
-        return Guinea_Bissau;
-    }
-
-    public List<Details> getMali() {
-        return Mali;
-    }
-
-    public List<Details> getSaint_Kitts_and_Nevis() {
-        return Saint_Kitts_and_Nevis;
-    }
-
-    public List<Details> getKosovo() {
-        return Kosovo;
-    }
-
-    public List<Details> getBurma() {
-        return Burma;
-    }
-
-    public List<Details> getMS_Zaandam() {
-        return MS_Zaandam;
-    }
-
-    public List<Details> getBotswana() {
-        return Botswana;
-    }
-
-    public List<Details> getBurundi() {
-        return Burundi;
-    }
-
-    public List<Details> getSierra_Leone() {
-        return Sierra_Leone;
-    }
-
-    public List<Details> getMalawi() {
-        return Malawi;
-    }
-
-    public List<Details> getSouth_Sudan() {
-        return South_Sudan;
-    }
-
-    public List<Details> getWestern_Sahara() {
-        return Western_Sahara;
-    }
-
-    public List<Details> getSao_Tome_and_Principe() {
-        return Sao_Tome_and_Principe;
-    }
-
-    public List<Details> getYemen() {
-        return Yemen;
-    }
+//    public List<Details> getAfghanistan() {
+//        return Afghanistan;
+//    }
+//
+//    public List<Details> getAlbania() {
+//        return Albania;
+//    }
+//
+//    public List<Details> getAlgeria() {
+//        return Algeria;
+//    }
+//
+//    public List<Details> getAndorra() {
+//        return Andorra;
+//    }
+//
+//    public List<Details> getAngola() {
+//        return Angola;
+//    }
+//
+//    public List<Details> getAntigua_and_Barbuda() {
+//        return Antigua_and_Barbuda;
+//    }
+//
+//    public List<Details> getArgentina() {
+//        return Argentina;
+//    }
+//
+//    public List<Details> getArmenia() {
+//        return Armenia;
+//    }
+//
+//    public List<Details> getAustralia() {
+//        return Australia;
+//    }
+//
+//    public List<Details> getAustria() {
+//        return Austria;
+//    }
+//
+//    public List<Details> getAzerbaijan() {
+//        return Azerbaijan;
+//    }
+//
+//    public List<Details> getBahamas() {
+//        return Bahamas;
+//    }
+//
+//    public List<Details> getBahrain() {
+//        return Bahrain;
+//    }
+//
+//    public List<Details> getBangladesh() {
+//        return Bangladesh;
+//    }
+//
+//    public List<Details> getBarbados() {
+//        return Barbados;
+//    }
+//
+//    public List<Details> getBelarus() {
+//        return Belarus;
+//    }
+//
+//    public List<Details> getBelgium() {
+//        return Belgium;
+//    }
+//
+//    public List<Details> getBenin() {
+//        return Benin;
+//    }
+//
+//    public List<Details> getBhutan() {
+//        return Bhutan;
+//    }
+//
+//    public List<Details> getBolivia() {
+//        return Bolivia;
+//    }
+//
+//    public List<Details> getBosnia_and_Herzegovina() {
+//        return Bosnia_and_Herzegovina;
+//    }
+//
+//    public List<Details> getBrazil() {
+//        return Brazil;
+//    }
+//
+//    public List<Details> getBrunei() {
+//        return Brunei;
+//    }
+//
+//    public List<Details> getBulgaria() {
+//        return Bulgaria;
+//    }
+//
+//    public List<Details> getBurkina_Faso() {
+//        return Burkina_Faso;
+//    }
+//
+//    public List<Details> getCabo_Verde() {
+//        return Cabo_Verde;
+//    }
+//
+//    public List<Details> getCambodia() {
+//        return Cambodia;
+//    }
+//
+//    public List<Details> getCameroon() {
+//        return Cameroon;
+//    }
+//
+//    public List<Details> getCanada() {
+//        return Canada;
+//    }
+//
+//    public List<Details> getCentral_African_Republic() {
+//        return Central_African_Republic;
+//    }
+//
+//    public List<Details> getChad() {
+//        return Chad;
+//    }
+//
+//    public List<Details> getChile() {
+//        return Chile;
+//    }
+//
+//    public List<Details> getChina() {
+//        return China;
+//    }
+//
+//    public List<Details> getColombia() {
+//        return Colombia;
+//    }
+//
+//    public List<Details> getCongo_Brazzaville() {
+//        return Congo_Brazzaville;
+//    }
+//
+//    public List<Details> getCongo_Kinshasa() {
+//        return Congo_Kinshasa;
+//    }
+//
+//    public List<Details> getCosta_Rica() {
+//        return Costa_Rica;
+//    }
+//
+//    public List<Details> getCote_d_Ivoire() {
+//        return Cote_d_Ivoire;
+//    }
+//
+//    public List<Details> getCroatia() {
+//        return Croatia;
+//    }
+//
+//    public List<Details> getDiamond_Princess() {
+//        return Diamond_Princess;
+//    }
+//
+//    public List<Details> getCuba() {
+//        return Cuba;
+//    }
+//
+//    public List<Details> getCyprus() {
+//        return Cyprus;
+//    }
+//
+//    public List<Details> getCzechia() {
+//        return Czechia;
+//    }
+//
+//    public List<Details> getDenmark() {
+//        return Denmark;
+//    }
+//
+//    public List<Details> getDjibouti() {
+//        return Djibouti;
+//    }
+//
+//    public List<Details> getDominican_Republic() {
+//        return Dominican_Republic;
+//    }
+//
+//    public List<Details> getEcuador() { return Ecuador; }
+//
+//    public List<Details> getEgypt() { return Egypt; }
+//
+//    public List<Details> getEl_Salvador() {
+//        return El_Salvador;
+//    }
+//
+//    public List<Details> getEquatorial_Guinea() {
+//        return Equatorial_Guinea;
+//    }
+//
+//    public List<Details> getEritrea() {
+//        return Eritrea;
+//    }
+//
+//    public List<Details> getEstonia() {
+//        return Estonia;
+//    }
+//
+//    public List<Details> getEswatini() {
+//        return Eswatini;
+//    }
+//
+//    public List<Details> getEthiopia() {
+//        return Ethiopia;
+//    }
+//
+//    public List<Details> getFiji() {
+//        return Fiji;
+//    }
+//
+//    public List<Details> getFinland() {
+//        return Finland;
+//    }
+//
+//    public List<Details> getFrance() {
+//        return France;
+//    }
+//
+//    public List<Details> getGabon() {
+//        return Gabon;
+//    }
+//
+//    public List<Details> getGambia() {
+//        return Gambia;
+//    }
+//
+//    public List<Details> getGeorgia() {
+//        return Georgia;
+//    }
+//
+//    public List<Details> getGermany() {
+//        return Germany;
+//    }
+//
+//    public List<Details> getGhana() {
+//        return Ghana;
+//    }
+//
+//    public List<Details> getGreece() {
+//        return Greece;
+//    }
+//
+//    public List<Details> getGuatemala() {
+//        return Guatemala;
+//    }
+//
+//    public List<Details> getGuinea() {
+//        return Guinea;
+//    }
+//
+//    public List<Details> getGuyana() {
+//        return Guyana;
+//    }
+//
+//    public List<Details> getHaiti() {
+//        return Haiti;
+//    }
+//
+//    public List<Details> getHoly_See() {
+//        return Holy_See;
+//    }
+//
+//    public List<Details> getHonduras() {
+//        return Honduras;
+//    }
+//
+//    public List<Details> getHungary() {
+//        return Hungary;
+//    }
+//
+//    public List<Details> getIceland() {
+//        return Iceland;
+//    }
+//
+//    public List<Details> getIndia() {
+//        return India;
+//    }
+//
+//    public List<Details> getIndonesia() {
+//        return Indonesia;
+//    }
+//
+//    public List<Details> getIran() {
+//        return Iran;
+//    }
+//
+//    public List<Details> getIraq() {
+//        return Iraq;
+//    }
+//
+//    public List<Details> getIreland() {
+//        return Ireland;
+//    }
+//
+//    public List<Details> getIsrael() {
+//        return Israel;
+//    }
+//
+//    public List<Details> getItaly() {
+//        return Italy;
+//    }
+//
+//    public List<Details> getJamaica() {
+//        return Jamaica;
+//    }
+//
+//    public List<Details> getJapan() {
+//        return Japan;
+//    }
+//
+//    public List<Details> getJordan() {
+//        return Jordan;
+//    }
+//
+//    public List<Details> getKazakhstan() {
+//        return Kazakhstan;
+//    }
+//
+//    public List<Details> getKenya() {
+//        return Kenya;
+//    }
+//
+//    public List<Details> getKuwait() {
+//        return Kuwait;
+//    }
+//
+//    public List<Details> getKyrgyzstan() {
+//        return Kyrgyzstan;
+//    }
+//
+//    public List<Details> getLatvia() {
+//        return Latvia;
+//    }
+//
+//    public List<Details> getLebanon() {
+//        return Lebanon;
+//    }
+//
+//    public List<Details> getLiberia() {
+//        return Liberia;
+//    }
+//
+//    public List<Details> getLiechtenstein() {
+//        return Liechtenstein;
+//    }
+//
+//    public List<Details> getLithuania() {
+//        return Lithuania;
+//    }
+//
+//    public List<Details> getLuxembourg() {
+//        return Luxembourg;
+//    }
+//
+//    public List<Details> getMadagascar() {
+//        return Madagascar;
+//    }
+//
+//    public List<Details> getMalaysia() {
+//        return Malaysia;
+//    }
+//
+//    public List<Details> getMaldives() {
+//        return Maldives;
+//    }
+//
+//    public List<Details> getMalta() {
+//        return Malta;
+//    }
+//
+//    public List<Details> getMauritania() {
+//        return Mauritania;
+//    }
+//
+//    public List<Details> getMauritius() {
+//        return Mauritius;
+//    }
+//
+//    public List<Details> getMexico() {
+//        return Mexico;
+//    }
+//
+//    public List<Details> getMoldova() {
+//        return Moldova;
+//    }
+//
+//    public List<Details> getMonaco() {
+//        return Monaco;
+//    }
+//
+//    public List<Details> getMongolia() {
+//        return Mongolia;
+//    }
+//
+//    public List<Details> getMontenegro() {
+//        return Montenegro;
+//    }
+//
+//    public List<Details> getMorocco() {
+//        return Morocco;
+//    }
+//
+//    public List<Details> getNamibia() {
+//        return Namibia;
+//    }
+//
+//    public List<Details> getNepal() {
+//        return Nepal;
+//    }
+//
+//    public List<Details> getNetherlands() {
+//        return Netherlands;
+//    }
+//
+//    public List<Details> getNew_Zealand() {
+//        return New_Zealand;
+//    }
+//
+//    public List<Details> getNicaragua() {
+//        return Nicaragua;
+//    }
+//
+//    public List<Details> getNiger() {
+//        return Niger;
+//    }
+//
+//    public List<Details> getNigeria() {
+//        return Nigeria;
+//    }
+//
+//    public List<Details> getNorth_Macedonia() {
+//        return North_Macedonia;
+//    }
+//
+//    public List<Details> getNorway() {
+//        return Norway;
+//    }
+//
+//    public List<Details> getOman() {
+//        return Oman;
+//    }
+//
+//    public List<Details> getPakistan() {
+//        return Pakistan;
+//    }
+//
+//    public List<Details> getPanama() {
+//        return Panama;
+//    }
+//
+//    public List<Details> getPapua_New_Guinea() {
+//        return Papua_New_Guinea;
+//    }
+//
+//    public List<Details> getParaguay() {
+//        return Paraguay;
+//    }
+//
+//    public List<Details> getPeru() {
+//        return Peru;
+//    }
+//
+//    public List<Details> getPhilippines() {
+//        return Philippines;
+//    }
+//
+//    public List<Details> getPoland() {
+//        return Poland;
+//    }
+//
+//    public List<Details> getPortugal() {
+//        return Portugal;
+//    }
+//
+//    public List<Details> getQatar() {
+//        return Qatar;
+//    }
+//
+//    public List<Details> getRomania() {
+//        return Romania;
+//    }
+//
+//    public List<Details> getRussia() {
+//        return Russia;
+//    }
+//
+//    public List<Details> getRwanda() {
+//        return Rwanda;
+//    }
+//
+//    public List<Details> getSaint_Lucia() {
+//        return Saint_Lucia;
+//    }
+//
+//    public List<Details> getSaint_Vincent_and_the_Grenadines() {
+//        return Saint_Vincent_and_the_Grenadines;
+//    }
+//
+//    public List<Details> getSan_Marino() {
+//        return San_Marino;
+//    }
+//
+//    public List<Details> getSaudi_Arabia() {
+//        return Saudi_Arabia;
+//    }
+//
+//    public List<Details> getSenegal() {
+//        return Senegal;
+//    }
+//
+//    public List<Details> getSerbia() {
+//        return Serbia;
+//    }
+//
+//    public List<Details> getSeychelles() {
+//        return Seychelles;
+//    }
+//
+//    public List<Details> getSingapore() {
+//        return Singapore;
+//    }
+//
+//    public List<Details> getSlovakia() {
+//        return Slovakia;
+//    }
+//
+//    public List<Details> getSlovenia() {
+//        return Slovenia;
+//    }
+//
+//    public List<Details> getSomalia() {
+//        return Somalia;
+//    }
+//
+//    public List<Details> getSouth_Africa() {
+//        return South_Africa;
+//    }
+//
+//    public List<Details> getSouth_Korea() {
+//        return South_Korea;
+//    }
+//
+//    public List<Details> getSpain() {
+//        return Spain;
+//    }
+//
+//    public List<Details> getSri_Lanka() {
+//        return Sri_Lanka;
+//    }
+//
+//    public List<Details> getSudan() {
+//        return Sudan;
+//    }
+//
+//    public List<Details> getSuriname() {
+//        return Suriname;
+//    }
+//
+//    public List<Details> getSweden() {
+//        return Sweden;
+//    }
+//
+//    public List<Details> getSwitzerland() {
+//        return Switzerland;
+//    }
+//
+//    public List<Details> getTaiwan() {
+//        return Taiwan;
+//    }
+//
+//    public List<Details> getTanzania() {
+//        return Tanzania;
+//    }
+//
+//    public List<Details> getThailand() {
+//        return Thailand;
+//    }
+//
+//    public List<Details> getTogo() {
+//        return Togo;
+//    }
+//
+//    public List<Details> getTrinidad_and_Tobago() {
+//        return Trinidad_and_Tobago;
+//    }
+//
+//    public List<Details> getTunisia() {
+//        return Tunisia;
+//    }
+//
+//    public List<Details> getTurkey() {
+//        return Turkey;
+//    }
+//
+//    public List<Details> getUganda() {
+//        return Uganda;
+//    }
+//
+//    public List<Details> getUkraine() {
+//        return Ukraine;
+//    }
+//
+//    public List<Details> getUnited_Arab_Emirates() {
+//        return United_Arab_Emirates;
+//    }
+//
+//    public List<Details> getUnited_Kingdom() {
+//        return United_Kingdom;
+//    }
+//
+//    public List<Details> getUruguay() {
+//        return Uruguay;
+//    }
+//
+//    public List<Details> getUS() {
+//        return US;
+//    }
+//
+//    public List<Details> getUzbekistan() {
+//        return Uzbekistan;
+//    }
+//
+//    public List<Details> getVenezuela() {
+//        return Venezuela;
+//    }
+//
+//    public List<Details> getVietnam() {
+//        return Vietnam;
+//    }
+//
+//    public List<Details> getZambia() {
+//        return Zambia;
+//    }
+//
+//    public List<Details> getZimbabwe() {
+//        return Zimbabwe;
+//    }
+//
+//    public List<Details> getDominica() {
+//        return Dominica;
+//    }
+//
+//    public List<Details> getGrenada() {
+//        return Grenada;
+//    }
+//
+//    public List<Details> getMozambique() {
+//        return Mozambique;
+//    }
+//
+//    public List<Details> getSyria() {
+//        return Syria;
+//    }
+//
+//    public List<Details> getTimor_Leste() {
+//        return Timor_Leste;
+//    }
+//
+//    public List<Details> getBelize() {
+//        return Belize;
+//    }
+//
+//    public List<Details> getLaos() {
+//        return Laos;
+//    }
+//
+//    public List<Details> getLibya() {
+//        return Libya;
+//    }
+//
+//    public List<Details> getWest_Bank_and_Gaza() {
+//        return West_Bank_and_Gaza;
+//    }
+//
+//    public List<Details> getGuinea_Bissau() {
+//        return Guinea_Bissau;
+//    }
+//
+//    public List<Details> getMali() {
+//        return Mali;
+//    }
+//
+//    public List<Details> getSaint_Kitts_and_Nevis() {
+//        return Saint_Kitts_and_Nevis;
+//    }
+//
+//    public List<Details> getKosovo() {
+//        return Kosovo;
+//    }
+//
+//    public List<Details> getBurma() {
+//        return Burma;
+//    }
+//
+//    public List<Details> getMS_Zaandam() {
+//        return MS_Zaandam;
+//    }
+//
+//    public List<Details> getBotswana() {
+//        return Botswana;
+//    }
+//
+//    public List<Details> getBurundi() {
+//        return Burundi;
+//    }
+//
+//    public List<Details> getSierra_Leone() {
+//        return Sierra_Leone;
+//    }
+//
+//    public List<Details> getMalawi() {
+//        return Malawi;
+//    }
+//
+//    public List<Details> getSouth_Sudan() {
+//        return South_Sudan;
+//    }
+//
+//    public List<Details> getWestern_Sahara() {
+//        return Western_Sahara;
+//    }
+//
+//    public List<Details> getSao_Tome_and_Principe() {
+//        return Sao_Tome_and_Principe;
+//    }
+//
+//    public List<Details> getYemen() {
+//        return Yemen;
+//    }
 }

@@ -5,20 +5,29 @@ import com.google.gson.annotations.SerializedName;
 
 public class Details {
 
-    @SerializedName("date")
+    @SerializedName("Country")
+    @Expose
+    private String Country;
+
+    @SerializedName("Date")
     @Expose
     private String date;
 
-    @SerializedName("confirmed")
+    @SerializedName("TotalConfirmed")
     private int confirmed;
 
-    @SerializedName("deaths")
+    @SerializedName("TotalDeaths")
     private int deaths;
 
-    @SerializedName("recovered")
+    @SerializedName("TotalRecovered")
     private int recovered;
 
     // Getters:
+
+
+    public String getCountry() {
+        return Country;
+    }
 
     public String getDate() {
         return date;

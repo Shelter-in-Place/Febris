@@ -10,4 +10,7 @@ public interface ResultsAPI {
     @GET("covid19/timeseries.json")
     Call<ResultModel> getResult();
 
+    @GET("covid19/timeseries.json")
+    Call<ResultModel> getSeparateResult();
+
 }
