@@ -42,7 +42,7 @@ public class Place {
     private boolean isSelected;
 
 
-    public Place(int ID, String place, String image_address, int infections, int deaths, int recovered, boolean isFavourite){
+    public Place(int ID, String place, String image_address, int infections, int deaths, int recovered, boolean isFavourite, String date){
         this.ID = ID;
         this.place = place;
         this.image_address = image_address;
@@ -51,6 +51,7 @@ public class Place {
         this.recovered = recovered;
         this.isFavourite = isFavourite;
         this.currentInfections = infections - recovered - deaths;
+        this.date = date;
     }
 
     @Ignore

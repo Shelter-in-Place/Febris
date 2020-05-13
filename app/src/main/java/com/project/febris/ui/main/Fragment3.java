@@ -15,6 +15,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -24,6 +28,7 @@ import com.project.febris.models.Place;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Fragment3 extends Fragment {
     public static final String TAG = "Fragment3";
@@ -38,7 +43,7 @@ public class Fragment3 extends Fragment {
 
     public Place selectedCountry;
 
-    LineGraphSeries<DataPoint> series;
+    List<Entry> entries = new ArrayList<Entry>();
 
     @Nullable
     @Override
@@ -53,18 +58,7 @@ public class Fragment3 extends Fragment {
         recovered = root.findViewById(R.id.data_recovered);
 
         initViewModel();
-
-        double y,x;
-        x = -2.0;
-
-        GraphView graph = (GraphView) root.findViewById(R.id.graph);
-        series = new LineGraphSeries<DataPoint>();
-        for(int i = 0; i < 500; i++){
-            x = x+0.09;
-            y = Math.sin(x);
-            series.appendData(new DataPoint(x,y), true, 100);
-        }
-        graph.addSeries(series);
+        initGraphViews(root);
 
         return root;
     }
@@ -75,7 +69,7 @@ public class Fragment3 extends Fragment {
         mListViewModel.getAllPlaces().observe(this, new Observer<List<Place>>() {
             @Override
             public void onChanged(List<Place> places) {
-                setPlaces(places);
+
                 try {
 //                    countryHeader.setText(mPlaces.getValue().get(32).getPlace());
 //                    totalInfections.setText("" + mPlaces.getValue().get(35).getInfections());
@@ -106,18 +100,23 @@ public class Fragment3 extends Fragment {
         });
     }
 
-    public void setPlaces(List<Place> places){
-        this.mPlacesLocal = places;
-        mListViewModel.setPlacesLocal(places);
-        Log.d(TAG, "setPlaces: " + this.mPlacesLocal.size());
+
+
+    private void initGraphViews(View root){
+        LineChart lineChart = (LineChart) root.findViewById(R.id.line_graph);
+
+        for(int i =0; i<20; i++){
+            entries.add(new Entry(i, i));
+
+        }
+
+        LineDataSet lineDataSet = new LineDataSet(entries, "Test Data");
+        lineDataSet.setColor(1);
+        LineData lineData = new LineData(lineDataSet);
+        lineChart.setData(lineData);
+        lineChart.invalidate();
+
     }
-
-    public void setSelectedCountry(int position){
-        Log.d(TAG, "setSelectedCountry: " + mListViewModel.getPlacesLocal().size());
-
-
-    }
-
 
     public void search(String newText){
         Log.d(TAG, "search: ");

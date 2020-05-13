@@ -42,6 +42,7 @@
             card_view:layout_constraintLeft_toLeftOf="parent"
             card_view:layout_constraintRight_toRightOf="@id/recoveredHeading"
             card_view:layout_constraintHorizontal_bias="1"
+            android:button="@drawable/selector"
             android:checked="false"/>
 
         <ImageView
@@ -80,8 +81,8 @@
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
             android:layout_marginRight="3dp"
-            android:contentDescription="Infections-Icon"
-            android:src="@drawable/infections_icon"
+            android:contentDescription="Deaths-Icon"
+            android:src="@drawable/ic_deathsicon1"
             card_view:layout_constraintTop_toBottomOf="@id/guideline_v_5"
             card_view:layout_constraintBottom_toTopOf="@id/deathsNumber"
             card_view:layout_constraintLeft_toLeftOf="@id/guideline_h_33"
@@ -112,8 +113,8 @@
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
             android:layout_marginRight="3dp"
-            android:contentDescription="Infections-Icon"
-            android:src="@drawable/infections_icon"
+            android:contentDescription="Recovered-Icon"
+            android:src="@drawable/ic_recovered_icon"
             card_view:layout_constraintTop_toBottomOf="@id/guideline_v_5"
             card_view:layout_constraintBottom_toTopOf="@id/recoveredNumber"
             card_view:layout_constraintLeft_toRightOf="@id/guideline_h_66"

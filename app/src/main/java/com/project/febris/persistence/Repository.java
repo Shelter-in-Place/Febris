@@ -28,16 +28,18 @@ public class Repository {
 
     private Database mDatabase;
     private Retrofit retrofit;
+
     private ResultsAPI resultsAPI;
 
-
+    private Retrofit retrofitJSON;
+    private ResultsAPI resultsAPIJSON;
 
     public Repository(Context context) {
 
         mDatabase = Database.getInstance(context);
         initRetrofit();
         callRetrofit();
-//        testDataFList();
+//        callRetrofitJSON();
     }
 
     // RETROFIT
@@ -48,6 +50,11 @@ public class Repository {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         resultsAPI = retrofit.create(ResultsAPI.class);
+
+        retrofitJSON = new Retrofit.Builder()
+                .baseUrl("https://pomber.github.io/")
+                .build();
+        resultsAPIJSON = retrofitJSON.create(ResultsAPI.class);
     }
 
     public void callRetrofit(){
@@ -56,13 +63,16 @@ public class Repository {
         call.enqueue(new Callback<ResultModel>() {
             @Override
             public void onResponse(Call<ResultModel> call, Response<ResultModel> response) {
-                Log.d(TAG, "Repository: Success -->" + response.code());
+                Log.d(TAG, "Repository: Success -->" + response.body().toString());
 
                 deleteAll();
+                Log.d(TAG, "onResponse: qqq" + response.body().hashCode());
                 List<List<Details>> countries = response.body().getCountries();
+
                 List<String> countryNames = response.body().getCountriesList();
                 for(int i=0; i < countries.size() - 1; i++){
                     String currentCountryName = countryNames.get(i);
+
                     Details currentCountry = countries.get(i).get(countries.get(i).size()-1);
                     Place place = new Place(i+1, currentCountryName, "", currentCountry.getConfirmed(), currentCountry.getDeaths(), currentCountry.getRecovered(),false, currentCountry.getDate());
                     place.setPresent(true);
@@ -77,6 +87,21 @@ public class Repository {
         });
 
     }
+
+//    private void callRetrofitJSON(){
+//        Call<ResultModel> call = resultsAPIJSON.getSeparateResult();
+//        call.enqueue(new Callback<ResultModel>() {
+//            @Override
+//            public void onResponse(Call<ResultModel> call, Response<ResultModel> response) {
+//                Log.d(TAG, "onResponse: qqqq" + response.raw());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResultModel> call, Throwable t) {
+//                Log.d(TAG, "onFailure: ");
+//            }
+//        });
+//    }
 
     // DATABASE METHODS
 
