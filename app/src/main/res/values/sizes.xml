@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="country_heading_size">23dp</dimen>
+    <dimen name="icon_height">25dp</dimen>
+    <dimen name="icon_width">25dp</dimen>
+    <dimen name="heading_text_size">16dp</dimen>
+    <dimen name="number_text_size">16dp</dimen>
+    <dimen name="table_column_width">10dp</dimen>
+</resources>

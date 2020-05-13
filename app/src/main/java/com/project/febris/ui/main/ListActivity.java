@@ -1,63 +1,51 @@
 
-package com.project.febris;
+package com.project.febris.ui.main;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
 
-
 import androidx.appcompat.widget.SearchView;
-
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
-import androidx.viewpager.widget.ViewPager;
-
-
 // Febris package imports
-
 import com.google.android.material.tabs.TabLayout;
+import com.project.febris.ListViewModel;
+import com.project.febris.R;
 import com.project.febris.adapters.PlacesRecyclerAdapter;
 import com.project.febris.models.Place;
-import com.project.febris.ui.main.*;
 
 import java.util.List;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity implements Fragment2.DataTransfertoActivity{
 
     private static final String TAG = "List Activity";
 
     //UI components
     List<Fragment> allFragments;
+    private CustomViewPager viewPager;
 
     //variables
     private PlacesRecyclerAdapter adapter;
-    private ListViewModel mListViewModel;
-    private FragmentManager mFragmentManager;
+
     private Fragment1 fragment1;
     private Fragment2 fragment2;
-    private Fragment3 fragment3;
+    public Fragment3 fragment3;
+    public Place selectedPlace;
+    public FragmentAdapter fragmentAdapter;
+
+    public ListViewModel mListViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        initViewModel();
         initSearchView();
         initFragmentAdapter();
-    }
-
-    public void initViewModel(){
         mListViewModel = new ViewModelProvider(this).get(ListViewModel.class);
-//        mListViewModel.getAllPlaces().observe(this, new Observer<List<Place>>() {
-//            @Override
-//            public void onChanged(List<Place> places) {
-//                adapter.setPlaces(places);
-//            }
-//        });
     }
 
     private void initSearchView(){
@@ -82,24 +70,52 @@ public class ListActivity extends AppCompatActivity {
     }
 
     public void initFragmentAdapter(){
-        FragmentAdapter fragmentAdapter = new FragmentAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
+        fragmentAdapter = new FragmentAdapter(this, getSupportFragmentManager());
+        viewPager = (CustomViewPager) findViewById(R.id.view_pager);
         viewPager.setAdapter(fragmentAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.setPagingEnabled(false);
     }
 
     public void searchViaFragment(String searchText){
-        mFragmentManager = getSupportFragmentManager();
         allFragments = getSupportFragmentManager().getFragments();
         fragment1 = (Fragment1) allFragments.get(0);
         fragment2 = (Fragment2) allFragments.get(1);
-//        fragment3 = (Fragment3) allFragments.get(2);
+        fragment3 = (Fragment3) allFragments.get(2);
+        Log.d(TAG, "searchViaFragment: " + allFragments.size());
 
         fragment1.search(searchText);
         fragment2.search(searchText);
+        fragment3.search(searchText);
 
         Log.d(TAG, "TEST METHOD TRIGGERED");
+    }
+
+    public CustomViewPager getViewPager() {
+        return viewPager;
+    }
+
+    @Override
+    public void onAttachFragment(@NonNull Fragment fragment) {
+        if (fragment instanceof Fragment2){
+            Fragment2 fragment2 = (Fragment2) fragment;
+            fragment2.setDataTransfertoActivity(this);
+        }
+
+    }
+
+    @Override
+    public void sendInfo(int position) {
+        Log.d(TAG, "sendInfo: Initiated");
+
+        try{
+            Log.d(TAG, "sendInfo: try");
+        }
+        catch(Exception err){
+            Log.d(TAG, "sendInfo: catch " + err);
+        }
     }
 
 }

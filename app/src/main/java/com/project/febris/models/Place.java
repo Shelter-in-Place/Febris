@@ -20,6 +20,9 @@ public class Place {
     @ColumnInfo(name = "infections")
     private int infections;
 
+    @ColumnInfo(name = "currentinfections")
+    private int currentInfections;
+
     @ColumnInfo(name = "deaths")
     private int deaths;
 
@@ -30,19 +33,24 @@ public class Place {
     private String date;
 
     @ColumnInfo(name = "isFav")
-    private boolean is_favourite;
+    private boolean isFavourite;
+
+    @ColumnInfo(name = "present")
+    private boolean isPresent;
+
+    @ColumnInfo(name = "selected")
+    private boolean isSelected;
 
 
-
-
-    public Place(int ID, String place, String image_address, int infections, int deaths, int recovered, boolean is_favourite){
+    public Place(int ID, String place, String image_address, int infections, int deaths, int recovered, boolean isFavourite){
         this.ID = ID;
         this.place = place;
         this.image_address = image_address;
         this.infections = infections;
         this.deaths = deaths;
         this.recovered = recovered;
-        this.is_favourite = is_favourite;
+        this.isFavourite = isFavourite;
+        this.currentInfections = infections - recovered - deaths;
     }
 
     @Ignore
@@ -52,11 +60,15 @@ public class Place {
     // Get / Set Methods:
 
     public boolean is_favourite() {
-        return is_favourite;
+        return isFavourite;
     }
 
     public void set_favourite(boolean is_favourite) {
-        this.is_favourite = is_favourite;
+        this.isFavourite = is_favourite;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
     }
 
     public int getID() { return ID; }
@@ -85,6 +97,10 @@ public class Place {
         this.infections = infections;
     }
 
+    public int getCurrentInfections() { return currentInfections; }
+
+    public void setCurrentInfections(int currentInfections) { this.currentInfections = currentInfections; }
+
     public int getDeaths() { return deaths; }
 
     public void setDeaths(int deaths) { this.deaths = deaths; }
@@ -100,5 +116,21 @@ public class Place {
     }
 
     public void setDate(String date) { this.date = date; }
+
+    public boolean isPresent() {
+        return isPresent;
+    }
+
+    public void setPresent(boolean present) {
+        isPresent = present;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 }
 

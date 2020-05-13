@@ -11,6 +11,7 @@ import com.project.febris.models.FavouritesPlace;
 import com.project.febris.models.Place;
 import com.project.febris.persistence.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListViewModel extends AndroidViewModel {
@@ -18,13 +19,15 @@ public class ListViewModel extends AndroidViewModel {
     private Repository mRepository;
     private LiveData<List<Place>> allPlaces;
     private LiveData<List<Place>> allFavourites;
+    private LiveData<List<Place>>  selectedCountry;
+    public List<Place> placesLocal = new ArrayList<>();
 
     public ListViewModel(@NonNull Application application) {
         super(application);
         mRepository = new Repository(application);
         allPlaces = mRepository.retrievePlacesTask();
         allFavourites = mRepository.getFavPlaces();
-
+        selectedCountry = mRepository.getSelectedCountry();
     }
 
     //DB METHODS:
@@ -45,9 +48,24 @@ public class ListViewModel extends AndroidViewModel {
         return allFavourites;
     }
 
-//    public void delFavourite(String place){
-//        mRepository.delFavourite(place);
-//        Log.d(TAG, "delFavourite: ");
-//    }
+    public LiveData<List<Place>> getSelectedCountry(){
+        return selectedCountry;
+    }
 
+    public void clearSelected() {
+        for(int i = 0; i < selectedCountry.getValue().size(); i++){
+            Place place = selectedCountry.getValue().get(i);
+            place.setSelected(false);
+            update(place);
+        }
+        Log.d(TAG, "ClearSelected: ");
+    }
+
+    public List<Place> getPlacesLocal() {
+        return placesLocal;
+    }
+
+    public void setPlacesLocal(List<Place> placesLocal) {
+        this.placesLocal = placesLocal;
+    }
 }

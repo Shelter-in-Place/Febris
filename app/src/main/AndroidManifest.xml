@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".SecondActivity"></activity>
-        <activity android:name=".ListActivity">
+        <activity android:name=".ui.main.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

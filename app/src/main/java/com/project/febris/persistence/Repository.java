@@ -8,15 +8,12 @@ import androidx.lifecycle.LiveData;
 import com.project.febris.API.Details;
 import com.project.febris.API.ResultModel;
 import com.project.febris.API.ResultsAPI;
-import com.project.febris.async.DeleteAllFavouritesAsyncTask;
 import com.project.febris.async.DeleteAsyncTask;
-import com.project.febris.async.DeleteFavouriteAsyncTask;
 import com.project.febris.async.InsertAsyncTask;
-import com.project.febris.async.InsertFavouriteAsyncTask;
 import com.project.febris.async.UpdateAsyncTask;
-import com.project.febris.models.FavouritesPlace;
 import com.project.febris.models.Place;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -32,6 +29,7 @@ public class Repository {
     private Database mDatabase;
     private Retrofit retrofit;
     private ResultsAPI resultsAPI;
+
 
 
     public Repository(Context context) {
@@ -59,14 +57,15 @@ public class Repository {
             @Override
             public void onResponse(Call<ResultModel> call, Response<ResultModel> response) {
                 Log.d(TAG, "Repository: Success -->" + response.code());
+
                 deleteAll();
-                deleteAllFavourites();
                 List<List<Details>> countries = response.body().getCountries();
                 List<String> countryNames = response.body().getCountriesList();
                 for(int i=0; i < countries.size() - 1; i++){
                     String currentCountryName = countryNames.get(i);
                     Details currentCountry = countries.get(i).get(countries.get(i).size()-1);
-                    Place place = new Place(i+1, currentCountryName, "", currentCountry.getConfirmed(), currentCountry.getDeaths(), currentCountry.getRecovered(),false);
+                    Place place = new Place(i+1, currentCountryName, "", currentCountry.getConfirmed(), currentCountry.getDeaths(), currentCountry.getRecovered(),false, currentCountry.getDate());
+                    place.setPresent(true);
                     insertPlaceTask(place);
                 }
             }
@@ -77,17 +76,6 @@ public class Repository {
             }
         });
 
-    }
-
-    private void testDataFList(){
-        deleteAllFavourites();
-        FavouritesPlace fPlace = new FavouritesPlace("test country name", "", 100, 200, 300,false);
-        insertFavouriteTask(fPlace);
-    }
-
-    public void addFav(String countryName){
-        FavouritesPlace fPlace = new FavouritesPlace(countryName, "", 100, 200, 300,false);
-        insertFavouriteTask(fPlace);
     }
 
     // DATABASE METHODS
@@ -105,51 +93,26 @@ public class Repository {
         return mDatabase.getNoteDao().getPlaces();
     }
 
-    public void deletePlace(Place place){
+    public List<Place> retrievePlacesTaskNonLiveData(){
+        return mDatabase.getNoteDao().getPlacesNonLiveData();
+    }
 
+    public LiveData<Place> getSpecificPlace(String placeName){
+        return mDatabase.getNoteDao().getSpecificPlace(placeName);
     }
 
     public void deleteAll() {
         new DeleteAsyncTask(mDatabase.getNoteDao()).execute();
     }
 
-    public int isFavourite(int id){return mDatabase.getNoteDao().isFavorite(id);}
-
-
-
-    //Favourites
-    public void insertFavouriteTask(FavouritesPlace favourite){
-        new InsertFavouriteAsyncTask(mDatabase.getFavouritesDao()).execute(favourite);
-    }
-
-    public void updateFavourites(FavouritesPlace favourite){
-
-    }
 
     public LiveData<List<Place>> getFavPlaces(){
         return mDatabase.getNoteDao().getFavPlaces();
     }
 
-    public void deleteFavourite(FavouritesPlace favourite){
-        new DeleteFavouriteAsyncTask(mDatabase.getFavouritesDao()).execute();
+    public LiveData<List<Place>> getSelectedCountry(){
+        return mDatabase.getNoteDao().getSelectedCountry();
     }
-
-    public void deleteAllFavourites() {
-        new DeleteAllFavouritesAsyncTask(mDatabase.getFavouritesDao()).execute();
-    }
-
-//    public void delFavourite(String place){
-//        final String placeName = place;
-//        new Thread(new Runnable(){
-//            public void run(){
-//                final FavouritesPlace favouritesPlace = mDatabase.getFavouritesDao().findFavorite(placeName);
-//                mDatabase.getFavouritesDao().deleteFavourite(favouritesPlace);
-//            }
-//        }).start();
-//        Log.d(TAG, "delFavourite: ");
-//
-//    }
-
 
 
 }
