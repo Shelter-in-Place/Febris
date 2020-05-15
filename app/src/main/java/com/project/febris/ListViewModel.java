@@ -29,6 +29,7 @@ public class ListViewModel extends AndroidViewModel {
         allFavourites = mRepository.getFavPlaces();
         selectedCountry = mRepository.getSelectedCountry();
     }
+    //To check git
 
     //DB METHODS:
     public void insert(Place place){
