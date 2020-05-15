@@ -4,10 +4,13 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.arch.core.util.Function;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 
-import com.project.febris.models.FavouritesPlace;
+//import com.project.febris.models.FavouritesPlace;
 import com.project.febris.models.Place;
 import com.project.febris.persistence.Repository;
 
@@ -19,7 +22,7 @@ public class ListViewModel extends AndroidViewModel {
     private Repository mRepository;
     private LiveData<List<Place>> allPlaces;
     private LiveData<List<Place>> allFavourites;
-    private LiveData<List<Place>>  selectedCountry;
+    private LiveData<List<Place>> selectedCountry;
     public List<Place> placesLocal = new ArrayList<>();
 
     public ListViewModel(@NonNull Application application) {
@@ -29,7 +32,6 @@ public class ListViewModel extends AndroidViewModel {
         allFavourites = mRepository.getFavPlaces();
         selectedCountry = mRepository.getSelectedCountry();
     }
-    //To check git
 
     //DB METHODS:
     public void insert(Place place){

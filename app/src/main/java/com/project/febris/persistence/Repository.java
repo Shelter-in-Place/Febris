@@ -4,23 +4,25 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
-import com.project.febris.API.Details;
-import com.project.febris.API.ResultModel;
+import com.project.febris.API.SummaryResponse;
+//import com.project.febris.models.Details;
+//import com.project.febris.models.ResultModel;
 import com.project.febris.API.ResultsAPI;
+import com.project.febris.API.ServiceGenerator;
 import com.project.febris.async.DeleteAsyncTask;
 import com.project.febris.async.InsertAsyncTask;
 import com.project.febris.async.UpdateAsyncTask;
 import com.project.febris.models.Place;
+import com.project.febris.models.SummaryDetails;
 
-import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Repository {
 
@@ -29,10 +31,12 @@ public class Repository {
     private Database mDatabase;
     private Retrofit retrofit;
 
-    private ResultsAPI resultsAPI;
+    private ResultsAPI mResultsAPI;
 
     private Retrofit retrofitJSON;
     private ResultsAPI resultsAPIJSON;
+    private ServiceGenerator mServiceGenerator;
+    private static Repository instance;
 
     public Repository(Context context) {
 
@@ -45,43 +49,57 @@ public class Repository {
     // RETROFIT
 
     public void initRetrofit(){
-        retrofit = new Retrofit.Builder()
-                .baseUrl("https://pomber.github.io/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        resultsAPI = retrofit.create(ResultsAPI.class);
+        mServiceGenerator = new ServiceGenerator();
+        mResultsAPI = mServiceGenerator.getResultsAPI();
 
-        retrofitJSON = new Retrofit.Builder()
-                .baseUrl("https://pomber.github.io/")
-                .build();
-        resultsAPIJSON = retrofitJSON.create(ResultsAPI.class);
+//        retrofit = new Retrofit.Builder()
+//                .baseUrl("https://pomber.github.io/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        resultsAPI = retrofit.create(ResultsAPI.class);
+//
+//        retrofitJSON = new Retrofit.Builder()
+//                .baseUrl("https://pomber.github.io/")
+//                .build();
+//        resultsAPIJSON = retrofitJSON.create(ResultsAPI.class);
     }
 
     public void callRetrofit(){
 
-        Call<ResultModel> call = resultsAPI.getResult();
-        call.enqueue(new Callback<ResultModel>() {
+        Call<SummaryResponse> call = mResultsAPI.getCountryData();
+        call.enqueue(new Callback<SummaryResponse>() {
             @Override
-            public void onResponse(Call<ResultModel> call, Response<ResultModel> response) {
-                Log.d(TAG, "Repository: Success -->" + response.body().toString());
+            public void onResponse(Call<SummaryResponse> call, Response<SummaryResponse> response) {
+                Log.d(TAG, "onResponse: this is happening on thread: "+Thread.currentThread().getName());
 
                 deleteAll();
-                Log.d(TAG, "onResponse: qqq" + response.body().hashCode());
-                List<List<Details>> countries = response.body().getCountries();
+//                Log.d(TAG, "onResponse: qqq" + response.body().hashCode());
+                List<SummaryDetails> countries = response.body().getCountries();
 
-                List<String> countryNames = response.body().getCountriesList();
                 for(int i=0; i < countries.size() - 1; i++){
-                    String currentCountryName = countryNames.get(i);
+                    String currentCountryName = countries.get(i).getCountry();
+                    int totConfirmedCases = countries.get(i).getTotalConfirmed();
+                    int totDeaths = countries.get(i).getTotalDeaths();
+                    int totRecovered = countries.get(i).getTotalRecovered();
+                    String latestUpdate = countries.get(i).getDate();
 
-                    Details currentCountry = countries.get(i).get(countries.get(i).size()-1);
-                    Place place = new Place(i+1, currentCountryName, "", currentCountry.getConfirmed(), currentCountry.getDeaths(), currentCountry.getRecovered(),false, currentCountry.getDate());
+//                    Details currentCountry = countries.get(i).get(countries.get(i).size()-1);
+                    Place place = new Place(
+                            i+1,
+                            currentCountryName,
+                            "",
+                            totConfirmedCases,
+                            totDeaths,
+                            totRecovered,
+                            false,
+                            latestUpdate);
                     place.setPresent(true);
                     insertPlaceTask(place);
                 }
             }
 
             @Override
-            public void onFailure(Call<ResultModel> call, Throwable t) {
+            public void onFailure(Call<SummaryResponse> call, Throwable t) {
                 Log.d(TAG, "Repository: Failure --> " + t);
             }
         });

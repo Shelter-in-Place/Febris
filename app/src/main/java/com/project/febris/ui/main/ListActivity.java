@@ -19,8 +19,8 @@ import com.project.febris.adapters.PlacesRecyclerAdapter;
 import com.project.febris.models.Place;
 
 import java.util.List;
-
-public class ListActivity extends AppCompatActivity implements Fragment2.DataTransfertoActivity{
+//implements Fragment2.DataTransfertoActivity
+public class ListActivity extends AppCompatActivity {
 
     private static final String TAG = "List Activity";
 
@@ -97,16 +97,16 @@ public class ListActivity extends AppCompatActivity implements Fragment2.DataTra
         return viewPager;
     }
 
-    @Override
-    public void onAttachFragment(@NonNull Fragment fragment) {
-        if (fragment instanceof Fragment2){
-            Fragment2 fragment2 = (Fragment2) fragment;
-            fragment2.setDataTransfertoActivity(this);
-        }
+//    @Override
+//    public void onAttachFragment(@NonNull Fragment fragment) {
+//        if (fragment instanceof Fragment2){
+//            Fragment2 fragment2 = (Fragment2) fragment;
+//            fragment2.setDataTransfertoActivity(this);
+//        }
 
-    }
+//    }
 
-    @Override
+    //    @Override
     public void sendInfo(int position) {
         Log.d(TAG, "sendInfo: Initiated");
 

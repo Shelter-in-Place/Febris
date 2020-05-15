@@ -35,7 +35,7 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
     private List<Place> mPlaces = new ArrayList<>();
     private ListViewModel mListViewModel;
 
-    DataTransfertoActivity dataTransfertoActivity;
+//    DataTransfertoActivity dataTransfertoActivity;
 
     @Nullable
     @Override
@@ -126,15 +126,15 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
         place.setSelected(true);
         mListViewModel.update(place);
 
-        dataTransfertoActivity.sendInfo(position);
+//        dataTransfertoActivity.sendInfo(position);
         viewPager.setCurrentItem(3);
     }
 
-    public void setDataTransfertoActivity(DataTransfertoActivity callback){
-        dataTransfertoActivity = callback;
-    }
+//    public void setDataTransfertoActivity(DataTransfertoActivity callback){
+//        dataTransfertoActivity = callback;
+//    }
 
-    public interface DataTransfertoActivity{
-        void sendInfo(int position);
-    }
+//    public interface DataTransfertoActivity{
+//        void sendInfo(int position);
+//    }
 }

@@ -92,11 +92,11 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is now favourited");
         }
     }
-    
+
     @Override
     public void onChecked(boolean checked){
         Log.d(TAG, "onChecked: ");
     }
-    
-    
+
+
 }
