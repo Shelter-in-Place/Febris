@@ -1,4 +1,4 @@
-package com.project.febris.models;
+package com.project.febris.API;
 
 import androidx.room.ColumnInfo;
 

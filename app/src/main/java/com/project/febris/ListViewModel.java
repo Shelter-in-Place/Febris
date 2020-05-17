@@ -33,6 +33,12 @@ public class ListViewModel extends AndroidViewModel {
         selectedCountry = mRepository.getSelectedCountry();
     }
 
+    //Network Calls
+    public void callRetrofitSpecificCountryData(String place){
+        Log.d(TAG, "callRetrofitSpecificCountryData: called");
+        mRepository.callRetrofitSpecificCountryData(place);
+    }
+
     //DB METHODS:
     public void insert(Place place){
         mRepository.insertPlaceTask(place);

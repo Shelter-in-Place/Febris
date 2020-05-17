@@ -100,7 +100,6 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
             place.set_favourite(false);
             mListViewModel.update(place);
 
-
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is no longer favourited");
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+ place.is_favourite());
         }
@@ -121,6 +120,9 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
     @Override
     public void dataScreen(int position) {
         Log.d(TAG, "dataScreen: clicked " + mPlaces.get(position).getPlace());
+
+        mListViewModel.callRetrofitSpecificCountryData(mPlaces.get(position).getPlace());
+
         mListViewModel.clearSelected();
         Place place = mPlaces.get(position);
         place.setSelected(true);

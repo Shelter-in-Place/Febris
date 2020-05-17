@@ -4,122 +4,132 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
+import com.project.febris.API.CountryResponse;
 import com.project.febris.API.SummaryResponse;
-//import com.project.febris.models.Details;
-//import com.project.febris.models.ResultModel;
 import com.project.febris.API.ResultsAPI;
 import com.project.febris.API.ServiceGenerator;
 import com.project.febris.async.DeleteAsyncTask;
 import com.project.febris.async.InsertAsyncTask;
 import com.project.febris.async.UpdateAsyncTask;
 import com.project.febris.models.Place;
-import com.project.febris.models.SummaryDetails;
+import com.project.febris.API.SummaryDetails;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class Repository {
 
     private static final String TAG = "Repository";
-
     private Database mDatabase;
-    private Retrofit retrofit;
-
     private ResultsAPI mResultsAPI;
-
-    private Retrofit retrofitJSON;
-    private ResultsAPI resultsAPIJSON;
     private ServiceGenerator mServiceGenerator;
-    private static Repository instance;
 
     public Repository(Context context) {
-
         mDatabase = Database.getInstance(context);
         initRetrofit();
         callRetrofit();
-//        callRetrofitJSON();
     }
 
     // RETROFIT
-
     public void initRetrofit(){
         mServiceGenerator = new ServiceGenerator();
         mResultsAPI = mServiceGenerator.getResultsAPI();
-
-//        retrofit = new Retrofit.Builder()
-//                .baseUrl("https://pomber.github.io/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//        resultsAPI = retrofit.create(ResultsAPI.class);
-//
-//        retrofitJSON = new Retrofit.Builder()
-//                .baseUrl("https://pomber.github.io/")
-//                .build();
-//        resultsAPIJSON = retrofitJSON.create(ResultsAPI.class);
     }
 
     public void callRetrofit(){
-
-        Call<SummaryResponse> call = mResultsAPI.getCountryData();
+        Log.d(TAG, "callRetrofit: called");
+        Call<SummaryResponse> call = mResultsAPI.getSummaryData();
         call.enqueue(new Callback<SummaryResponse>() {
             @Override
             public void onResponse(Call<SummaryResponse> call, Response<SummaryResponse> response) {
                 Log.d(TAG, "onResponse: this is happening on thread: "+Thread.currentThread().getName());
 
                 deleteAll();
-//                Log.d(TAG, "onResponse: qqq" + response.body().hashCode());
-                List<SummaryDetails> countries = response.body().getCountries();
+                if(response.body() != null){
+                    List<SummaryDetails> countries = response.body().getCountries();
+                    for(int i=0; i < countries.size() - 1; i++){
+                        // 1. Setting local variables for loop
+                        String currentCountryName = countries.get(i).getCountry();
+                        int totConfirmedCases = countries.get(i).getTotalConfirmed();
+                        int totDeaths = countries.get(i).getTotalDeaths();
+                        int totRecovered = countries.get(i).getTotalRecovered();
+                        String latestUpdate = countries.get(i).getDate();
 
-                for(int i=0; i < countries.size() - 1; i++){
-                    String currentCountryName = countries.get(i).getCountry();
-                    int totConfirmedCases = countries.get(i).getTotalConfirmed();
-                    int totDeaths = countries.get(i).getTotalDeaths();
-                    int totRecovered = countries.get(i).getTotalRecovered();
-                    String latestUpdate = countries.get(i).getDate();
+                        // 2. Creating new Place using local variables on loop
+                        Place place = new Place(null,
+                                currentCountryName,
+                                "",
+                                totConfirmedCases,
+                                totDeaths,
+                                totRecovered,
+                                false,
+                                latestUpdate);
+                        place.setPresent(true);
 
-//                    Details currentCountry = countries.get(i).get(countries.get(i).size()-1);
-                    Place place = new Place(
-                            i+1,
-                            currentCountryName,
-                            "",
-                            totConfirmedCases,
-                            totDeaths,
-                            totRecovered,
-                            false,
-                            latestUpdate);
-                    place.setPresent(true);
-                    insertPlaceTask(place);
+                        // 3. Inserting new Place into the DB
+                        insertPlaceTask(place);
+                    }
                 }
+                else{
+                    Log.d(TAG, "onResponse: init call - response was null");
+                    callRetrofit(); // Fix this to avoid an infinite loop!!!
+                }
+
             }
+
 
             @Override
             public void onFailure(Call<SummaryResponse> call, Throwable t) {
                 Log.d(TAG, "Repository: Failure --> " + t);
+                callRetrofit();
             }
         });
 
     }
 
-//    private void callRetrofitJSON(){
-//        Call<ResultModel> call = resultsAPIJSON.getSeparateResult();
-//        call.enqueue(new Callback<ResultModel>() {
-//            @Override
-//            public void onResponse(Call<ResultModel> call, Response<ResultModel> response) {
-//                Log.d(TAG, "onResponse: qqqq" + response.raw());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResultModel> call, Throwable t) {
-//                Log.d(TAG, "onFailure: ");
-//            }
-//        });
-//    }
+    public void callRetrofitSpecificCountryData(String place){
+        Log.d(TAG, "callRetrofitSpecificCountryData: qqq called");
+        Call<List<CountryResponse>> call = mResultsAPI.getCountryData(place);
+        call.enqueue(new Callback<List<CountryResponse>>() {
+            @Override
+            public void onResponse(Call<List<CountryResponse>> call, Response<List<CountryResponse>> response) {
+                Log.d(TAG, "onResponse: this is happening on thread: qqq "+Thread.currentThread().getName());
+
+                if(response.body() != null){
+                    Log.d(TAG, "onResponse: qqq Success");
+                    for(int i = 0; i< response.body().size(); i++){
+                        Place place = new Place(null,
+                                response.body().get(i).getCountry(),
+                                "",
+                                Integer.parseInt(response.body().get(i).getConfirmed()),
+                                Integer.parseInt(response.body().get(i).getDeaths()),
+                                Integer.parseInt(response.body().get(i).getRecovered()),
+                                false,
+                                response.body().get(i).getDate());
+                        place.setSelected(true);
+                        insertPlaceTask(place);
+                    }
+
+                }
+                else{
+                    Log.d(TAG, "onResponse: qqq response was null");
+//                    callRetrofitSpecificCountryData();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CountryResponse>> call, Throwable t) {
+                Log.d(TAG, "Repository: Failure --> qqq " + t);
+//                callRetrofitSpecificCountryData();
+            }
+        });
+
+    }
+
 
     // DATABASE METHODS
 
