@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Fragment3 extends Fragment {
+public class Fragment3 extends Fragment  {
     public static final String TAG = "Fragment3";
     private ListViewModel mListViewModel;
     public LiveData<List<Place>> mPlaces;
@@ -42,14 +42,16 @@ public class Fragment3 extends Fragment {
     private TextView currentInfections;
     private TextView deaths;
     private TextView recovered;
-    private LiveData<List<Place>> totDeathsCountry;
+    private MutableLiveData<List<Place>> totDeathsCountry;
     private float mValue;
+    private LineChart mLineChart;
 
 //    private String mDeaths = "";
 
     public Place selectedCountry;
-
     List<Entry> entries = new ArrayList<Entry>();
+
+
 
     @Nullable
     @Override
@@ -62,18 +64,23 @@ public class Fragment3 extends Fragment {
         currentInfections = root.findViewById(R.id.data_current_infections);
         deaths = root.findViewById(R.id.data_deaths);
         recovered = root.findViewById(R.id.data_recovered);
-        mValue = 0;
 
+        initViewModel();
+        initGraphViews(root);
 
-        initViewModel(root);
 
 
         return root;
     }
 
-    private void initViewModel(View v){
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+    private void initViewModel(){
         Log.d(TAG, "initViewModel: called");
-        final View root = v;
         mListViewModel = new ViewModelProvider(getActivity()).get(ListViewModel.class);
         mPlaces = mListViewModel.getAllPlaces();
         mListViewModel.getAllPlaces().observe(this, new Observer<List<Place>>() {
@@ -98,11 +105,8 @@ public class Fragment3 extends Fragment {
             public void onChanged(List<Place> places) {
                 try {
                     float deathFloat = (float)places.get(0).getDeaths();
-                    try{
-                        initGraphViews(root,deathFloat);
-                    }catch(Exception e){
-                        Log.d(TAG, "onChanged: "+e.getMessage());
-                    }
+                    setData(deathFloat);
+
 
                     Log.d(TAG, "onChanged: mValue "+mValue);
                     countryHeader.setText(places.get(0).getPlace());
@@ -119,27 +123,27 @@ public class Fragment3 extends Fragment {
 
     }
 
-
-
-
-    private void initGraphViews(View root,float value){
-        Log.d(TAG, "initGraphViews: called");
-        Log.d(TAG, "initGraphViews: value = "+value);
-
-        LineChart lineChart = (LineChart) root.findViewById(R.id.line_graph);
+    private void setData(float data){
 
         for(int i =0; i<20; i++){
-            entries.add(new Entry(value*i, i));
+            entries.add(new Entry(data/(i+1), i));
         }
-//        float deaths = Float.valueOf(mDeaths);
+    }
 
 
+    private void initGraphViews(View root){
+        Log.d(TAG, "initGraphViews: called");
+//        Log.d(TAG, "initGraphViews: value = "+value);
+        mLineChart = root.findViewById(R.id.line_graph);
 
         LineDataSet lineDataSet = new LineDataSet(entries, "Test Data");
         lineDataSet.setColor(1);
         LineData lineData = new LineData(lineDataSet);
-        lineChart.setData(lineData);
-        lineChart.invalidate();
+        mLineChart.setData(lineData);
+        mLineChart.notifyDataSetChanged();
+        mLineChart.invalidate();
+
+
 
     }
 

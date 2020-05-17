@@ -64,6 +64,7 @@ public class ListViewModel extends AndroidViewModel {
         Log.d(TAG, "ClearSelected: ");
     }
 
+
     public List<Place> getPlacesLocal() {
         return placesLocal;
     }
