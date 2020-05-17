@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -26,24 +27,31 @@ import com.project.febris.ListViewModel;
 import com.project.febris.R;
 import com.project.febris.models.Place;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Fragment3 extends Fragment {
+public class Fragment3 extends Fragment  {
     public static final String TAG = "Fragment3";
     private ListViewModel mListViewModel;
     public LiveData<List<Place>> mPlaces;
-    public List<Place> mPlacesLocal = new ArrayList<>();
+    public MutableLiveData<List<Place>> mPlacesLocal;
     private TextView countryHeader;
     private TextView totalInfections;
     private TextView currentInfections;
     private TextView deaths;
     private TextView recovered;
+    private MutableLiveData<List<Place>> totDeathsCountry;
+    private float mValue;
+    private LineChart mLineChart;
+
+//    private String mDeaths = "";
 
     public Place selectedCountry;
-
     List<Entry> entries = new ArrayList<Entry>();
+
+
 
     @Nullable
     @Override
@@ -63,7 +71,14 @@ public class Fragment3 extends Fragment {
         return root;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
     private void initViewModel(){
+        Log.d(TAG, "initViewModel: called");
         mListViewModel = new ViewModelProvider(getActivity()).get(ListViewModel.class);
         mPlaces = mListViewModel.getAllPlaces();
         mListViewModel.getAllPlaces().observe(this, new Observer<List<Place>>() {
@@ -87,34 +102,63 @@ public class Fragment3 extends Fragment {
             @Override
             public void onChanged(List<Place> places) {
                 try {
-                    countryHeader.setText(places.get(0).getPlace());
-                    totalInfections.setText("" + places.get(0).getInfections());
-                    currentInfections.setText("" + places.get(0).getCurrentInfections());
-                    deaths.setText("" + places.get(0).getDeaths());
-                    recovered.setText("" + places.get(0).getRecovered());
+                    setTable(places);
+                    entries.clear();
+                    setData(places);
+
                 }
                 catch (Exception err){
                     Log.d(TAG, "onChanged: " + err);
                 }
+//                try {
+//                    float deathFloat = (float)places.get(0).getDeaths();
+//                    setData(deathFloat);
+//
+//
+//                    Log.d(TAG, "onChanged: mValue "+mValue);
+//                    countryHeader.setText(places.get(0).getPlace());
+//                    totalInfections.setText("" + places.get(0).getInfections());
+//                    currentInfections.setText("" + places.get(0).getCurrentInfections());
+//                    deaths.setText("" + places.get(0).getDeaths());
+//                    recovered.setText("" + places.get(0).getRecovered());
+//                }
+//                catch (Exception err){
+//                    Log.d(TAG, "onChanged: " + err);
+//                }
             }
         });
+
+    }
+
+    private void setTable(List<Place> places){
+        countryHeader.setText(places.get(0).getPlace());
+        totalInfections.setText("" + places.get(0).getInfections());
+        currentInfections.setText("" + places.get(0).getCurrentInfections());
+        deaths.setText("" + places.get(0).getDeaths());
+        recovered.setText("" + places.get(0).getRecovered());
     }
 
 
+    private void setData(List<Place> places){
 
-    private void initGraphViews(View root){
-        LineChart lineChart = (LineChart) root.findViewById(R.id.line_graph);
-
-        for(int i =0; i<20; i++){
-            entries.add(new Entry(i, i));
-
+        for(int i = 0; i < places.size(); i++){
+            entries.add(new Entry(i, places.get(i).getCurrentInfections()));
+            Log.d(TAG, "setData: placeN" + places.get(i).getPlace());
         }
 
-        LineDataSet lineDataSet = new LineDataSet(entries, "Test Data");
+        LineDataSet lineDataSet = new LineDataSet(entries, "Infections");
         lineDataSet.setColor(1);
         LineData lineData = new LineData(lineDataSet);
-        lineChart.setData(lineData);
-        lineChart.invalidate();
+        mLineChart.setData(lineData);
+        mLineChart.notifyDataSetChanged();
+        mLineChart.invalidate();
+    }
+
+
+    private void initGraphViews(View root){
+        Log.d(TAG, "initGraphViews: called");
+
+        mLineChart = (LineChart) root.findViewById(R.id.line_graph);
 
     }
 

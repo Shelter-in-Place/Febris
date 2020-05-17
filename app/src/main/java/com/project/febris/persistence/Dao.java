@@ -2,6 +2,7 @@ package com.project.febris.persistence;
 
 import androidx.lifecycle.LiveData;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -17,7 +18,7 @@ public interface Dao {
     @Insert
     long[] insertPlaces(Place... places);
 
-    @Query("SELECT * FROM places")
+    @Query("SELECT * FROM places WHERE present = 1")
     LiveData<List<Place>> getPlaces();
 
     @Query("SELECT * FROM places")
@@ -26,7 +27,7 @@ public interface Dao {
     @Query("SELECT * FROM places WHERE place = :place")
     LiveData<Place> getSpecificPlace(String place);
 
-    @Query("SELECT * FROM places WHERE isFav = 1")
+    @Query("SELECT * FROM places WHERE isFav = 1 and present = 1")
     LiveData<List<Place>> getFavPlaces();
 
     @Query("SELECT * FROM places WHERE selected = 1")

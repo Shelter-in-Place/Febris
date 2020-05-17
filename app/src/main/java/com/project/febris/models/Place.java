@@ -1,5 +1,6 @@
 package com.project.febris.models;
 
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -42,8 +43,10 @@ public class Place {
     private boolean isSelected;
 
 
-    public Place(int ID, String place, String image_address, int infections, int deaths, int recovered, boolean isFavourite, String date){
-        this.ID = ID;
+    public Place(@Nullable Integer ID, String place, String image_address, int infections, int deaths, int recovered, boolean isFavourite, String date){
+        if(ID != null){
+            this.ID = ID;
+        }
         this.place = place;
         this.image_address = image_address;
         this.infections = infections;

@@ -35,7 +35,7 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
     private List<Place> mPlaces = new ArrayList<>();
     private ListViewModel mListViewModel;
 
-    DataTransfertoActivity dataTransfertoActivity;
+//    DataTransfertoActivity dataTransfertoActivity;
 
     @Nullable
     @Override
@@ -100,7 +100,6 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
             place.set_favourite(false);
             mListViewModel.update(place);
 
-
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is no longer favourited");
             Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+ place.is_favourite());
         }
@@ -121,20 +120,23 @@ public class Fragment2 extends Fragment implements PlacesRecyclerAdapter.OnClick
     @Override
     public void dataScreen(int position) {
         Log.d(TAG, "dataScreen: clicked " + mPlaces.get(position).getPlace());
+
+        mListViewModel.callRetrofitSpecificCountryData(mPlaces.get(position).getPlace());
+
         mListViewModel.clearSelected();
         Place place = mPlaces.get(position);
         place.setSelected(true);
         mListViewModel.update(place);
 
-        dataTransfertoActivity.sendInfo(position);
+//        dataTransfertoActivity.sendInfo(position);
         viewPager.setCurrentItem(3);
     }
 
-    public void setDataTransfertoActivity(DataTransfertoActivity callback){
-        dataTransfertoActivity = callback;
-    }
+//    public void setDataTransfertoActivity(DataTransfertoActivity callback){
+//        dataTransfertoActivity = callback;
+//    }
 
-    public interface DataTransfertoActivity{
-        void sendInfo(int position);
-    }
+//    public interface DataTransfertoActivity{
+//        void sendInfo(int position);
+//    }
 }
