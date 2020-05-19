@@ -1,5 +1,6 @@
 package com.project.febris.API;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.project.febris.models.Place;
@@ -10,6 +11,8 @@ import com.project.febris.ui.main.AppExecutors;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -24,16 +27,21 @@ public class SummaryAPIClient {
 
     private static SummaryAPIClient instance;
     private GetSummaryCountriesRunnable mGetSummaryCountriesRunnable;
+    private Database mDatabase;
 
 
 
 
-    public static SummaryAPIClient getInstance(){
+    public static SummaryAPIClient getInstance(Database database){
         Log.d(TAG, "getInstance: called");
         if(instance==null){
-            instance = new SummaryAPIClient();
+            instance = new SummaryAPIClient(database);
         }
         return instance;
+    }
+
+    public SummaryAPIClient(Database database) {
+        mDatabase = database;
     }
 
     public void setSummaryCountries(){
@@ -48,18 +56,19 @@ public class SummaryAPIClient {
             @Override
             public void run() {
                 //let user know ts timed out
-                handler.cancel(true);
+                Log.d(TAG, "run: timed out!");
+//                handler.cancel(true);
             }
         },NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
     private class GetSummaryCountriesRunnable implements Runnable{
 
-        private Dao mDao;
 
         boolean cancelRequest;
 
         public GetSummaryCountriesRunnable() {
+            Log.d(TAG, "GetSummaryCountriesRunnable: called: cancel request is false");
             cancelRequest = false;
         }
 
@@ -78,6 +87,7 @@ public class SummaryAPIClient {
                     Log.d(TAG, "run: response code is 200");
                     List<SummaryDetails> countries = new ArrayList<>(((SummaryResponse)response.body()).getCountries());
                     Log.d(TAG, "run: countries list size = "+countries.size());
+                    Log.d(TAG, "run: country 10 "+countries.get(10).getCountry());
                     for(int i=0; i < countries.size() - 1; i++){
                         // 1. Setting local variables for loop
                         String currentCountryName = countries.get(i).getCountry();
@@ -96,10 +106,10 @@ public class SummaryAPIClient {
                                 false,
                                 latestUpdate);
                         place.setPresent(true);
-                        Log.d(TAG, "run: print details: "+place.toString());
+                        Log.d(TAG, "run: print details: ");
 
                         // 3. Inserting new Place into the DB
-                        mDao.insertPlaces(place);
+                        mDatabase.getNoteDao().insertPlaces(place);
 
                     }
                 }

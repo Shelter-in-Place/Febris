@@ -7,44 +7,54 @@ import java.util.List;
 
 public class CountryResponse {
 
-    @SerializedName("Country")
     @Expose
-    private String country;
-
-    @SerializedName("Confirmed")
+    private String Country;
     @Expose
-    private String confirmed;
-
-    @SerializedName("Deaths")
+    private int Confirmed;
     @Expose
-    private String deaths;
-
-    @SerializedName("Recovered")
+    private int Deaths;
     @Expose
-    private String recovered;
-
-
-    @SerializedName("Date")
+    private int Recovered;
     @Expose
-    private String date;
+    private int Active;
+    @Expose
+    private String Date;
+
 
     public String getCountry() {
-        return country;
+        return Country;
     }
 
-    public String getConfirmed() {
-        return confirmed;
+    public int getConfirmed() {
+        return Confirmed;
     }
 
-    public String getDeaths() {
-        return deaths;
+    public int getDeaths() {
+        return Deaths;
     }
 
-    public String getRecovered() {
-        return recovered;
+    public int getRecovered() {
+        return Recovered;
+    }
+
+    public int getActive() {
+        return Active;
     }
 
     public String getDate() {
-        return date;
+        return Date;
     }
+
+    @Override
+    public String toString() {
+        return "CountryDetails{" +
+                "Country='" + Country + '\'' +
+                ", Confirmed=" + Confirmed +
+                ", Deaths=" + Deaths +
+                ", Recovered=" + Recovered +
+                ", Active=" + Active +
+                ", Date='" + Date + '\'' +
+                '}';
+    }
+
 }
