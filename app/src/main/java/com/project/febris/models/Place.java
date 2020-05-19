@@ -136,5 +136,22 @@ public class Place {
     public void setSelected(boolean selected) {
         isSelected = selected;
     }
+
+    @Override
+    public String toString() {
+        return "Place{" +
+                "ID=" + ID +
+                ", place='" + place + '\'' +
+                ", image_address='" + image_address + '\'' +
+                ", infections=" + infections +
+                ", currentInfections=" + currentInfections +
+                ", deaths=" + deaths +
+                ", recovered=" + recovered +
+                ", date='" + date + '\'' +
+                ", isFavourite=" + isFavourite +
+                ", isPresent=" + isPresent +
+                ", isSelected=" + isSelected +
+                '}';
+    }
 }
 
