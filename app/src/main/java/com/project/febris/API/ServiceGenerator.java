@@ -15,7 +15,8 @@ public class ServiceGenerator {
     private static Retrofit retrofit = retrofitBuilder.build();
     private static ResultsAPI resultsAPI = retrofit.create(ResultsAPI.class);
 
-    public ResultsAPI getResultsAPI(){
+
+    public static ResultsAPI getResultsAPI(){
         return resultsAPI;
     };
 }

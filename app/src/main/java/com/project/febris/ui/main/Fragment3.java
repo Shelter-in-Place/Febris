@@ -101,7 +101,9 @@ public class Fragment3 extends Fragment  {
         mListViewModel.getSelectedCountry().observe(this, new Observer<List<Place>>() {
             @Override
             public void onChanged(List<Place> places) {
+                Log.d(TAG, "onChanged: get selected Country called: "+ places.size());
                 try {
+                    Log.d(TAG, "onChanged: places = " + places.get(0).toString());
                     setTable(places);
                     entries.clear();
                     setData(places);
@@ -140,10 +142,11 @@ public class Fragment3 extends Fragment  {
 
 
     private void setData(List<Place> places){
+        Log.d(TAG, "setData: size of array "+ places.size());
 
         for(int i = 0; i < places.size(); i++){
             entries.add(new Entry(i, places.get(i).getCurrentInfections()));
-            Log.d(TAG, "setData: placeN" + places.get(i).getPlace());
+            Log.d(TAG, "setData: place " + places.get(i).getPlace());
         }
 
         LineDataSet lineDataSet = new LineDataSet(entries, "Infections");

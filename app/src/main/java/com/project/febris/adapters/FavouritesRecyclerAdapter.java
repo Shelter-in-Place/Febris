@@ -119,6 +119,7 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
 
             this.favOnClickboxListener = favOnClickboxListener;
             favourites_checkbox.setOnClickListener(this);
+            itemView.setOnClickListener(this);
 
         }
 
@@ -126,7 +127,12 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick: triggered");
-            favOnClickboxListener.favOnClickboxclick(getLayoutPosition());
+            if(v==favourites_checkbox){
+                mFavOnClickListener.favOnClickboxclick(getLayoutPosition());
+            }
+            else{
+                favOnClickboxListener.dataScreen(getLayoutPosition());
+            }
         }
 
         @Override
@@ -138,5 +144,7 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
     public interface FavOnClickboxListener{
         void favOnClickboxclick(int position);
         void onChecked(boolean checked);
+        void dataScreen(int position);
+
     }
 }

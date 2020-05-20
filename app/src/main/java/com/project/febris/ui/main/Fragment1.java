@@ -31,12 +31,15 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
     private FavouritesRecyclerAdapter favouritesRecyclerAdapter;
     private List<Place> mPlaces = new ArrayList<>();
     private ListViewModel mListViewModel;
+    private CustomViewPager viewPager;
+
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_screen_1, container, false);
+        viewPager = getActivity().findViewById(R.id.view_pager);
         initRecyclerView(root);
         initViewModel();
         return root;
@@ -96,6 +99,21 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
     @Override
     public void onChecked(boolean checked){
         Log.d(TAG, "onChecked: ");
+    }
+
+    @Override
+    public void dataScreen(int position) {
+        Log.d(TAG, "dataScreen: clicked " + mPlaces.get(position).getPlace());
+
+        mListViewModel.callRetrofitSpecificCountryData(mPlaces.get(position).getPlace());
+
+        mListViewModel.clearSelected();
+        Place place = mPlaces.get(position);
+        place.setSelected(true);
+        mListViewModel.update(place);
+
+//        dataTransfertoActivity.sendInfo(position);
+        viewPager.setCurrentItem(3);
     }
 
 
