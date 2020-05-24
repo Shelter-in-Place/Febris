@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.project.febris.models.Place;
@@ -44,4 +45,17 @@ public interface Dao {
 
     @Query("SELECT EXISTS (SELECT 1 FROM places WHERE ID == :id AND deaths >= 2000)")
     public int isFavorite(int id);
+
+    // Transaction:
+    @Query("DELETE FROM places WHERE place = :place AND present = 0")
+    void deleteSpecificPlaceList(String place);
+
+    @Insert
+    long[] insertPlacesList(List<Place> places);
+
+//    @Transaction
+//    void singleTransaction(String place, List<Place> places){
+//        deleteSpecificPlaceList(place);
+//        insertPlacesList(places);
+//    }
 }

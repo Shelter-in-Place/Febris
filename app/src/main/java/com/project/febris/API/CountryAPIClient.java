@@ -25,7 +25,7 @@ public class CountryAPIClient {
     private GetSpecificCountryRunnable mGetSpecificCountryRunnable;
     private Database mDatabase;
 
-
+    private List<Place> placeslist = new ArrayList<>();
 
 
     public static CountryAPIClient getInstance(Database database){
@@ -89,6 +89,9 @@ public class CountryAPIClient {
                 if(response.code() == 200){
                     Log.d(TAG, "onResponse: qqq Success");
                     Log.d(TAG, "run: country array size = " + country.size());
+
+
+
                     for(int i = 0; i< country.size(); i++){
                         Place place = new Place(null,
                                 country.get(i).getCountry(),
@@ -98,12 +101,17 @@ public class CountryAPIClient {
                                 country.get(i).getRecovered(),
                                 false,
                                 country.get(i).getDate());
+                        place.setPresent(false);
                         place.setSelected(true);
 
                         Log.d(TAG, "run: place "+toString());
-                        mDatabase.getNoteDao().insertPlaces(place);
-                    }
 
+                        placeslist.add(place);
+
+                    }
+                    //Inserts the whole list rather than place by place in the for loop above
+//                    mDatabase.getNoteDao().deleteSpecificPlaceList();
+                    mDatabase.getNoteDao().insertPlacesList(placeslist);
                 }
                 else{
                     Log.d(TAG, "onResponse: qqq response was null");

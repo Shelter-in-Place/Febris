@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_gravity="center"
@@ -10,23 +10,34 @@
     android:layout_marginTop="10dp"
     android:layout_marginLeft="6dp"
     android:layout_marginRight="6dp"
-    card_view:cardCornerRadius="5dp">
+    app:cardCornerRadius="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:background="@color/background_white">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.66"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_h_5"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guideline_v_33"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/secondaryColor"
+            />
 
         <TextView
             android:id="@+id/country_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintBottom_toTopOf="@id/guideline_v_5"
-            card_view:layout_constraintLeft_toLeftOf="@id/infectionIcon"
-            card_view:layout_constraintRight_toRightOf="parent"
-            card_view:layout_constraintVertical_chainStyle="packed"
-            card_view:layout_constraintHorizontal_bias="0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline_v_33"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_h_1"
+
+            app:layout_constraintVertical_chainStyle="packed"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/country_heading_size"
             android:lines="1"
@@ -37,59 +48,27 @@
             android:id="@+id/myList_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintBottom_toTopOf="@id/guideline_v_5"
-            card_view:layout_constraintLeft_toLeftOf="parent"
-            card_view:layout_constraintRight_toRightOf="@id/recoveredHeading"
-            card_view:layout_constraintHorizontal_bias="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline_v_33"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_h_5"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
             android:button="@drawable/selector"
             android:checked="false"/>
-
-        <ImageView
-            android:id="@+id/infectionIcon"
-            android:layout_width="@dimen/icon_width"
-            android:layout_height="@dimen/icon_height"
-            android:layout_marginRight="3dp"
-            android:contentDescription="Infections-Icon"
-            android:src="@drawable/infections_icon"
-            card_view:layout_constraintTop_toBottomOf="@id/guideline_v_5"
-            card_view:layout_constraintLeft_toLeftOf="parent"
-            card_view:layout_constraintRight_toLeftOf="@id/infectionsHeading"
-            card_view:layout_constraintBottom_toTopOf="@id/infectionsNumber"
-            card_view:layout_constraintHorizontal_chainStyle="packed"
-            card_view:layout_constraintVertical_chainStyle="packed"
-            />
-
-        <TextView
-            android:id="@+id/infectionsHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            card_view:layout_constraintTop_toTopOf="@id/infectionIcon"
-            card_view:layout_constraintBottom_toBottomOf="@id/infectionIcon"
-            card_view:layout_constraintLeft_toRightOf="@id/infectionIcon"
-            card_view:layout_constraintRight_toLeftOf="@id/guideline_h_33"
-            card_view:layout_constraintHorizontal_chainStyle="packed"
-            android:textColor="@color/cardHeadingColor"
-            android:textSize="@dimen/heading_text_size"
-            android:lines="1"
-            android:text="Infected"
-            />
 
         <ImageView
             android:id="@+id/deathsIcon"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
             android:layout_marginRight="3dp"
-            android:contentDescription="Deaths-Icon"
-            android:src="@drawable/ic_deathsicon1"
-            card_view:layout_constraintTop_toBottomOf="@id/guideline_v_5"
-            card_view:layout_constraintBottom_toTopOf="@id/deathsNumber"
-            card_view:layout_constraintLeft_toLeftOf="@id/guideline_h_33"
-            card_view:layout_constraintRight_toLeftOf="@id/deathsHeading"
-            card_view:layout_constraintHorizontal_chainStyle="packed"
-            card_view:layout_constraintVertical_chainStyle="packed"
-
+            android:contentDescription="Infections-Icon"
+            android:src="@drawable/ic_deathsicon"
+            app:layout_constraintTop_toBottomOf="@id/guideline_v_33"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/deathsHeading"
+            app:layout_constraintBottom_toTopOf="@id/deathsNumber"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintVertical_chainStyle="packed"
             />
 
         <TextView
@@ -97,120 +76,108 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
-            card_view:layout_constraintTop_toTopOf="@id/deathsIcon"
-            card_view:layout_constraintBottom_toBottomOf="@id/deathsIcon"
-            card_view:layout_constraintLeft_toRightOf="@id/deathsIcon"
-            card_view:layout_constraintRight_toLeftOf="@id/guideline_h_66"
-            card_view:layout_constraintHorizontal_chainStyle="packed"
-            card_view:layout_constraintVertical_chainStyle="packed"
-            android:textColor="@color/cardHeadingColor"
+            app:layout_constraintTop_toTopOf="@id/deathsIcon"
+            app:layout_constraintBottom_toBottomOf="@id/deathsIcon"
+            app:layout_constraintLeft_toRightOf="@id/deathsIcon"
+            app:layout_constraintRight_toLeftOf="@id/guideline_h_5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:textColor="@color/secondaryTextColor"
             android:textSize="@dimen/heading_text_size"
-            android:text="Deaths"
+            android:lines="1"
+            android:text="Infected"
             />
 
+
         <ImageView
-            android:id="@+id/recoveredIcon"
+            android:id="@+id/activeIcon"
             android:layout_width="@dimen/icon_width"
             android:layout_height="@dimen/icon_height"
             android:layout_marginRight="3dp"
-            android:contentDescription="Recovered-Icon"
-            android:src="@drawable/ic_recovered_icon"
-            card_view:layout_constraintTop_toBottomOf="@id/guideline_v_5"
-            card_view:layout_constraintBottom_toTopOf="@id/recoveredNumber"
-            card_view:layout_constraintLeft_toRightOf="@id/guideline_h_66"
-            card_view:layout_constraintRight_toLeftOf="@id/recoveredHeading"
-            card_view:layout_constraintHorizontal_chainStyle="packed"
-            card_view:layout_constraintVertical_chainStyle="packed"
+            android:contentDescription="Active-Icon"
+            android:src="@drawable/ic_active_icon1"
+            app:layout_constraintTop_toBottomOf="@id/guideline_v_33"
+            app:layout_constraintBottom_toTopOf="@id/casesNumber"
+            app:layout_constraintLeft_toRightOf="@id/guideline_h_5"
+            app:layout_constraintRight_toLeftOf="@id/casesHeading"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintVertical_chainStyle="packed"
 
             />
 
         <TextView
-            android:id="@+id/recoveredHeading"
+            android:id="@+id/casesHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
-            card_view:layout_constraintTop_toTopOf="@id/recoveredIcon"
-            card_view:layout_constraintBottom_toBottomOf="@id/recoveredIcon"
-            card_view:layout_constraintLeft_toRightOf="@id/recoveredIcon"
-            card_view:layout_constraintRight_toRightOf="parent"
-            card_view:layout_constraintHorizontal_chainStyle="packed"
-            card_view:layout_constraintVertical_chainStyle="packed"
-            android:textColor="@color/cardHeadingColor"
+            app:layout_constraintTop_toTopOf="@id/activeIcon"
+            app:layout_constraintBottom_toBottomOf="@id/activeIcon"
+            app:layout_constraintLeft_toRightOf="@id/activeIcon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:textColor="@color/cardHeadingBoxColor"
             android:textSize="@dimen/heading_text_size"
             android:lines="1"
-            android:text="Recovered"
+            android:text="Cases"
             />
 
 
         <TextView
-            android:id="@+id/infectionsNumber"
+            android:id="@+id/deathsNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            card_view:layout_constraintTop_toBottomOf="@id/infectionIcon"
-            card_view:layout_constraintLeft_toLeftOf="parent"
-            card_view:layout_constraintRight_toRightOf="@id/infectionsHeading"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintVertical_chainStyle="packed"
-            card_view:layout_constraintHorizontal_bias="1"
+            app:layout_constraintTop_toBottomOf="@id/deathsIcon"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/deathsHeading"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="1"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/number_text_size"
             android:lines="1"
             android:text="1,000,000"
             />
 
-        <TextView
-            android:id="@+id/deathsNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            card_view:layout_constraintTop_toBottomOf="@id/deathsIcon"
-            card_view:layout_constraintLeft_toLeftOf="@id/guideline_h_33"
-            card_view:layout_constraintRight_toRightOf="@id/deathsHeading"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintVertical_chainStyle="packed"
-            card_view:layout_constraintHorizontal_bias="1"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/number_text_size"
-            android:lines="1"
-            android:text="10,000"
-            />
 
         <TextView
-            android:id="@+id/recoveredNumber"
+            android:id="@+id/casesNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            card_view:layout_constraintTop_toBottomOf="@id/recoveredIcon"
-            card_view:layout_constraintLeft_toLeftOf="@id/guideline_h_66"
-            card_view:layout_constraintRight_toRightOf="@id/recoveredHeading"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintVertical_chainStyle="packed"
-            card_view:layout_constraintHorizontal_bias="1"
-            android:textColor="@color/primaryTextColor"
+            app:layout_constraintTop_toBottomOf="@id/activeIcon"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_h_5"
+            app:layout_constraintRight_toRightOf="@id/casesHeading"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintHorizontal_bias="1"
+            android:textColor="@color/cardNumbersBoxColor"
             android:textSize="@dimen/number_text_size"
             android:lines="1"
             android:text="400,000"
             />
 
+
+
+
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/guideline_v_5"
+            android:id="@+id/guideline_v_33"
             android:orientation="horizontal"
-            card_view:layout_constraintGuide_percent="0.5"/>
+            app:layout_constraintGuide_percent="0.33"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/guideline_h_33"
+            android:id="@+id/guideline_h_1"
             android:orientation="vertical"
-            card_view:layout_constraintGuide_percent="0.3333"/>
+            app:layout_constraintGuide_percent="0.1"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/guideline_h_66"
+            android:id="@+id/guideline_h_5"
             android:orientation="vertical"
-            card_view:layout_constraintGuide_percent="0.6666"/>
+            app:layout_constraintGuide_percent="0.5"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

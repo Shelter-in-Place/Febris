@@ -75,6 +75,8 @@ public class ListActivity extends AppCompatActivity {
         viewPager.setAdapter(fragmentAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+        tabs.getTabAt(0).setIcon(R.drawable.ic_list_icon);
+        tabs.getTabAt(1).setIcon(R.drawable.ic_world_icon);
         viewPager.setOffscreenPageLimit(3);
         viewPager.setPagingEnabled(false);
     }

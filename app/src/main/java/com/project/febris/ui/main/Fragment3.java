@@ -1,6 +1,6 @@
 package com.project.febris.ui.main;
 
-import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,20 +17,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 import com.project.febris.ListViewModel;
 import com.project.febris.R;
 import com.project.febris.models.Place;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Fragment3 extends Fragment  {
     public static final String TAG = "Fragment3";
@@ -49,8 +46,8 @@ public class Fragment3 extends Fragment  {
 //    private String mDeaths = "";
 
     public Place selectedCountry;
-    List<Entry> entries = new ArrayList<Entry>();
-
+    List<Entry> entriesActive = new ArrayList<Entry>();
+    List<Entry> entriesDeaths = new ArrayList<Entry>();
 
 
     @Nullable
@@ -105,7 +102,7 @@ public class Fragment3 extends Fragment  {
                 try {
                     Log.d(TAG, "onChanged: places = " + places.get(0).toString());
                     setTable(places);
-                    entries.clear();
+                    entriesActive.clear();
                     setData(places);
 
                 }
@@ -142,17 +139,32 @@ public class Fragment3 extends Fragment  {
 
 
     private void setData(List<Place> places){
+        entriesActive.clear();
+        entriesDeaths.clear();
+        mLineChart.invalidate();
+        mLineChart.clear();
+
         Log.d(TAG, "setData: size of array "+ places.size());
 
         for(int i = 0; i < places.size(); i++){
-            entries.add(new Entry(i, places.get(i).getCurrentInfections()));
+            entriesActive.add(new Entry(i, places.get(i).getCurrentInfections()));
+            entriesDeaths.add(new Entry(i, places.get(i).getDeaths()));
             Log.d(TAG, "setData: place " + places.get(i).getPlace());
         }
 
-        LineDataSet lineDataSet = new LineDataSet(entries, "Infections");
-        lineDataSet.setColor(1);
-        LineData lineData = new LineData(lineDataSet);
-        mLineChart.setData(lineData);
+        LineDataSet activeDataSet = new LineDataSet(entriesActive, "Infections");
+        activeDataSet.setColor(Color.BLUE);
+        activeDataSet.setDrawCircles(false);
+        activeDataSet.setLineWidth(1f);
+        LineData lineDataSet = new LineData(activeDataSet);
+
+        LineDataSet deathsDataSet = new LineDataSet(entriesDeaths, "Deaths");
+        deathsDataSet.setColor(Color.RED);
+        deathsDataSet.setDrawCircles(false);
+        deathsDataSet.setLineWidth(1f);
+        lineDataSet.addDataSet(deathsDataSet);
+
+        mLineChart.setData(lineDataSet);
         mLineChart.notifyDataSetChanged();
         mLineChart.invalidate();
     }
@@ -162,7 +174,13 @@ public class Fragment3 extends Fragment  {
         Log.d(TAG, "initGraphViews: called");
 
         mLineChart = (LineChart) root.findViewById(R.id.line_graph);
-
+        mLineChart.getDescription().setText("Covid-19 Data");
+        XAxis xAxis = mLineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        YAxis yAxis = mLineChart.getAxisLeft();
+        yAxis.setAxisMinimum(0f);
+        mLineChart.getAxisRight().setDrawLabels(false);
+        mLineChart.setTouchEnabled(true);
     }
 
     public void search(String newText){

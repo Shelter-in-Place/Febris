@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.febris.R;
 import com.project.febris.models.Place;
-import com.project.febris.persistence.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +43,8 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         holder.place_title.setText(mPlaces.get(position).getPlace());
-        holder.place_infections.setText(String.valueOf("" + mPlaces.get(position).getCurrentInfections()));
         holder.place_deaths.setText("" + mPlaces.get(position).getDeaths());
-        holder.place_recovered.setText("" + mPlaces.get(position).getRecovered());
+        holder.place_active.setText("" + mPlaces.get(position).getRecovered());
         holder.favourites_checkbox.setChecked( mPlaces.get(position).is_favourite());
     }
 
@@ -105,18 +103,16 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
         TextView place_title;
-        TextView place_infections;
         TextView place_deaths;
-        TextView place_recovered;
+        TextView place_active;
         CheckBox favourites_checkbox;
         OnClickboxListener onClickboxListener;
 
         public ViewHolder(@NonNull View itemView, OnClickboxListener onClickboxListener) {
             super(itemView);
             place_title = itemView.findViewById(R.id.country_name);
-            place_infections = itemView.findViewById(R.id.infectionsNumber);
             place_deaths = itemView.findViewById(R.id.deathsNumber);
-            place_recovered = itemView.findViewById(R.id.recoveredNumber);
+            place_active = itemView.findViewById(R.id.casesNumber);
             favourites_checkbox = itemView.findViewById(R.id.myList_checkbox);
 
             this.onClickboxListener = onClickboxListener;

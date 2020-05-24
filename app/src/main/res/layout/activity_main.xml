@@ -6,55 +6,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.ListActivity">
+    tools:context=".ui.main.ListActivity"
+    android:background="@color/background_white">
 
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:elevation="0dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@android:color/white"
-            android:background="@color/primaryColor"
-            android:contentInsetLeft="0dp"
-            android:contentInsetStart="0dp"
-            app:contentInsetLeft="0dp"
-            app:contentInsetStart="0dp"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_scrollFlags="scroll|snap">
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_bar"
+            <ImageView
+                android:id="@+id/landingIcon"
+                android:layout_height="200dp"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:paddingRight="30dp"
-                app:theme="@style/SearchViewStyle"
-                app:iconifiedByDefault="false"
-                app:queryBackground="@drawable/search_view_rounded"
+                android:scaleType="fitCenter"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:contentDescription="Landing-Icon"
+                android:src="@drawable/ic_landing_icon"
 
-                app:queryHint="New Zealand..."
-                app:showAsAction="always">
+                />
+
+            <TextView
+                android:id="@+id/country_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="39dp"
+                android:lines="1"
+                android:fontFamily="@font/goudystout"
+                android:text="FEBRIS"
+
+                />
+
+            <TextView
+                android:id="@+id/country_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="15dp"
+                android:textColor="@color/secondaryColor"
+                android:textSize="17dp"
+                android:lines="1"
+                android:fontFamily="@font/goudystout"
+                android:text="COVID-19 TRACKER"
+
+                />
+
+        </LinearLayout>
 
 
-            </androidx.appcompat.widget.SearchView>
 
-        </androidx.appcompat.widget.Toolbar>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="30dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            app:theme="@style/SearchViewStyle"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@drawable/search_view_rounded"
+            app:queryHint="New Zealand..."
+            app:showAsAction="always"
+            android:background="#0095E6"
+            app:layout_scrollFlags="scroll|enterAlways"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary" />
+            android:background="?attr/colorPrimary"
+            app:tabIndicatorColor="@color/secondaryColor"
+            />
 
-    </com.google.android.material.appbar.AppBarLayout>
+        <com.project.febris.ui.main.CustomViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    </LinearLayout>
 
-    <com.project.febris.ui.main.CustomViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
