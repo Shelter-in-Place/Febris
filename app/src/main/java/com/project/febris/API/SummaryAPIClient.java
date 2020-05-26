@@ -109,7 +109,12 @@ public class SummaryAPIClient {
                         Log.d(TAG, "run: print details: ");
 
                         // 3. Inserting new Place into the DB
-                        mDatabase.getNoteDao().insertPlaces(place);
+                        if(mDatabase.getNoteDao().getSpecificPlace(currentCountryName) != null){
+                            mDatabase.getNoteDao().updatePlaces(place);
+                        }
+                        else{
+                            mDatabase.getNoteDao().insertPlaces(place);
+                        }
 
                     }
                 }

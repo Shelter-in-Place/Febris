@@ -14,48 +14,63 @@ import com.project.febris.models.Place;
 import java.util.List;
 
 @androidx.room.Dao
-public interface Dao {
+public abstract class Dao {
 
+
+    //^^^^^^^^^^^^^^^^^^^
+    // INSERTS / UPDATES:
+    // Insert a single place
     @Insert
-    long[] insertPlaces(Place... places);
+    public abstract long[] insertPlaces(Place... places);
 
-    @Query("SELECT * FROM places WHERE present = 1")
-    LiveData<List<Place>> getPlaces();
+    // Insert an arraylist of places
+    @Insert
+    public abstract long[] insertPlacesList(List<Place> places);
 
-    @Query("SELECT * FROM places")
-    List<Place> getPlacesNonLiveData();
-
-    @Query("SELECT * FROM places WHERE place = :place")
-    LiveData<Place> getSpecificPlace(String place);
-
-    @Query("SELECT * FROM places WHERE isFav = 1 and present = 1")
-    LiveData<List<Place>> getFavPlaces();
-
-    @Query("SELECT * FROM places WHERE selected = 1")
-    LiveData<List<Place>> getSelectedCountry();
-
-    @Delete
-    int delete(Place... places);
-
-    @Query("DELETE FROM places")
-    void deleteAll();
-
+    // Update places
     @Update
-    void updatePlaces(Place... places);
+    public abstract void updatePlaces(Place... places);
 
-    @Query("SELECT EXISTS (SELECT 1 FROM places WHERE ID == :id AND deaths >= 2000)")
-    public int isFavorite(int id);
 
-    // Transaction:
+    //^^^^^^
+    // GETS:
+    // Retrieve the latest (i.e. present) places for the summary list
+    @Query("SELECT * FROM places WHERE present = 1")
+    public abstract LiveData<List<Place>> getPlaces();
+
+    // Retrieve the latest (i.e. present) favourited places for the summary list
+    @Query("SELECT * FROM places WHERE isFav = 1 and present = 1")
+    public abstract LiveData<List<Place>> getFavPlaces();
+
+    // Retrieve all entries (i.e. for all dates) for a selected country
+    @Query("SELECT * FROM places WHERE selected = 1 ORDER BY date(date)")
+    public abstract LiveData<List<Place>> getSelectedCountry();
+
+    @Query("SELECT * FROM places WHERE place = :place and present = 1")
+    public abstract Place getSpecificPlace(String place);
+
+
+    //^^^^^^^^
+    // DELETES:
+    // Delete specific places
+    @Delete
+    public abstract int delete(Place... places);
+
+    // Delete all places
+    @Query("DELETE FROM places")
+    public abstract void deleteAll();
+
+    // Delete all non-present entries for a specific place
     @Query("DELETE FROM places WHERE place = :place AND present = 0")
-    void deleteSpecificPlaceList(String place);
+    public abstract void deleteSpecificPlaceList(String place);
 
-    @Insert
-    long[] insertPlacesList(List<Place> places);
 
-//    @Transaction
-//    void singleTransaction(String place, List<Place> places){
-//        deleteSpecificPlaceList(place);
-//        insertPlacesList(places);
-//    }
+    //^^^^^^^^^^^^^
+    // TRANSACTIONS:
+    // Transaction to delete non-current places and insert API call for specific country (i.e. for the data screen)
+    @Transaction
+    public void singleTransaction(String place, List<Place> placeslist){
+        deleteSpecificPlaceList(place);
+        insertPlacesList(placeslist);
+    }
 }

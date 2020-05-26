@@ -111,7 +111,8 @@ public class CountryAPIClient {
                     }
                     //Inserts the whole list rather than place by place in the for loop above
 //                    mDatabase.getNoteDao().deleteSpecificPlaceList();
-                    mDatabase.getNoteDao().insertPlacesList(placeslist);
+                    mDatabase.getNoteDao().singleTransaction(mPlace, placeslist);
+                    placeslist.clear();
                 }
                 else{
                     Log.d(TAG, "onResponse: qqq response was null");

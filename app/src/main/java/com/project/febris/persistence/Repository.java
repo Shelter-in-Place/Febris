@@ -38,18 +38,13 @@ public class Repository {
         mDatabase = Database.getInstance(context);
         mSummaryAPIClient = SummaryAPIClient.getInstance(mDatabase);
         mCountryAPIClient = CountryAPIClient.getInstance(mDatabase);
-//        initRetrofit();
         callRetrofit();
     }
 
-    // RETROFIT
-//    public void initRetrofit(){
-//        mServiceGenerator = new ServiceGenerator();
-//        mResultsAPI = mServiceGenerator.getResultsAPI();
-//    }
 
+    // RETROFIT METHODS
     public void callRetrofit(){
-        deleteAll();
+
         mSummaryAPIClient.setSummaryCountries();
 
     }
@@ -57,47 +52,10 @@ public class Repository {
     public void callRetrofitSpecificCountryData(String place){
         Log.d(TAG, "callRetrofitSpecificCountryData: qqq called");
         mCountryAPIClient.setSpecificCountries(place);
-//        Call<List<CountryResponse>> call = mResultsAPI.getCountryData(place);
-//        call.enqueue(new Callback<List<CountryResponse>>() {
-//            @Override
-//            public void onResponse(Call<List<CountryResponse>> call, Response<List<CountryResponse>> response) {
-//                Log.d(TAG, "onResponse: this is happening on thread: qqq "+Thread.currentThread().getName());
-//
-//                if(response.body() != null){
-//                    Log.d(TAG, "onResponse: qqq Success");
-//                    for(int i = 0; i< response.body().size(); i++){
-//                        Place place = new Place(null,
-//                                response.body().get(i).getCountry(),
-//                                "",
-//                                response.body().get(i).getConfirmed(),
-//                                response.body().get(i).getDeaths(),
-//                                response.body().get(i).getRecovered(),
-//                                false,
-//                                response.body().get(i).getDate());
-//                        place.setSelected(true);
-//                        insertPlaceTask(place);
-//                    }
-//
-//                }
-//                else{
-//                    Log.d(TAG, "onResponse: qqq response was null");
-////                    callRetrofitSpecificCountryData();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<CountryResponse>> call, Throwable t) {
-//                Log.d(TAG, "Repository: Failure --> qqq " + t);
-////                callRetrofitSpecificCountryData();
-//            }
-//        });
-
     }
 
 
     // DATABASE METHODS
-
-    //Places
     public void insertPlaceTask(Place place){
         new InsertAsyncTask(mDatabase.getNoteDao()).execute(place);
     }
@@ -111,19 +69,10 @@ public class Repository {
         return mDatabase.getNoteDao().getPlaces();
     }
 
-    public List<Place> retrievePlacesTaskNonLiveData(){
-        return mDatabase.getNoteDao().getPlacesNonLiveData();
-    }
-
-    public LiveData<Place> getSpecificPlace(String placeName){
-        return mDatabase.getNoteDao().getSpecificPlace(placeName);
-    }
-
     public void deleteAll() {
         Log.d(TAG, "deleteAll: called");
         new DeleteAsyncTask(mDatabase.getNoteDao()).execute();
     }
-
 
     public LiveData<List<Place>> getFavPlaces(){
         return mDatabase.getNoteDao().getFavPlaces();
@@ -132,6 +81,5 @@ public class Repository {
     public LiveData<List<Place>> getSelectedCountry(){
         return mDatabase.getNoteDao().getSelectedCountry();
     }
-
 
 }

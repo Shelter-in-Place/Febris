@@ -175,11 +175,30 @@ public class Fragment3 extends Fragment  {
 
         mLineChart = (LineChart) root.findViewById(R.id.line_graph);
         mLineChart.getDescription().setText("Covid-19 Data");
+
+
+
+        // Setting references for the X / Y axes
         XAxis xAxis = mLineChart.getXAxis();
+        YAxis yAxisLeft = mLineChart.getAxisLeft();
+        YAxis yAxisRight = mLineChart.getAxisRight();
+        xAxis.setCenterAxisLabels(false);
+        yAxisLeft.setCenterAxisLabels(false);
+
+        // Remove the background grid lines
+        yAxisLeft.setDrawGridLines(true);
+        yAxisRight.setDrawGridLines(false);
+        xAxis.setDrawGridLines(false);
+
+        // Leveling the position of the X / Y axes (i.e. so 0 is hard up against the lines)
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        YAxis yAxis = mLineChart.getAxisLeft();
-        yAxis.setAxisMinimum(0f);
-        mLineChart.getAxisRight().setDrawLabels(false);
+        xAxis.setAxisMinimum(0);
+        yAxisLeft.setAxisMinimum(0f);
+
+        // No labeling on the right hand Y axis of the graph
+        yAxisRight.setDrawAxisLine(false);
+        yAxisRight.setDrawLabels(false);
+
         mLineChart.setTouchEnabled(true);
     }
 
