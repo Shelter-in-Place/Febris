@@ -84,7 +84,7 @@
             android:textColor="@color/secondaryTextColor"
             android:textSize="@dimen/heading_text_size"
             android:lines="1"
-            android:text="Infected"
+            android:text="Deaths"
             />
 
 
@@ -118,7 +118,7 @@
             android:textColor="@color/cardHeadingBoxColor"
             android:textSize="@dimen/heading_text_size"
             android:lines="1"
-            android:text="Cases"
+            android:text="Active Cases"
             />
 
 

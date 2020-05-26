@@ -1,5 +1,6 @@
 package com.project.febris.adapters;
 
+import android.icu.text.NumberFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.project.febris.models.Place;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRecyclerAdapter.ViewHolder> implements
         Filterable {
@@ -42,8 +44,8 @@ public class FavouritesRecyclerAdapter extends RecyclerView.Adapter<FavouritesRe
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.place_title.setText(mPlaces.get(position).getPlace());
-        holder.place_deaths.setText("" + mPlaces.get(position).getDeaths());
-        holder.place_active.setText("" + mPlaces.get(position).getRecovered());
+        holder.place_deaths.setText("" + NumberFormat.getNumberInstance(Locale.US).format(mPlaces.get(position).getDeaths()));
+        holder.place_active.setText("" + NumberFormat.getNumberInstance(Locale.US).format(mPlaces.get(position).getCurrentInfections()));
         holder.favourites_checkbox.setChecked(mPlaces.get(position).is_favourite());
     }
 
