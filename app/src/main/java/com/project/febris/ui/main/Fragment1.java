@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import com.project.febris.R;
 import com.project.febris.adapters.FavouritesRecyclerAdapter;
 import com.project.febris.models.Place;
 
+import com.project.febris.models.PlaceWithDatasets;
 import com.project.febris.util.VerticalSpacingItemDecorator;
 
 import java.util.ArrayList;
@@ -29,9 +31,9 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
     private static final String TAG = "FRAGMENT 1";
 
     private FavouritesRecyclerAdapter favouritesRecyclerAdapter;
-    private List<Place> mPlaces = new ArrayList<>();
+    private List<PlaceWithDatasets> mPlaces = new ArrayList<>();
     private ListViewModel mListViewModel;
-    private CustomViewPager viewPager;
+//    private CustomViewPager viewPager;
 
 
 
@@ -39,7 +41,7 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_screen_1, container, false);
-        viewPager = getActivity().findViewById(R.id.view_pager);
+//        viewPager = getActivity().findViewById(R.id.view_pager);
         initRecyclerView(root);
         initViewModel();
         return root;
@@ -56,13 +58,13 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
 
     private void initViewModel(){
         mListViewModel = new ViewModelProvider(getActivity()).get(ListViewModel.class);
-        mListViewModel.getFavPlaces().observe(this, new Observer<List<Place>>() {
+        mListViewModel.getFavPlaces().observe(this, new Observer<List<PlaceWithDatasets>>() {
             @Override
-            public void onChanged(List<Place> places) {
+            public void onChanged(List<PlaceWithDatasets> places) {
                 Log.d(TAG, "onChanged: ");
                 mPlaces = places;
                 favouritesRecyclerAdapter.setFavourites(places);
-                favouritesRecyclerAdapter.notifyItemRangeChanged(0, places.size());
+//                favouritesRecyclerAdapter.notifyItemRangeChanged(0, places.size());
 
             }
         });
@@ -75,24 +77,24 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
 
     @Override
     public void favOnClickboxclick(int position) {
-        Place place = mPlaces.get(position);
-        if(place.is_favourite()){
-            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") was favourited");
-            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+ place.is_favourite());
+        PlaceWithDatasets place = mPlaces.get(position);
+        if(place.getPlace().isFavourite()){
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace().getLocation()+") was favourited");
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace().getLocation()+") is currently set to\n"+ place.getPlace().isFavourite());
 
-            place.set_favourite(false);
-            mListViewModel.update(place);
+            place.getPlace().setFavourite(false);
+            mListViewModel.update(place.getPlace());
 
 
-            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is no longer favourited");
-            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is currently set to\n"+ place.is_favourite());
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace().getLocation()+") is no longer favourited");
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace().getLocation()+") is currently set to\n"+ place.getPlace().isFavourite());
         }
         else{
-            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") was not favourited");
-            place.set_favourite(true);
-            mListViewModel.update(place);
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace().getLocation()+") was not favourited");
+            place.getPlace().setFavourite(true);
+            mListViewModel.update(place.getPlace());
 
-            Log.d(TAG, "onClickboxclick: place ("+place.getPlace()+") is now favourited");
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace().getLocation()+") is now favourited");
         }
     }
 
@@ -103,17 +105,17 @@ public class Fragment1 extends Fragment implements FavouritesRecyclerAdapter.Fav
 
     @Override
     public void dataScreen(int position) {
-        Log.d(TAG, "dataScreen: clicked " + mPlaces.get(position).getPlace());
+        Log.d(TAG, "dataScreen: clicked " + mPlaces.get(position).getPlace().getLocation());
 
-        mListViewModel.callRetrofitSpecificCountryData(mPlaces.get(position).getPlace());
+//        mListViewModel.callRetrofitSpecificCountryData(mPlaces.get(position).getLocation());
 
         mListViewModel.clearSelected();
-        Place place = mPlaces.get(position);
-        place.setSelected(true);
-        mListViewModel.update(place);
+        PlaceWithDatasets place = mPlaces.get(position);
+        place.getPlace().setSelected(true);
+        mListViewModel.update(place.getPlace());
 
 //        dataTransfertoActivity.sendInfo(position);
-        viewPager.setCurrentItem(3);
+//        viewPager.setCurrentItem(3);
     }
 
 

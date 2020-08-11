@@ -14,10 +14,10 @@ public interface ResultsAPI {
 //    Call<ResultModel> getResult();
 
     //Summary Data
-    @GET("summary")
-    Call<SummaryResponse> getSummaryData();
+    @GET("latest_data_all_countries/")
+    Call<List<SummaryResponse>> getSummaryData();
 
-    @GET("total/dayone/country/{place}")
-    Call<List<CountryResponse>> getCountryData(@Path("place") String place);
+    @GET("countries/{place}")
+    Call<List<SummaryResponse>> getCountryData(@Path("place") String place);
 }
 

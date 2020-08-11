@@ -1,5 +1,6 @@
 package com.project.febris.models;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -9,29 +10,40 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "places")
 public class Place {
 
-    @PrimaryKey(autoGenerate = true)
-    private int ID;
+//    @PrimaryKey(autoGenerate = true)
+////    private int ID;
 
-    @ColumnInfo(name = "place")
-    private String place;
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "country_key_id")
+    private String country_key_id;
+
+    @ColumnInfo(name = "continent")
+    private String continent;
+
+    @ColumnInfo(name = "location")
+    private String location;
+
+    @ColumnInfo(name = "population")
+    private float population;
 
     @ColumnInfo(name = "image_address")
     private String image_address;
 
-    @ColumnInfo(name = "infections")
-    private int infections;
+//    @ColumnInfo(name = "infections")
+//    private int infections;
+//
+//    @ColumnInfo(name = "currentinfections")
+//    private int currentInfections;
 
-    @ColumnInfo(name = "currentinfections")
-    private int currentInfections;
-
-    @ColumnInfo(name = "deaths")
-    private int deaths;
-
-    @ColumnInfo(name = "recovered")
-    private int recovered;
-
-    @ColumnInfo(name = "date")
-    private String date;
+//    @ColumnInfo(name = "deaths")
+//    private int deaths;
+//
+//    @ColumnInfo(name = "recovered")
+//    private int recovered;
+//
+//    @ColumnInfo(name = "date")
+//    private String date;
 
     @ColumnInfo(name = "isFav")
     private boolean isFavourite;
@@ -43,18 +55,16 @@ public class Place {
     private boolean isSelected;
 
 
-    public Place(@Nullable Integer ID, String place, String image_address, int infections, int deaths, int recovered, boolean isFavourite, String date){
-        if(ID != null){
-            this.ID = ID;
-        }
-        this.place = place;
+    public Place(String country_key_id, String continent, String location, float population, String image_address, boolean isFavourite){
+//        if(ID != null){
+//            this.ID = ID;
+//        }
+        this.country_key_id = country_key_id;
+        this.continent = continent;
+        this.location = location;
+        this.population = population;
         this.image_address = image_address;
-        this.infections = infections;
-        this.deaths = deaths;
-        this.recovered = recovered;
         this.isFavourite = isFavourite;
-        this.currentInfections = infections - recovered - deaths;
-        this.date = date;
     }
 
     @Ignore
@@ -63,28 +73,44 @@ public class Place {
 
     // Get / Set Methods:
 
-    public boolean is_favourite() {
-        return isFavourite;
+//    public int getID() {
+//        return ID;
+//    }
+//
+//    public void setID(int ID) {
+//        this.ID = ID;
+//    }
+
+    public String getCountry_key_id() {
+        return country_key_id;
     }
 
-    public void set_favourite(boolean is_favourite) {
-        this.isFavourite = is_favourite;
+    public void setCountry_key_id(String country_key_id) {
+        this.country_key_id = country_key_id;
     }
 
-    public boolean isFavourite() {
-        return isFavourite;
+    public String getContinent() {
+        return continent;
     }
 
-    public int getID() { return ID; }
-
-    public void setID(int ID) { this.ID = ID; }
-
-    public String getPlace() {
-        return place;
+    public void setContinent(String continent) {
+        this.continent = continent;
     }
 
-    public void setRegion(String region) {
-        this.place = region;
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public float getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(float population) {
+        this.population = population;
     }
 
     public String getImage_address() {
@@ -95,31 +121,13 @@ public class Place {
         this.image_address = image_address;
     }
 
-    public int getInfections() { return infections;}
-
-    public void setInfections(int infections) {
-        this.infections = infections;
+    public boolean isFavourite() {
+        return isFavourite;
     }
 
-    public int getCurrentInfections() { return currentInfections; }
-
-    public void setCurrentInfections(int currentInfections) { this.currentInfections = currentInfections; }
-
-    public int getDeaths() { return deaths; }
-
-    public void setDeaths(int deaths) { this.deaths = deaths; }
-
-    public int getRecovered() {
-        return recovered;
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
     }
-
-    public void setRecovered(int recovered) { this.recovered = recovered; }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) { this.date = date; }
 
     public boolean isPresent() {
         return isPresent;
@@ -137,21 +145,22 @@ public class Place {
         isSelected = selected;
     }
 
-    @Override
-    public String toString() {
-        return "Place{" +
-                "ID=" + ID +
-                ", place='" + place + '\'' +
-                ", image_address='" + image_address + '\'' +
-                ", infections=" + infections +
-                ", currentInfections=" + currentInfections +
-                ", deaths=" + deaths +
-                ", recovered=" + recovered +
-                ", date='" + date + '\'' +
-                ", isFavourite=" + isFavourite +
-                ", isPresent=" + isPresent +
-                ", isSelected=" + isSelected +
-                '}';
-    }
+
+//    @Override
+//    public String toString() {
+//        return "Place{" +
+//                "ID=" + ID +
+//                ", place='" + place + '\'' +
+//                ", image_address='" + image_address + '\'' +
+//                ", infections=" + infections +
+//                ", currentInfections=" + currentInfections +
+//                ", deaths=" + deaths +
+//                ", recovered=" + recovered +
+//                ", date='" + date + '\'' +
+//                ", isFavourite=" + isFavourite +
+//                ", isPresent=" + isPresent +
+//                ", isSelected=" + isSelected +
+//                '}';
+//    }
 }
 

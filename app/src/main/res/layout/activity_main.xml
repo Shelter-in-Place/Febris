@@ -6,104 +6,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.ListActivity"
+    tools:context=".ui.main.MainActivity"
     android:background="@color/background_white">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        app:fabCustomSize="56dp"
+        android:clickable="true"
+        app:backgroundTint="#0095E6"
+        app:srcCompat="@drawable/ic_add_white_36dp"
+        android:scaleType="center"
+        app:maxImageSize="36dp"
+        android:tint="@android:color/white"
+        android:onClick="onClick"
+        />
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp">
+        android:elevation="0dp">
 
-        <LinearLayout
+        <com.project.febris.ui.main.CustomViewPager
+            android:id="@+id/view_pager_top"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_scrollFlags="scroll|snap">
+            android:layout_height="301dp"
+            app:layout_scrollFlags="scroll|snap"/>
 
-            <ImageView
-                android:id="@+id/landingIcon"
-                android:layout_height="200dp"
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">-->
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background_white">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
                 android:layout_width="match_parent"
-                android:scaleType="fitCenter"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:contentDescription="Landing-Icon"
-                android:src="@drawable/ic_landing_icon"
-
-                />
-
-            <TextView
-                android:id="@+id/country_name"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="39dp"
-                android:lines="1"
-                android:fontFamily="@font/goudystout"
-                android:text="FEBRIS"
+                app:layout_constraintTop_toTopOf="@id/fab"
+                app:layout_constraintBottom_toBottomOf="@id/fab"
 
-                />
 
-            <TextView
-                android:id="@+id/country_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="15dp"
-                android:textColor="@color/secondaryColor"
-                android:textSize="17dp"
-                android:lines="1"
-                android:fontFamily="@font/goudystout"
-                android:text="COVID-19 TRACKER"
-
-                />
-
-        </LinearLayout>
+                android:background="?attr/colorPrimary"
+                app:tabIndicatorColor="@color/secondaryColor"
+                android:elevation="0dp"/>
 
 
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingRight="30dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            app:theme="@style/SearchViewStyle"
-            app:iconifiedByDefault="false"
-            app:queryBackground="@drawable/search_view_rounded"
-            app:queryHint="New Zealand..."
-            app:showAsAction="always"
-            android:background="#0095E6"
-            app:layout_scrollFlags="scroll|enterAlways"
-            />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--        </LinearLayout>-->
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <com.project.febris.ui.main.CustomViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            app:tabIndicatorColor="@color/secondaryColor"
-            android:elevation="4dp"/>
-
-        <com.project.febris.ui.main.CustomViewPager
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-    </LinearLayout>
-
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
 

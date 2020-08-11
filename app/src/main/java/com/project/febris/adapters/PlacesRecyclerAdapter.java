@@ -1,6 +1,7 @@
 package com.project.febris.adapters;
 
 import android.icu.text.NumberFormat;
+import android.icu.text.SimpleDateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.febris.R;
 import com.project.febris.models.Place;
+import com.project.febris.models.PlaceWithDatasets;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -25,8 +29,8 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         Filterable {
     private static final String TAG = "PlacesRecyclerAdapter";
 
-    private List<Place> mPlaces;
-    private List<Place> mPlacesFull;
+    private List<PlaceWithDatasets> mPlaces;
+    private List<PlaceWithDatasets> mPlacesFull;
     private OnClickboxListener mOnClickBoxListener;
 
 
@@ -43,11 +47,33 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        int LatestEntryPosition = (mPlaces.get(position).getDatasets().size() - 1);
+        if(LatestEntryPosition >= 0){
+            try{
+                Log.d(TAG, "onBindViewHolder: " + LatestEntryPosition);
+                int newDeaths = (int) mPlaces.get(position).getDatasets().get(LatestEntryPosition).getNew_deaths();
+                int newInfections = (int) mPlaces.get(position).getDatasets().get(LatestEntryPosition).getNew_cases();
 
-        holder.place_title.setText(mPlaces.get(position).getPlace());
-        holder.place_deaths.setText("" + NumberFormat.getNumberInstance(Locale.US).format(mPlaces.get(position).getDeaths()));
-        holder.place_active.setText("" + NumberFormat.getNumberInstance(Locale.US).format(mPlaces.get(position).getCurrentInfections()));
-        holder.favourites_checkbox.setChecked( mPlaces.get(position).is_favourite());
+                holder.place_title.setText(mPlaces.get(position).getPlace().getLocation());
+                holder.place_deaths.setText("" + newDeaths);
+                holder.place_active.setText("" + newInfections);
+                holder.favourites_checkbox.setChecked(mPlaces.get(position).getPlace().isFavourite());
+
+                //Parsing date string and setting as text in the ItemCard
+                String dateInput = mPlaces.get(position).getDatasets().get(LatestEntryPosition).getDate();
+                SimpleDateFormat month_date = new SimpleDateFormat("dd MMMM", Locale.ENGLISH);
+                SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date date = input.parse(dateInput);
+                String month_name = month_date.format(date);
+                holder.place_date.setText(month_name);
+            }
+            catch(ParseException e){
+                Log.d(TAG, "" + e.getMessage());
+            }
+
+        }
+
     }
 
 
@@ -61,7 +87,7 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         }
     }
 
-    public void setPlaces(List<Place> places) {
+    public void setPlaces(List<PlaceWithDatasets> places) {
         this.mPlaces = places;
         mPlacesFull = new ArrayList<>(places);
 
@@ -76,14 +102,14 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
     private Filter resultsFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<Place> filteredList = new ArrayList<>();
+            List<PlaceWithDatasets> filteredList = new ArrayList<>();
             if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(mPlacesFull);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (Place place : mPlacesFull) {
-                    if (place.getPlace().toLowerCase().contains(filterPattern)) {
+                for (PlaceWithDatasets place : mPlacesFull) {
+                    if (place.getPlace().getLocation().toLowerCase().contains(filterPattern)) {
                         filteredList.add(place);
                     }
                 }
@@ -104,7 +130,9 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
+
         TextView place_title;
+        TextView place_date;
         TextView place_deaths;
         TextView place_active;
         CheckBox favourites_checkbox;
@@ -113,6 +141,7 @@ public class PlacesRecyclerAdapter extends RecyclerView.Adapter<PlacesRecyclerAd
         public ViewHolder(@NonNull View itemView, OnClickboxListener onClickboxListener) {
             super(itemView);
             place_title = itemView.findViewById(R.id.country_name);
+            place_date = itemView.findViewById(R.id.date);
             place_deaths = itemView.findViewById(R.id.deathsNumber);
             place_active = itemView.findViewById(R.id.casesNumber);
             favourites_checkbox = itemView.findViewById(R.id.myList_checkbox);

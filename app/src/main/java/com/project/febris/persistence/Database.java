@@ -6,9 +6,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 
+import com.project.febris.models.Dataset;
+//import com.project.febris.models.OrderedDataset;
 import com.project.febris.models.Place;
 
-@androidx.room.Database(entities = {Place.class}, version = 9)
+@androidx.room.Database(entities = {Place.class, Dataset.class}, version = 11)
 public abstract class Database extends RoomDatabase {
 
     public static final String DATABASE_NAME = "db";

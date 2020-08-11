@@ -1,51 +1,65 @@
-
 package com.project.febris.ui.main;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-// Febris package imports
-import com.google.android.material.tabs.TabLayout;
 import com.project.febris.ListViewModel;
 import com.project.febris.R;
 import com.project.febris.adapters.PlacesRecyclerAdapter;
-import com.project.febris.models.Place;
+import com.project.febris.models.PlaceWithDatasets;
+import com.project.febris.util.VerticalSpacingItemDecorator;
 
+import java.util.ArrayList;
 import java.util.List;
-//implements Fragment2.DataTransfertoActivity
-public class ListActivity extends AppCompatActivity {
 
-    private static final String TAG = "List Activity";
-
-    //UI components
-    List<Fragment> allFragments;
-    private CustomViewPager viewPager;
-
-    //variables
+public class ListActivity extends AppCompatActivity implements PlacesRecyclerAdapter.OnClickboxListener {
+    private static final String TAG = "LIST ACTIVITY";
+    private RecyclerView mRecyclerView;
     private PlacesRecyclerAdapter adapter;
 
-    private Fragment1 fragment1;
-    private Fragment2 fragment2;
-    public Fragment3 fragment3;
-    public Place selectedPlace;
-    public FragmentAdapter fragmentAdapter;
-
-    public ListViewModel mListViewModel;
+    private ListViewModel mListViewModel;
+    private List<PlaceWithDatasets> mPlaces = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initSearchView();
-        initFragmentAdapter();
+        setContentView(R.layout.activity_list);
+
         mListViewModel = new ViewModelProvider(this).get(ListViewModel.class);
+
+        initViewModel();
+        initRecyclerView();
+        initSearchView();
+    }
+
+    public void initRecyclerView(){
+        mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(0);
+        mRecyclerView.addItemDecoration(itemDecorator);
+        adapter = new PlacesRecyclerAdapter(this);
+        mRecyclerView.setAdapter(adapter);
+    }
+
+    private void initViewModel(){
+        mListViewModel.getAllPlaces().observe(this, new Observer<List<PlaceWithDatasets>>() {
+            @Override
+            public void onChanged(List<PlaceWithDatasets> places) {
+                Log.d(TAG, "onChanged: ");
+                mPlaces = places;
+                adapter.setPlaces(places);
+                adapter.notifyItemRangeChanged(0, places.size());
+                Log.d(TAG, "onChanged: ");
+            }
+        });
     }
 
     private void initSearchView(){
@@ -60,64 +74,46 @@ public class ListActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                // Keith your search methods go here ya ya ya!
+            public boolean onQueryTextChange(String searchText) {
+                adapter.getFilter().filter(searchText);
                 Log.d(TAG, "Search Text Typed");
-                searchViaFragment(newText);
+
                 return false;
             }
         });
     }
 
-    public void initFragmentAdapter(){
-        fragmentAdapter = new FragmentAdapter(this, getSupportFragmentManager());
-        viewPager = (CustomViewPager) findViewById(R.id.view_pager);
-        viewPager.setAdapter(fragmentAdapter);
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
-        tabs.getTabAt(0).setIcon(R.drawable.ic_list_icon);
-        tabs.getTabAt(1).setIcon(R.drawable.ic_world_icon);
-        viewPager.setOffscreenPageLimit(3);
-        viewPager.setPagingEnabled(false);
-    }
 
-    public void searchViaFragment(String searchText){
-        allFragments = getSupportFragmentManager().getFragments();
-        fragment1 = (Fragment1) allFragments.get(0);
-        fragment2 = (Fragment2) allFragments.get(1);
-        fragment3 = (Fragment3) allFragments.get(2);
-        Log.d(TAG, "searchViaFragment: " + allFragments.size());
 
-        fragment1.search(searchText);
-        fragment2.search(searchText);
-        fragment3.search(searchText);
+    @Override
+    public void onClickboxclick(int position) {
+        PlaceWithDatasets place = mPlaces.get(position);
+        if(place.getPlace().isFavourite()){
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace().getLocation()+") was favourited");
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace().getLocation()+") is currently set to\n"+ place.getPlace().isFavourite());
 
-        Log.d(TAG, "TEST METHOD TRIGGERED");
-    }
+            place.getPlace().setFavourite(false);
+            mListViewModel.update(place.getPlace());
 
-    public CustomViewPager getViewPager() {
-        return viewPager;
-    }
-
-//    @Override
-//    public void onAttachFragment(@NonNull Fragment fragment) {
-//        if (fragment instanceof Fragment2){
-//            Fragment2 fragment2 = (Fragment2) fragment;
-//            fragment2.setDataTransfertoActivity(this);
-//        }
-
-//    }
-
-    //    @Override
-    public void sendInfo(int position) {
-        Log.d(TAG, "sendInfo: Initiated");
-
-        try{
-            Log.d(TAG, "sendInfo: try");
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace().getLocation()+") is no longer favourited");
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace().getLocation()+") is currently set to\n"+ place.getPlace().isFavourite());
         }
-        catch(Exception err){
-            Log.d(TAG, "sendInfo: catch " + err);
+        else{
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace().getLocation()+") was not favourited");
+            place.getPlace().setFavourite(true);
+            mListViewModel.update(place.getPlace());
+            mListViewModel.callSpecificCountryData(place.getPlace().getCountry_key_id());
+            Log.d(TAG, "onClickboxclick: place ("+place.getPlace().getLocation()+") is now favourited");
         }
     }
 
+    @Override
+    public void onChecked(boolean checked) {
+        Log.d(TAG, "onChecked: ");
+    }
+
+    @Override
+    public void dataScreen(int position) {
+
+    }
 }

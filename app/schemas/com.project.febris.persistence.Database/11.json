@@ -1,0 +1,179 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 11,
+    "identityHash": "f812afcbfe6631e58c718006769fcc17",
+    "entities": [
+      {
+        "tableName": "places",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`country_key_id` TEXT NOT NULL, `continent` TEXT, `location` TEXT, `population` REAL NOT NULL, `image_address` TEXT, `isFav` INTEGER NOT NULL, `present` INTEGER NOT NULL, `selected` INTEGER NOT NULL, PRIMARY KEY(`country_key_id`))",
+        "fields": [
+          {
+            "fieldPath": "country_key_id",
+            "columnName": "country_key_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "continent",
+            "columnName": "continent",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "location",
+            "columnName": "location",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "population",
+            "columnName": "population",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "image_address",
+            "columnName": "image_address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isFavourite",
+            "columnName": "isFav",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isPresent",
+            "columnName": "present",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isSelected",
+            "columnName": "selected",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "country_key_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "datasets",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `date` TEXT, `total_cases` REAL NOT NULL, `new_cases` REAL NOT NULL, `total_deaths` REAL NOT NULL, `new_deaths` REAL NOT NULL, `total_cases_per_million` REAL NOT NULL, `new_cases_per_million` REAL NOT NULL, `total_deaths_per_million` REAL NOT NULL, `new_deaths_per_million` REAL NOT NULL, `country_key` TEXT, `isFav` INTEGER NOT NULL, `present` INTEGER NOT NULL, `selected` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "ID",
+            "columnName": "ID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "total_cases",
+            "columnName": "total_cases",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "new_cases",
+            "columnName": "new_cases",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total_deaths",
+            "columnName": "total_deaths",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "new_deaths",
+            "columnName": "new_deaths",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total_cases_per_million",
+            "columnName": "total_cases_per_million",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "new_cases_per_million",
+            "columnName": "new_cases_per_million",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total_deaths_per_million",
+            "columnName": "total_deaths_per_million",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "new_deaths_per_million",
+            "columnName": "new_deaths_per_million",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "country_key",
+            "columnName": "country_key",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isFavourite",
+            "columnName": "isFav",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isPresent",
+            "columnName": "present",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isSelected",
+            "columnName": "selected",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "ID"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [
+      {
+        "viewName": "OrderedDataset",
+        "createSql": "CREATE VIEW `${VIEW_NAME}` AS SELECT * FROM datasets ORDER BY date DESC"
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f812afcbfe6631e58c718006769fcc17')"
+    ]
+  }
+}

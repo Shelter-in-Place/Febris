@@ -16,13 +16,13 @@ import com.project.febris.R;
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-public class FragmentAdapter extends FragmentPagerAdapter {
+public class FragmentAdapterBottom extends FragmentPagerAdapter {
     private static final String TAG = "FragmentAdapter";
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
     private final Context mContext;
 
-    public FragmentAdapter(Context context, FragmentManager fm) {
+    public FragmentAdapterBottom(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
     }
@@ -40,10 +40,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
                 fragment = new Fragment2();
                 Log.d(TAG, "Frag 2 built " + fragment.getId());
                 break;
-            case 2:
-                fragment = new Fragment3();
-
-                Log.d(TAG, "Frag 3 built " + fragment.getId());
 
         }
         return fragment;
@@ -57,6 +53,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 }

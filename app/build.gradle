@@ -16,9 +16,9 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [
-                        "room.schemaLocation":"$projectDir/schemas".toString(),
-                        "room.incremental":"true",
-                        "room.expandProjection":"true"]
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
             }
         }
     }
@@ -58,6 +58,7 @@ dependencies {
     // Retrofit + OKHttp
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'org.conscrypt:conscrypt-android:2.4.0'
 
 
     // Room
@@ -65,6 +66,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.7.2'
 
     //Graphview Library [REMOVE THIS once the MPAndroid Chart is implemented]
     implementation 'com.jjoe64:graphview:4.2.2'

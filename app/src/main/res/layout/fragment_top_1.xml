@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/landingIcon"
+            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:contentDescription="Landing-Icon"
+            android:src="@drawable/ic_landing_icon"
+
+            />
+
+        <TextView
+            android:id="@+id/country_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="39dp"
+            android:lines="1"
+            android:fontFamily="@font/goudystout"
+            android:text="FEBRIS"
+
+            />
+
+        <TextView
+            android:id="@+id/country_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/secondaryColor"
+            android:textSize="17dp"
+            android:lines="1"
+            android:fontFamily="@font/goudystout"
+            android:text="COVID-19 TRACKER"
+
+            />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

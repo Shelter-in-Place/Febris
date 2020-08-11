@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 9,
-    "identityHash": "508828a6b0f4a6119cd71ed39b485345",
+    "identityHash": "253407ba14542a589574005ff17ae127",
     "entities": [
       {
         "tableName": "places",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `place` TEXT, `image_address` TEXT, `infections` INTEGER NOT NULL, `currentinfections` INTEGER NOT NULL, `deaths` INTEGER NOT NULL, `recovered` INTEGER NOT NULL, `date` TEXT, `isFav` INTEGER NOT NULL, `present` INTEGER NOT NULL, `selected` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`ID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `country_key_id` TEXT, `continent` TEXT, `location` TEXT, `population` REAL NOT NULL, `image_address` TEXT, `isFav` INTEGER NOT NULL, `present` INTEGER NOT NULL, `selected` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "ID",
@@ -15,44 +15,32 @@
             "notNull": true
           },
           {
-            "fieldPath": "place",
-            "columnName": "place",
+            "fieldPath": "country_key_id",
+            "columnName": "country_key_id",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "continent",
+            "columnName": "continent",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "location",
+            "columnName": "location",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "population",
+            "columnName": "population",
+            "affinity": "REAL",
+            "notNull": true
           },
           {
             "fieldPath": "image_address",
             "columnName": "image_address",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "infections",
-            "columnName": "infections",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "currentInfections",
-            "columnName": "currentinfections",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "deaths",
-            "columnName": "deaths",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "recovered",
-            "columnName": "recovered",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "date",
-            "columnName": "date",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -88,7 +76,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '508828a6b0f4a6119cd71ed39b485345')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '253407ba14542a589574005ff17ae127')"
     ]
   }
 }

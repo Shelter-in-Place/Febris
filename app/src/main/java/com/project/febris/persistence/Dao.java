@@ -9,7 +9,9 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
+import com.project.febris.models.Dataset;
 import com.project.febris.models.Place;
+import com.project.febris.models.PlaceWithDatasets;
 
 import java.util.List;
 
@@ -23,6 +25,9 @@ public abstract class Dao {
     @Insert
     public abstract long[] insertPlaces(Place... places);
 
+    @Insert
+    public abstract long[] insertDatasets(Dataset... datasets);
+
     // Insert an arraylist of places
     @Insert
     public abstract long[] insertPlacesList(List<Place> places);
@@ -31,23 +36,34 @@ public abstract class Dao {
     @Update
     public abstract void updatePlaces(Place... places);
 
+    @Update
+    public abstract void updateDatasets(Dataset... datasets);
 
     //^^^^^^
     // GETS:
     // Retrieve the latest (i.e. present) places for the summary list
-    @Query("SELECT * FROM places WHERE present = 1")
-    public abstract LiveData<List<Place>> getPlaces();
+    @Query("SELECT * FROM places ORDER BY location")
+    public abstract LiveData<List<PlaceWithDatasets>> getPlaces();
+
 
     // Retrieve the latest (i.e. present) favourited places for the summary list
-    @Query("SELECT * FROM places WHERE isFav = 1 and present = 1")
-    public abstract LiveData<List<Place>> getFavPlaces();
+//    @Query("SELECT * FROM places WHERE isFav = 1 and present = 1")INNER JOIN datasets ON places.country_key_id = datasets.country_key
+    @Query("SELECT * FROM places  WHERE places.isFav = 1")
+    public abstract LiveData<List<PlaceWithDatasets>> getFavPlaces();
+
+
 
     // Retrieve all entries (i.e. for all dates) for a selected country
-    @Query("SELECT * FROM places WHERE selected = 1 ORDER BY date(date)")
-    public abstract LiveData<List<Place>> getSelectedCountry();
+    @Query("SELECT * FROM datasets WHERE selected = 1 ORDER BY date(date)")
+    public abstract LiveData<List<Dataset>> getSelectedCountry();
 
-    @Query("SELECT * FROM places WHERE place = :place and present = 1")
+    @Query("SELECT * FROM places WHERE location = :place and present = 1")
     public abstract Place getSpecificPlace(String place);
+
+
+    @Query("SELECT * FROM datasets WHERE date = :date and country_key = :country_key")
+    public abstract Dataset getSpecificDataset(String date, String country_key);
+
 
 
     //^^^^^^^^
@@ -60,8 +76,12 @@ public abstract class Dao {
     @Query("DELETE FROM places")
     public abstract void deleteAll();
 
+    // Delete all datasets
+    @Query("DELETE FROM datasets")
+    public abstract void deleteAllDatasets();
+
     // Delete all non-present entries for a specific place
-    @Query("DELETE FROM places WHERE place = :place AND present = 0")
+    @Query("DELETE FROM places WHERE location = :place AND present = 0")
     public abstract void deleteSpecificPlaceList(String place);
 
 
@@ -73,4 +93,8 @@ public abstract class Dao {
         deleteSpecificPlaceList(place);
         insertPlacesList(placeslist);
     }
+
+    @Transaction
+    @Query("SELECT * FROM places")
+    public abstract LiveData<List<PlaceWithDatasets>> getPlacesWithDatasets();
 }
